@@ -5,7 +5,7 @@ import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import type { CopyousSettings } from '../../common/settings.js';
+import type { KleptoSettings } from '../../common/settings.js';
 import { ShortcutRow } from './shortcutRow.js';
 
 const ShortcutLabel = ('ShortcutLabel' in Gtk && !('ShortcutLabel' in Adw) ? (Gtk as typeof Adw) : Adw).ShortcutLabel;
@@ -86,7 +86,7 @@ export class SearchScrollShortcuts extends Adw.PreferencesGroup {
 		swapScrollRow.bind_property('active', cycleItemTypeRow, 'show-ctrl', GObject.BindingFlags.DEFAULT);
 		swapScrollRow.bind_property('active', cycleItemTagRow, 'show-ctrl', GObject.BindingFlags.INVERT_BOOLEAN);
 
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('swap-scroll-shortcut', swapScrollRow, 'active', Gio.SettingsBindFlags.DEFAULT);
 	}
 }

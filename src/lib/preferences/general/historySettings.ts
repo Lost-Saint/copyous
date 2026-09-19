@@ -8,7 +8,7 @@ import type Preferences from '../../../prefs.js';
 import { getDataPath, getDefaultDatabaseFile } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { bind_enum, type CopyousSettings, DatabaseBackend } from '../../common/settings.js';
+import { bind_enum, DatabaseBackend, type KleptoSettings } from '../../common/settings.js';
 import { checkGda, GdaDialog } from '../dependencies/dependencies.js';
 import { makeResettable } from '../utils.js';
 
@@ -44,7 +44,7 @@ class DatabaseBackendItem extends GObject.Object {
 	},
 })
 export class HistorySettings extends Adw.PreferencesGroup {
-	private readonly _settings: CopyousSettings;
+	private readonly _settings: KleptoSettings;
 
 	private _defaultDatabaseLocation: string;
 	private readonly _databaseBackend: Adw.ComboRow;

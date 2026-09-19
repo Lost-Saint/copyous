@@ -4,7 +4,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import St from 'gi://St';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { Color } from '../common/color.js';
 import { getImagesPath, ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
@@ -83,7 +83,7 @@ export class ClipboardManager extends GObject.Object {
 	private prevClipboard: [ContentType, string] | null = null;
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		private tracker: ClipboardEntryTracker,
 	) {
 		super();

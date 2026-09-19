@@ -3,7 +3,7 @@ import Gio from 'gi://Gio';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 import { gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import type { ClipboardEntry } from '../../database/database.js';
@@ -134,7 +134,7 @@ export class FilesItem extends ClipboardItem {
 	private readonly _files: string[];
 	private readonly _formattedFiles?: string[];
 
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Folder, _('Files'));
 
 		this.add_style_class_name('files-item');

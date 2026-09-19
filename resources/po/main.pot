@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Copyous
-# This file is distributed under the same license as the Copyous package.
+# Copyright (C) YEAR Klepto
+# This file is distributed under the same license as the Klepto package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Copyous\n"
+"Project-Id-Version: Klepto\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-19 12:42-0400\n"
+"POT-Creation-Date: 2026-09-19 13:35-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,8 +125,8 @@ msgstr ""
 #: src/lib/preferences/general/feedbackSettings.ts:257
 #: src/lib/preferences/general/feedbackSettings.ts:306
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:37
-#: src/lib/ui/components/editDialog.ts:215
-#: src/lib/ui/components/editDialog.ts:242
+#: src/lib/ui/components/editDialog.ts:212
+#: src/lib/ui/components/editDialog.ts:239
 msgid "None"
 msgstr ""
 
@@ -216,7 +216,7 @@ msgstr ""
 #: src/lib/preferences/dependencies/dependencies.ts:222
 #: src/lib/preferences/general/appExclusionSettings.ts:169
 #: src/lib/preferences/shortcuts/shortcutRow.ts:129
-#: src/lib/ui/components/editDialog.ts:304 src/lib/ui/indicator.ts:45
+#: src/lib/ui/components/editDialog.ts:301 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr ""
 
@@ -325,7 +325,7 @@ msgstr ""
 
 #: src/lib/preferences/actions/actionDialog.ts:653
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:71
-#: src/lib/preferences/actions/actionsGroup.ts:548
+#: src/lib/preferences/actions/actionsGroup.ts:549
 #: src/lib/preferences/customization/items/exclusions.ts:90
 #: src/lib/preferences/general/appExclusionSettings.ts:171
 msgid "Add"
@@ -333,7 +333,7 @@ msgstr ""
 
 #: src/lib/preferences/actions/actionDialog.ts:653
 #: src/lib/preferences/actions/actionsGroup.ts:98
-#: src/lib/preferences/actions/actionsGroup.ts:566
+#: src/lib/preferences/actions/actionsGroup.ts:567
 msgid "Add Action"
 msgstr ""
 
@@ -342,18 +342,18 @@ msgid "Edit Action"
 msgstr ""
 
 #: src/lib/preferences/actions/actionDialog.ts:660
-#: src/lib/ui/components/editDialog.ts:311
+#: src/lib/ui/components/editDialog.ts:308
 msgid "Save"
 msgstr ""
 
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:71
-#: src/lib/preferences/actions/actionsGroup.ts:567
+#: src/lib/preferences/actions/actionsGroup.ts:568
 msgid "Add Submenu"
 msgstr ""
 
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:78
 #: src/lib/preferences/actions/actionsGroup.ts:123
-#: src/lib/preferences/actions/actionsGroup.ts:421
+#: src/lib/preferences/actions/actionsGroup.ts:422
 #: src/lib/ui/components/clipboardItemMenu.ts:92
 msgid "Edit"
 msgstr ""
@@ -364,12 +364,12 @@ msgstr ""
 
 #: src/lib/preferences/actions/actionsGroup.ts:32
 #: src/lib/preferences/actions/actionsGroup.ts:124
-#: src/lib/preferences/actions/actionsGroup.ts:422
+#: src/lib/preferences/actions/actionsGroup.ts:423
 msgid "Delete"
 msgstr ""
 
 #: src/lib/preferences/actions/actionsGroup.ts:89
-#: src/lib/preferences/actions/actionsGroup.ts:527
+#: src/lib/preferences/actions/actionsGroup.ts:528
 msgid "No Actions"
 msgstr ""
 
@@ -381,11 +381,11 @@ msgstr ""
 msgid "Deleting the submenu will delete all actions in the submenu"
 msgstr ""
 
-#: src/lib/preferences/actions/actionsGroup.ts:444
+#: src/lib/preferences/actions/actionsGroup.ts:445
 msgid "Delete Action?"
 msgstr ""
 
-#: src/lib/preferences/actions/actionsGroup.ts:516
+#: src/lib/preferences/actions/actionsGroup.ts:517
 #: src/lib/preferences/actions/actionsPage.ts:55
 msgid "Actions"
 msgstr ""
@@ -581,45 +581,45 @@ msgstr ""
 msgid "Change the height of the clipboard dialog"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:14
+#: src/lib/preferences/customization/headerCustomization.ts:15
 msgid "Header"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:18
+#: src/lib/preferences/customization/headerCustomization.ts:19
 msgid "Show Header"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:19
+#: src/lib/preferences/customization/headerCustomization.ts:20
 msgid "Show the header"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:24
+#: src/lib/preferences/customization/headerCustomization.ts:25
 msgid "Show Item Title"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:25
+#: src/lib/preferences/customization/headerCustomization.ts:26
 msgid "Show the title of the item"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:30
+#: src/lib/preferences/customization/headerCustomization.ts:31
 msgid "Header Controls Visibility"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:31
+#: src/lib/preferences/customization/headerCustomization.ts:32
 msgid "The visibility of the header controls"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:32
+#: src/lib/preferences/customization/headerCustomization.ts:33
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:162
 #: src/lib/preferences/general/feedbackSettings.ts:228
 msgid "Hidden"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:32
+#: src/lib/preferences/customization/headerCustomization.ts:33
 msgid "Visible"
 msgstr ""
 
-#: src/lib/preferences/customization/headerCustomization.ts:32
+#: src/lib/preferences/customization/headerCustomization.ts:33
 msgid "Visible on Hover"
 msgstr ""
 
@@ -686,62 +686,62 @@ msgstr ""
 msgid "Show the Unicode of the character"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:14
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:15
 msgid "Code Item"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:15
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:16
 msgid "Configure code clipboard items"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:19
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:20
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:177
 msgid "Syntax Highlighting"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:20
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:21
 msgid "Enable or disable syntax highlighting in the code item"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:25
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:26
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:183
 msgid "Show Line Numbers"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:26
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:27
 msgid "Show line numbers in the code item"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:31
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:32
 msgid "Show Code Info"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:32
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:33
 msgid "Show extra information in the code item"
-msgstr ""
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:37
-#: src/lib/preferences/customization/items/textItemCustomization.ts:25
-msgid "Text Count Mode"
 msgstr ""
 
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:38
 #: src/lib/preferences/customization/items/textItemCustomization.ts:26
+msgid "Text Count Mode"
+msgstr ""
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
+#: src/lib/preferences/customization/items/textItemCustomization.ts:27
 msgid "Show the number of characters, words or lines"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
-#: src/lib/preferences/customization/items/textItemCustomization.ts:27
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
 msgid "Characters"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
-#: src/lib/preferences/customization/items/textItemCustomization.ts:27
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
 msgid "Lines"
 msgstr ""
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
-#: src/lib/preferences/customization/items/textItemCustomization.ts:27
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
 msgid "Words"
 msgstr ""
 
@@ -874,7 +874,7 @@ msgid "File Preview and File Info"
 msgstr ""
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:170
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:24
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:25
 msgid "Background Size"
 msgstr ""
 
@@ -883,13 +883,13 @@ msgid "Background size of the image preview"
 msgstr ""
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:172
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:26
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:83
 msgid "Contain"
 msgstr ""
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:172
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:26
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:83
 msgid "Cover"
 msgstr ""
@@ -906,23 +906,23 @@ msgstr ""
 msgid "Configure file exclusions for file previews"
 msgstr ""
 
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:13
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:14
 msgid "Image Item"
 msgstr ""
 
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:14
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:15
 msgid "Configure image clipboard items"
 msgstr ""
 
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:18
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:19
 msgid "Show Image Info"
 msgstr ""
 
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:19
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:20
 msgid "Show extra information in the image item"
 msgstr ""
 
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:25
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:26
 msgid "Background size of the image"
 msgstr ""
 
@@ -988,19 +988,19 @@ msgstr ""
 msgid "Configure link exclusions for link previews"
 msgstr ""
 
-#: src/lib/preferences/customization/items/textItemCustomization.ts:14
+#: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
 msgstr ""
 
-#: src/lib/preferences/customization/items/textItemCustomization.ts:15
+#: src/lib/preferences/customization/items/textItemCustomization.ts:16
 msgid "Configure text clipboard items"
 msgstr ""
 
-#: src/lib/preferences/customization/items/textItemCustomization.ts:19
+#: src/lib/preferences/customization/items/textItemCustomization.ts:20
 msgid "Show Text Info"
 msgstr ""
 
-#: src/lib/preferences/customization/items/textItemCustomization.ts:20
+#: src/lib/preferences/customization/items/textItemCustomization.ts:21
 msgid "Show extra information in the text item"
 msgstr ""
 
@@ -1199,7 +1199,7 @@ msgid "Error Uninstalling %s"
 msgstr ""
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:285
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:379
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:382
 msgid "Manage Highlight.js"
 msgstr ""
 
@@ -1208,15 +1208,15 @@ msgid "Languages"
 msgstr ""
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:318
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:47
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:48
 msgid "Search"
 msgstr ""
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:372
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:375
 msgid "Dependencies"
 msgstr ""
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:380
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:383
 msgid "Manage the Highlight.js installation"
 msgstr ""
 
@@ -1609,55 +1609,55 @@ msgstr ""
 msgid "Select Item Type"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:31
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:32
 msgid "Scroll"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:49
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:50
 msgid "Toggle Pinned Search"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:50
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
 msgid "Clear Item Tag/Type"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:52
 msgid "Activate First Item"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:60
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:61
 msgid "Next Item Type"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:61
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:62
 msgid "Previous Item Type"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:62
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:63
 msgid "Next Item Tag"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:63
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:64
 msgid "Previous Item Tag"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:64
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:65
 msgid "Select Item Tag"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:74
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:75
 msgid "Swap Scroll Shortcut"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:75
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:76
 msgid "Swaps scroll shortcuts of cycling item types and item tags"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:79
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:80
 msgid "Cycle Item Type"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:81
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:82
 msgid "Cycle Item Tag"
 msgstr ""
 
@@ -1725,7 +1725,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: src/lib/ui/components/editDialog.ts:267
+#: src/lib/ui/components/editDialog.ts:264
 msgid "Edit Clipboard Item"
 msgstr ""
 

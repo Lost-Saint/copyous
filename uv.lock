@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.13"
 
 [[package]]
-name = "copyous"
+name = "klepto"
 version = "1.0"
 source = { virtual = "." }
 dependencies = [

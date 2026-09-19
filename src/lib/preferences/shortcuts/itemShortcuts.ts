@@ -4,7 +4,7 @@ import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum, type CopyousSettings } from '../../common/settings.js';
+import { bind_enum, type KleptoSettings } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 import { ShortcutRow } from './shortcutRow.js';
 
@@ -39,7 +39,7 @@ export class ItemShortcuts extends Adw.PreferencesGroup {
 		this.add(middleClickAction);
 
 		// Bind properties
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('pin-item-shortcut', pinItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('delete-item-shortcut', deleteItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('edit-item-shortcut', editItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
@@ -83,7 +83,7 @@ export class ItemActivationShortcuts extends Adw.PreferencesGroup {
 			}
 		});
 
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('swap-copy-shortcut', swapCopyPasteRow, 'active', Gio.SettingsBindFlags.DEFAULT);
 	}
 }

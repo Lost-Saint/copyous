@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/main/gio/gresource.dtd?ref_type=heads"?>
 <gresources>
-	<gresource prefix="/org/gnome/shell/extensions/copyous">
+	<gresource prefix="/org/gnome/shell/extensions/klepto">
 		<file>css/stylesheet-default-dark.css</file>
 		<file>css/stylesheet-default-light.css</file>
 		<file>css/stylesheet-default-high-contrast.css</file>

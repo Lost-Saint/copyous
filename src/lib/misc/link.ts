@@ -2,7 +2,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Soup from 'gi://Soup';
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { getCachePath, UserAgent } from '../common/constants.js';
 import type { LinkMetadata } from '../database/database.js';
 
@@ -40,7 +40,7 @@ async function readWithBudget(stream: Gio.InputStream, cancellable: Gio.Cancella
 }
 
 export async function tryGetMetadata(
-	ext: CopyousExtension,
+	ext: KleptoExtension,
 	url: string,
 	cancellable: Gio.Cancellable,
 ): Promise<LinkMetadata> {
@@ -182,7 +182,7 @@ export function getLinkImagePath(ext: Extension, url: string): Gio.File | null {
 }
 
 export async function tryGetLinkImage(
-	ext: CopyousExtension,
+	ext: KleptoExtension,
 	url: string,
 	cancellable: Gio.Cancellable,
 ): Promise<Gio.File | null> {

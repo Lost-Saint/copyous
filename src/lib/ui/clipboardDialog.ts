@@ -10,7 +10,7 @@ import * as Layout from 'resource:///org/gnome/shell/ui/layout.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import type { EasingParamsWithProperties } from '@girs/gnome-shell/extensions/global';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
@@ -40,7 +40,7 @@ class IncognitoButton extends St.Button {
 	private readonly _icon: St.Icon;
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		props: Partial<St.Button.ConstructorProps>,
 	) {
 		super({ ...props, toggle_mode: true, can_focus: true });
@@ -91,7 +91,7 @@ class ClipboardDialogHeader extends St.Widget {
 
 	private _headerVisible: boolean = true;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super({
 			style_class: 'dialog-header',
 			clip_to_allocation: true,
@@ -203,7 +203,7 @@ class ClipboardDialogHeader extends St.Widget {
 	},
 })
 class ClipboardDialogFooter extends St.BoxLayout {
-	constructor(ext: CopyousExtension) {
+	constructor(ext: KleptoExtension) {
 		super({
 			style_class: 'dialog-footer',
 			y_align: Clutter.ActorAlign.END,
@@ -271,7 +271,7 @@ export class ClipboardDialog extends St.Widget {
 	private readonly _footer: ClipboardDialogFooter;
 	private readonly _clipboardItemMenu: ClipboardItemMenu;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super({
 			layout_manager: new Clutter.BinLayout(),
 			x_align: Clutter.ActorAlign.FILL,

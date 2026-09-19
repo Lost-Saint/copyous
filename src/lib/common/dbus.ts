@@ -5,7 +5,7 @@ import { ClipboardHistory } from './settings.js';
 
 const DBusInterfaceXml = `
 <node>
-	<interface name="org.gnome.Shell.Extensions.Copyous">
+	<interface name="org.gnome.Shell.Extensions.Klepto">
 		<method name="Toggle"/>
 		<method name="Show"/>
 		<method name="Hide"/>
@@ -46,7 +46,7 @@ export class DbusService extends GObject.Object implements DBusInterface {
 
 		this.ownerId = Gio.DBus.own_name(
 			Gio.BusType.SESSION,
-			'org.gnome.Shell.Extensions.Copyous',
+			'org.gnome.Shell.Extensions.Klepto',
 			Gio.BusNameOwnerFlags.NONE,
 			this.busAcquired.bind(this),
 			null,
@@ -85,7 +85,7 @@ export class DbusService extends GObject.Object implements DBusInterface {
 		if (this.ownerId < 0) return;
 
 		this.dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterfaceXml, this);
-		this.dbus.export(connection, '/org/gnome/Shell/Extensions/Copyous');
+		this.dbus.export(connection, '/org/gnome/Shell/Extensions/Klepto');
 	}
 
 	private registerSignals() {

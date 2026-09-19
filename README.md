@@ -1,7 +1,7 @@
-# <img src="resources/images/icon.svg" height="32px" alt="Icon"/> Copyous - Clipboard Manager
-[![GitHub License](https://img.shields.io/github/license/boerdereinar/copyous)](./LICENSE)
-[![GitHub Release](https://img.shields.io/github/v/release/boerdereinar/copyous)](https://github.com/boerdereinar/copyous/releases/latest)
-[![Extension Downloads](https://img.shields.io/gnome-extensions/dt/copyous%40boerdereinar.dev?logo=gnome&logoColor=white&cacheSeconds=86400)](https://extensions.gnome.org/extension/8834/copyous/)
+# <img src="resources/images/icon.svg" height="32px" alt="Icon"/> Klepto - Clipboard Manager
+[![GitHub License](https://img.shields.io/github/license/lost-saint/klepto)](./LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/lost-saint/klepto)](https://github.com/lost-saint/klepto/releases/latest)
+[![Extension Downloads](https://img.shields.io/gnome-extensions/dt/klepto%40lost-saint?logo=gnome&logoColor=white&cacheSeconds=86400)](https://extensions.gnome.org/extension/8834/klepto/)
 
 ![Screenshot](resources/images/screenshot.png)
 
@@ -30,18 +30,18 @@ For the extension to work optimally you need to install the following dependenci
 </details>
 
 ### From Gnome Extensions (Recommended)
-[<img width="200" src="https://github.com/andyholmes/gnome-shell-extensions-badge/raw/master/get-it-on-ego.png">](https://extensions.gnome.org/extension/8834/copyous/)
+[<img width="200" src="https://github.com/andyholmes/gnome-shell-extensions-badge/raw/master/get-it-on-ego.png">](https://extensions.gnome.org/extension/8834/klepto/)
 
 ### From Latest GitHub Release
-1. Download the latest release from [Releases](https://github.com/boerdereinar/copyous/releases).
+1. Download the latest release from [Releases](https://github.com/lost-saint/klepto/releases).
 2. Install extension:
    ```shell
-   gnome-extensions install -f ~/Downloads/copyous@boerdereinar.dev.zip
+   gnome-extensions install -f ~/Downloads/klepto@lost-saint.zip
    ```
 3. Restart the session by logging out.
 4. Enable the extension in [Extension Manager](https://flathub.org/en/apps/com.mattjakeman.ExtensionManager) or by running the following command:
    ```shell
-   gnome-extensions enable copyous@boerdereinar.dev
+   gnome-extensions enable klepto@lost-saint
    ```
 
 ### From Source
@@ -52,8 +52,8 @@ For the extension to work optimally you need to install the following dependenci
     - [jq](https://jqlang.org/)
 2. Clone the repository:
    ```shell
-   git clone --recurse-submodules https://github.com/boerdereinar/copyous
-   cd copyous
+   git clone --recurse-submodules https://github.com/lost-saint/klepto
+   cd klepto
    ```
 3. Build and install the extension:
    ```shell
@@ -62,13 +62,13 @@ For the extension to work optimally you need to install the following dependenci
 4. Restart the session by logging out.
 5. Enable the extension in [Extension Manager](https://flathub.org/en/apps/com.mattjakeman.ExtensionManager) or by running the following command:
    ```shell
-   gnome-extensions enable copyous@boerdereinar.dev
+   gnome-extensions enable klepto@lost-saint
    ```
 
 ## Configuration
 You can open the extension settings either through the panel indicator, [Extension Manager](https://flathub.org/en/apps/com.mattjakeman.ExtensionManager) or by running the following command:
 ```shell
-gnome-extensions prefs copyous@boerdereinar.dev
+gnome-extensions prefs klepto@lost-saint
 ```
 
 ## Shortcuts
@@ -89,8 +89,8 @@ The most common shortcuts are listed below. Some can be customized in the extens
 | Cycle Item Tag        | <kbd>Ctrl</kbd> <kbd>\`</kbd> / <kbd>Shift</kbd> <kbd>Ctrl</kbd> <kbd>\`</kbd>                                |
 
 ## DBus
-**Name:** `org.gnome.Shell.Extensions.Copyous`
-**Path:** `/org/gnome/Shell/Extensions/Copyous`
+**Name:** `org.gnome.Shell.Extensions.Klepto`
+**Path:** `/org/gnome/Shell/Extensions/Klepto`
 
 | Method         | Arguments                                                                                                    | Description                       |
 |----------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------|
@@ -102,22 +102,22 @@ The most common shortcuts are listed below. Some can be customized in the extens
 ### Examples
 ```shell
 gdbus call --session \
-    --dest org.gnome.Shell.Extensions.Copyous \
-    --object-path /org/gnome/Shell/Extensions/Copyous \
-    --method org.gnome.Shell.Extensions.Copyous.Toggle
+    --dest org.gnome.Shell.Extensions.Klepto \
+    --object-path /org/gnome/Shell/Extensions/Klepto \
+    --method org.gnome.Shell.Extensions.Klepto.Toggle
 ```
 ```shell
 gdbus call --session \
-    --dest org.gnome.Shell.Extensions.Copyous \
-    --object-path /org/gnome/Shell/Extensions/Copyous \
-    --method org.gnome.Shell.Extensions.Copyous.ClearHistory false
+    --dest org.gnome.Shell.Extensions.Klepto \
+    --object-path /org/gnome/Shell/Extensions/Klepto \
+    --method org.gnome.Shell.Extensions.Klepto.ClearHistory false
 ```
 
 ## Contributing
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
 ## Acknowledgments
-Copyous is a full rewrite of [Pano](https://github.com/oae/gnome-shell-pano).
+Klepto is a full rewrite of [Pano](https://github.com/oae/gnome-shell-pano).
 
 ## License
 This project is licensed under the **GNU General Public License 3 or Later**.

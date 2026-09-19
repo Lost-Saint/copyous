@@ -6,7 +6,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { bind_enum, type CopyousSettings, IndicatorDisplay } from '../../common/settings.js';
+import { bind_enum, IndicatorDisplay, type KleptoSettings } from '../../common/settings.js';
 import { Sound, SoundManager } from '../../common/sound.js';
 import { makeResettable } from '../utils.js';
 
@@ -264,7 +264,7 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 		playSound.connect('activated', () => this._soundChooserPage && window.push_subpage(this._soundChooserPage));
 
 		// Bind properties
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		bind_enum(settings, 'indicator-display', indicatorDisplay, 'selected');
 		settings.bind('wiggle-indicator', wiggleIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('send-notification', sendNotification, 'active', Gio.SettingsBindFlags.DEFAULT);

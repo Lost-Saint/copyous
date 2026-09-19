@@ -4,7 +4,7 @@ import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
@@ -54,7 +54,7 @@ export class LinkPreview extends St.Widget {
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		url: string,
 	) {
 		super({
@@ -298,7 +298,7 @@ export class LinkItem extends ClipboardItem {
 
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Link, _('Link'));
 
 		this.linkItemSettings = this.ext.settings.get_child('link-item');

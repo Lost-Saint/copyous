@@ -3,7 +3,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { CustomColorScheme } from '../../common/settings.js';
 import type { Language } from '../../database/database.js';
@@ -268,7 +268,7 @@ export class CodeLabel extends St.Label {
 	private _highlighted: string = '';
 
 	public constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		props: Partial<St.Label.ConstructorProps & CodeLabelConstructorProps>,
 	) {
 		super({ ...props, min_height: 0, clip_to_allocation: true });

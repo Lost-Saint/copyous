@@ -1,7 +1,7 @@
 name: Release CI
 
 env:
-  UUID: copyous@boerdereinar.dev
+  UUID: klepto@lost-saint
 
 on:
   push:
@@ -45,7 +45,7 @@ jobs:
           generate_release_notes: true
 
       - name: Publish Release
-        if: ${{ steps.version.outputs.prerelease == 'false' && github.repository == 'boerdereinar/copyous' }}
+        if: ${{ steps.version.outputs.prerelease == 'false' && github.repository == 'lost-saint/klepto' }}
         run: gnome-extensions upload -u "$GNOME_USER" -p "$GNOME_PASSWORD" --accept-tos dist/${{ env.UUID }}.zip
         env:
           GNOME_USER: ${{ secrets.GNOME_USER }}

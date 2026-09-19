@@ -16,7 +16,7 @@ import {
 } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import type { CopyousSettings } from '../../common/settings.js';
+import type { KleptoSettings } from '../../common/settings.js';
 
 export async function checkGda(prefs: ExtensionPreferences): Promise<boolean> {
 	try {
@@ -398,7 +398,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 						this.deleteItem('hljs');
 
 						// Re-enable hljs dialog for if hljs was uninstalled for some reason
-						const settings: CopyousSettings = prefs.getSettings();
+						const settings: KleptoSettings = prefs.getSettings();
 						settings.set_boolean('disable-hljs-dialog', false);
 					}
 					this.notify('hljs');
@@ -409,7 +409,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 				}
 			} else if (response === 'cancel') {
 				// Disable hljs dialog from showing up since hljs is not installed
-				const settings: CopyousSettings = prefs.getSettings();
+				const settings: KleptoSettings = prefs.getSettings();
 				settings.set_boolean('disable-hljs-dialog', true);
 			}
 		});
@@ -464,7 +464,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 					this.deleteItem('hljs');
 				} else {
 					// Open dialog for the first time if hljs is not installed
-					const settings: CopyousSettings = prefs.getSettings();
+					const settings: KleptoSettings = prefs.getSettings();
 					if (!settings.get_boolean('disable-hljs-dialog')) {
 						hljsDialog.present(window);
 					}

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
 <schemalist>
-	<enum id="org.gnome.shell.extensions.copyous.DatabaseBackend">
+	<enum id="org.gnome.shell.extensions.klepto.DatabaseBackend">
 		<value nick="default" value="0"/>
 		<value nick="memory" value="1"/>
 		<value nick="sqlite" value="2"/>
 		<value nick="json" value="3"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.ClipboardHistory">
+	<enum id="org.gnome.shell.extensions.klepto.ClipboardHistory">
 		<value nick="clear" value="0"/>
 		<value nick="keep-pinned-and-tagged" value="1"/>
 		<value nick="keep-all" value="2"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.Orientation">
+	<enum id="org.gnome.shell.extensions.klepto.Orientation">
 		<value nick="horizontal" value="0"/>
 		<value nick="vertical" value="1"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.Position">
+	<enum id="org.gnome.shell.extensions.klepto.Position">
 		<value nick="top" value="0"/>
 		<!-- <value nick="left" value="0" /> -->
 		<value nick="center" value="1" />
@@ -28,66 +28,66 @@
 		<value nick="fill" value="3" />
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.HeaderControlsVisibility">
+	<enum id="org.gnome.shell.extensions.klepto.HeaderControlsVisibility">
 		<value nick="visible" value="0"/>
 		<value nick="visible-on-hover" value="1"/>
 		<value nick="hidden" value="2"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.Theme">
+	<enum id="org.gnome.shell.extensions.klepto.Theme">
 		<value nick="default" value="0"/>
 		<value nick="yaru" value="1"/>
 		<value nick="custom" value="2"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.ColorScheme">
+	<enum id="org.gnome.shell.extensions.klepto.ColorScheme">
 		<value nick="system" value="0"/>
 		<value nick="dark" value="1"/>
 		<value nick="light" value="2"/>
 		<value nick="high-contrast" value="3"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.CustomColorScheme">
+	<enum id="org.gnome.shell.extensions.klepto.CustomColorScheme">
 		<value nick="dark" value="0"/>
 		<value nick="light" value="1"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.OpenClipboardDialogBehavior">
+	<enum id="org.gnome.shell.extensions.klepto.OpenClipboardDialogBehavior">
 		<value nick="toggle" value="0"/>
 		<value nick="open-or-select-next" value="1"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.MiddleClickAction">
+	<enum id="org.gnome.shell.extensions.klepto.MiddleClickAction">
 		<value nick="none" value="0"/>
 		<value nick="pin" value="1"/>
 		<value nick="delete" value="2"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.IndicatorDisplay">
+	<enum id="org.gnome.shell.extensions.klepto.IndicatorDisplay">
 		<value nick="hidden" value="0"/>
 		<value nick="icon-only" value="1"/>
 		<value nick="clipboard-content-only" value="2"/>
 		<value nick="icon-and-clipboard-content" value="3"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.TextCountMode">
+	<enum id="org.gnome.shell.extensions.klepto.TextCountMode">
 		<value nick="characters" value="0"/>
 		<value nick="words" value="1"/>
 		<value nick="lines" value="2"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.BackgroundSize">
+	<enum id="org.gnome.shell.extensions.klepto.BackgroundSize">
 		<value nick="cover" value="0" />
 		<value nick="contain" value="1" />
 	</enum>
 
-	<flags id="org.gnome.shell.extensions.copyous.file-item.FilePreviewType">
+	<flags id="org.gnome.shell.extensions.klepto.file-item.FilePreviewType">
 		<value nick="text" value="1"/>
 		<value nick="image" value="2"/>
 		<value nick="thumbnail" value="4" />
 	</flags>
 
-	<enum id="org.gnome.shell.extensions.copyous.file-item.FilePreviewVisibility">
+	<enum id="org.gnome.shell.extensions.klepto.file-item.FilePreviewVisibility">
 		<value nick="file-preview" value="0"/>
 		<value nick="file-info" value="1"/>
 		<value nick="file-preview-or-file-info" value="2"/>
@@ -95,7 +95,7 @@
 		<value nick="hidden" value="4"/>
 	</enum>
 
-	<schema id="org.gnome.shell.extensions.copyous" path="/org/gnome/shell/extensions/copyous/">
+	<schema id="org.gnome.shell.extensions.klepto" path="/org/gnome/shell/extensions/klepto/">
 		<!-- State -->
 		<key name="incognito" type="b">
 			<default>false</default>
@@ -115,7 +115,7 @@
 			<default>false</default>
 			<summary>Store clipboard history in memory instead of on disk (Deprecated)</summary>
 		</key>
-		<key name="database-backend" enum="org.gnome.shell.extensions.copyous.DatabaseBackend">
+		<key name="database-backend" enum="org.gnome.shell.extensions.klepto.DatabaseBackend">
 			<default>'default'</default>
 			<summary>Selects which backend to use for the clipboard database.</summary>
 		</key>
@@ -123,7 +123,7 @@
 			<default>''</default>
 			<summary>Path to the database. When empty defaults to {XDG_DATA_HOME}/{EXTENSION UUID}/clipboard.{db,json} depending on the backend.</summary>
 		</key>
-		<key name="clipboard-history" enum="org.gnome.shell.extensions.copyous.ClipboardHistory">
+		<key name="clipboard-history" enum="org.gnome.shell.extensions.klepto.ClipboardHistory">
 			<default>'keep-pinned-and-tagged'</default>
 			<summary>Choose what to do with your clipboard history when you restart, log out, or shut down your system</summary>
 		</key>
@@ -173,7 +173,7 @@
 		</key>
 
 		<!-- Feedback -->
-		<key name="indicator-display" enum="org.gnome.shell.extensions.copyous.IndicatorDisplay">
+		<key name="indicator-display" enum="org.gnome.shell.extensions.klepto.IndicatorDisplay">
 			<default>'icon-only'</default>
 			<summary>Choose how the clipboard indicator appears in the top panel</summary>
 		</key>
@@ -229,11 +229,11 @@
 			<default>false</default>
 			<summary>Show the clipboard dialog at the text cursor position</summary>
 		</key>
-		<key name="clipboard-orientation" enum="org.gnome.shell.extensions.copyous.Orientation">
+		<key name="clipboard-orientation" enum="org.gnome.shell.extensions.klepto.Orientation">
 			<default>'horizontal'</default>
 			<summary>Orientation of the clipboard dialog</summary>
 		</key>
-		<key name="clipboard-position-vertical" enum="org.gnome.shell.extensions.copyous.Position">
+		<key name="clipboard-position-vertical" enum="org.gnome.shell.extensions.klepto.Position">
 			<default>'top'</default>
 			<summary>Vertical position of the clipboard dialog</summary>
 
@@ -242,7 +242,7 @@
 				<alias value="right" target="bottom" />
 			</aliases>
 		</key>
-		<key name="clipboard-position-horizontal" enum="org.gnome.shell.extensions.copyous.Position">
+		<key name="clipboard-position-horizontal" enum="org.gnome.shell.extensions.klepto.Position">
 			<default>'fill'</default>
 			<summary>Horizontal position of the clipboard dialog</summary>
 
@@ -312,7 +312,7 @@
 			<default>true</default>
 			<summary>Show the header of a clipboard item</summary>
 		</key>
-		<key name="header-controls-visibility" enum="org.gnome.shell.extensions.copyous.HeaderControlsVisibility">
+		<key name="header-controls-visibility" enum="org.gnome.shell.extensions.klepto.HeaderControlsVisibility">
 			<default>'visible'</default>
 			<summary>Visibility of the header controls of a clipboard item</summary>
 		</key>
@@ -322,15 +322,15 @@
 		</key>
 
 		<!-- Items -->
-		<child name="text-item" schema="org.gnome.shell.extensions.copyous.text-item"/>
-		<child name="code-item" schema="org.gnome.shell.extensions.copyous.code-item" />
-		<child name="image-item" schema="org.gnome.shell.extensions.copyous.image-item"/>
-		<child name="file-item" schema="org.gnome.shell.extensions.copyous.file-item"/>
-		<child name="link-item" schema="org.gnome.shell.extensions.copyous.link-item"/>
-		<child name="character-item" schema="org.gnome.shell.extensions.copyous.character-item"/>
+		<child name="text-item" schema="org.gnome.shell.extensions.klepto.text-item"/>
+		<child name="code-item" schema="org.gnome.shell.extensions.klepto.code-item" />
+		<child name="image-item" schema="org.gnome.shell.extensions.klepto.image-item"/>
+		<child name="file-item" schema="org.gnome.shell.extensions.klepto.file-item"/>
+		<child name="link-item" schema="org.gnome.shell.extensions.klepto.link-item"/>
+		<child name="character-item" schema="org.gnome.shell.extensions.klepto.character-item"/>
 
 		<!-- Theme -->
-		<child name="theme" schema="org.gnome.shell.extensions.copyous.theme"/>
+		<child name="theme" schema="org.gnome.shell.extensions.klepto.theme"/>
 
 		<!-- Shortcuts -->
 		<key name="open-clipboard-dialog-shortcut" type="as">
@@ -341,7 +341,7 @@
 			<default>['&lt;Super&gt;&lt;Control&gt;&lt;Shift&gt;v']</default>
 			<summary>Shortcut to toggle incognito mode</summary>
 		</key>
-		<key name="open-clipboard-dialog-behavior" enum="org.gnome.shell.extensions.copyous.OpenClipboardDialogBehavior">
+		<key name="open-clipboard-dialog-behavior" enum="org.gnome.shell.extensions.klepto.OpenClipboardDialogBehavior">
 			<default>'toggle'</default>
 			<summary>Behavior of the open clipboard dialog shortcut when the dialog is open/closed.</summary>
 		</key>
@@ -367,7 +367,7 @@
 			<summary>Shortcut to open the menu of a clipboard item</summary>
 		</key>
 
-		<key name="middle-click-action" enum="org.gnome.shell.extensions.copyous.MiddleClickAction">
+		<key name="middle-click-action" enum="org.gnome.shell.extensions.klepto.MiddleClickAction">
 			<default>'pin'</default>
 			<summary>Action to perform when the middle mouse button is clicked</summary>
 		</key>
@@ -383,18 +383,18 @@
 		</key>
 	</schema>
 
-	<schema id="org.gnome.shell.extensions.copyous.text-item" path="/org/gnome/shell/extensions/copyous/text-item/">
+	<schema id="org.gnome.shell.extensions.klepto.text-item" path="/org/gnome/shell/extensions/klepto/text-item/">
 		<key name="show-text-info" type="b">
 			<default>false</default>
 			<summary>Show extra information</summary>
 		</key>
-		<key name="text-count-mode" enum="org.gnome.shell.extensions.copyous.TextCountMode">
+		<key name="text-count-mode" enum="org.gnome.shell.extensions.klepto.TextCountMode">
 			<default>'characters'</default>
 			<summary>Show the number of characters, words or lines</summary>
 		</key>
 	</schema>
 
-	<schema id="org.gnome.shell.extensions.copyous.code-item" path="/org/gnome/shell/extensions/copyous/code-item/">
+	<schema id="org.gnome.shell.extensions.klepto.code-item" path="/org/gnome/shell/extensions/klepto/code-item/">
 		<key name="syntax-highlighting" type="b">
 			<default>true</default>
 			<summary>Enable syntax highlighting</summary>
@@ -407,36 +407,36 @@
 			<default>false</default>
 			<summary>Show extra information</summary>
 		</key>
-		<key name="text-count-mode" enum="org.gnome.shell.extensions.copyous.TextCountMode">
+		<key name="text-count-mode" enum="org.gnome.shell.extensions.klepto.TextCountMode">
 			<default>'characters'</default>
 			<summary>Show the number of characters, words or lines</summary>
 		</key>
 	</schema>
 
-	<schema id="org.gnome.shell.extensions.copyous.image-item" path="/org/gnome/shell/extensions/copyous/image-item/">
+	<schema id="org.gnome.shell.extensions.klepto.image-item" path="/org/gnome/shell/extensions/klepto/image-item/">
 		<key name="show-image-info" type="b">
 			<default>false</default>
 			<summary>Show extra information</summary>
 		</key>
-		<key name="background-size" enum="org.gnome.shell.extensions.copyous.BackgroundSize">
+		<key name="background-size" enum="org.gnome.shell.extensions.klepto.BackgroundSize">
 			<default>'cover'</default>
 			<summary>Background size of the image</summary>
 		</key>
 	</schema>
 
-	<schema id="org.gnome.shell.extensions.copyous.file-item" path="/org/gnome/shell/extensions/copyous/file-item/">
-		<key name="file-preview-visibility" enum="org.gnome.shell.extensions.copyous.file-item.FilePreviewVisibility">
+	<schema id="org.gnome.shell.extensions.klepto.file-item" path="/org/gnome/shell/extensions/klepto/file-item/">
+		<key name="file-preview-visibility" enum="org.gnome.shell.extensions.klepto.file-item.FilePreviewVisibility">
 			<default>'file-preview-or-file-info'</default>
 			<summary>File preview shows a preview of the contents of a file. File info shows some information about the file.</summary>
 		</key>
-		<key name="file-preview-types" flags="org.gnome.shell.extensions.copyous.file-item.FilePreviewType">
+		<key name="file-preview-types" flags="org.gnome.shell.extensions.klepto.file-item.FilePreviewType">
 			<default>['text','image','thumbnail']</default>
 		</key>
 		<key name="file-preview-exclusion-patterns" type="as">
 			<default>[]</default>
 			<summary>Files matching these glob patterns will not have a preview</summary>
 		</key>
-		<key name="background-size" enum="org.gnome.shell.extensions.copyous.BackgroundSize">
+		<key name="background-size" enum="org.gnome.shell.extensions.klepto.BackgroundSize">
 			<default>'cover'</default>
 			<summary>Background size of the image preview</summary>
 		</key>
@@ -450,7 +450,7 @@
 		</key>
 	</schema>
 
-	<schema id="org.gnome.shell.extensions.copyous.link-item" path="/org/gnome/shell/extensions/copyous/link-item/">
+	<schema id="org.gnome.shell.extensions.klepto.link-item" path="/org/gnome/shell/extensions/klepto/link-item/">
 		<key name="show-link-preview" type="b">
 			<default>true</default>
 			<summary>Show a preview of the link</summary>
@@ -459,11 +459,11 @@
 			<default>true</default>
 			<summary>Show a preview image of the link</summary>
 		</key>
-		<key name="link-preview-image-background-size" enum="org.gnome.shell.extensions.copyous.BackgroundSize">
+		<key name="link-preview-image-background-size" enum="org.gnome.shell.extensions.klepto.BackgroundSize">
 			<default>'contain'</default>
 			<summary>Background size of the preview image of the link</summary>
 		</key>
-		<key name="link-preview-orientation" enum="org.gnome.shell.extensions.copyous.Orientation">
+		<key name="link-preview-orientation" enum="org.gnome.shell.extensions.klepto.Orientation">
 			<default>'vertical'</default>
 			<summary>Orientation of the link preview</summary>
 		</key>
@@ -473,7 +473,7 @@
 		</key>
 	</schema>
 
-	<schema id="org.gnome.shell.extensions.copyous.character-item" path="/org/gnome/shell/extensions/copyous/character-item/">
+	<schema id="org.gnome.shell.extensions.klepto.character-item" path="/org/gnome/shell/extensions/klepto/character-item/">
 		<key name="max-characters" type="i">
 			<default>1</default>
 			<range min="1" max="4"/>
@@ -485,16 +485,16 @@
 		</key>
 	</schema>
 
-	<schema id="org.gnome.shell.extensions.copyous.theme" path="/org/gnome/shell/extensions/copyous/theme/">
-		<key name="theme" enum="org.gnome.shell.extensions.copyous.Theme">
+	<schema id="org.gnome.shell.extensions.klepto.theme" path="/org/gnome/shell/extensions/klepto/theme/">
+		<key name="theme" enum="org.gnome.shell.extensions.klepto.Theme">
 			<default>'default'</default>
 			<summary>The preferred theme</summary>
 		</key>
-		<key name="color-scheme" enum="org.gnome.shell.extensions.copyous.ColorScheme">
+		<key name="color-scheme" enum="org.gnome.shell.extensions.klepto.ColorScheme">
 			<default>'system'</default>
 			<summary>The color scheme of the theme</summary>
 		</key>
-		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.copyous.CustomColorScheme">
+		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.klepto.CustomColorScheme">
 			<default>'dark'</default>
 			<summary>The color scheme of the custom theme</summary>
 		</key>

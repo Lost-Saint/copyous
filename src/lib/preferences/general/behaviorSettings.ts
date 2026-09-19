@@ -3,7 +3,7 @@ import Gio from 'gi://Gio';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import type { CopyousSettings } from '../../common/settings.js';
+import type { KleptoSettings } from '../../common/settings.js';
 
 @registerClass()
 export class BehaviorSettings extends Adw.PreferencesGroup {
@@ -55,7 +55,7 @@ export class BehaviorSettings extends Adw.PreferencesGroup {
 		this.add(updateDateOnCopy);
 
 		// Bind properties
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('remember-search', rememberSearch, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('exclude-pinned', excludePinned, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('exclude-tagged', excludeTagged, 'active', Gio.SettingsBindFlags.DEFAULT);

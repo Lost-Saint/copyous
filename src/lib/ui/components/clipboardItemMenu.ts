@@ -4,7 +4,7 @@ import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.j
 import * as BoxPointer from 'resource:///org/gnome/shell/ui/boxpointer.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { ItemType, Tags } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import type { ClipboardEntry } from '../../database/database.js';
@@ -23,7 +23,7 @@ class PopupMenuShortcutItem extends PopupMenu.PopupBaseMenuItem {
 	private readonly _shortcutLabel: ShortcutLabel;
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		text: string,
 		shortcut: Shortcut,
 	) {
@@ -67,7 +67,7 @@ export class ClipboardItemMenu extends PopupMenu.PopupMenu<ActionPopupMenuSectio
 	private readonly _editSection: PopupMenu.PopupMenuSection;
 	private readonly _actionMenuSection: ActionPopupMenuSection;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super(Main.layoutManager.dummyCursor, 0, St.Side.TOP);
 
 		this.actor.add_style_class_name('clipboard-item-menu');

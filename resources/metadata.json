@@ -1,9 +1,9 @@
 {
-	"name": "Copyous",
+	"name": "Klepto",
 	"description": "Modern Clipboard Manager for GNOME.\n\nMonitors clipboard selections to keep a searchable history with previews, pins, tags, and actions.",
-	"uuid": "copyous@boerdereinar.dev",
+	"uuid": "klepto@lost-saint.gg",
 	"shell-version": ["48", "49", "50"],
-	"settings-schema": "org.gnome.shell.extensions.copyous",
-	"gettext-domain": "copyous@boerdereinar.dev",
-	"url": "https://github.com/boerdereinar/copyous"
+	"settings-schema": "org.gnome.shell.extensions.klepto",
+	"gettext-domain": "klepto@lost-saint.gg",
+	"url": "https://github.com/lost-saint/klepto"
 }

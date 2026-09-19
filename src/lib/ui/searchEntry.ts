@@ -6,7 +6,7 @@ import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.j
 import * as BoxPointer from 'resource:///org/gnome/shell/ui/boxpointer.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { ItemType, ItemTypes, type Tag, Tags } from '../common/constants.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
@@ -272,7 +272,7 @@ export class SearchEntry extends St.Entry {
 	private readonly _itemButton: St.Button;
 	private readonly _menu: ItemPopupMenu;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super({
 			style_class: 'clipboard-search-entry',
 			hint_text: _('Type to search'),

@@ -5,7 +5,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { ActiveState, getPreviewCacheFile } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
@@ -271,7 +271,7 @@ export class TextPreview extends ContentPreview {
 	declare showLineNumbers: boolean;
 	declare tabWidth: number;
 
-	constructor(ext: CopyousExtension, text: string, language?: string) {
+	constructor(ext: KleptoExtension, text: string, language?: string) {
 		super();
 
 		this.add_style_class_name('text-preview');
@@ -295,7 +295,7 @@ Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
  * Creates a text preview by reading the first 4096 bytes
  * @returns The text preview
  */
-async function createTextPreview(ext: CopyousExtension, file: Gio.File): Promise<TextPreview> {
+async function createTextPreview(ext: KleptoExtension, file: Gio.File): Promise<TextPreview> {
 	const extension = file.get_uri().match(/\.(\w+)$/)?.[1];
 	const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
 	const bytes = await stream.read_bytes_async(4096, GLib.PRIORITY_DEFAULT, null);
@@ -403,7 +403,7 @@ export async function getFileType(file: Gio.File): Promise<[FileType, Gio.File |
  * @returns the created file preview or null if either the file preview could not be created or if it is not allowed
  */
 export async function tryCreateFilePreview(
-	ext: CopyousExtension,
+	ext: KleptoExtension,
 	file: Gio.File,
 	fileType: FileType,
 	thumbnail: Gio.File | null,

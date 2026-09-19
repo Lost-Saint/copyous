@@ -4,7 +4,7 @@ import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import type { CopyousSettings } from '../../common/settings.js';
+import type { KleptoSettings } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass()
@@ -56,7 +56,7 @@ export class ItemCustomization extends Adw.PreferencesGroup {
 		});
 		this.add(tabWidth);
 
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('item-width', itemWidth, 'value', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('item-height', itemHeight, 'value', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('dynamic-item-height', dynamicHeight, 'active', Gio.SettingsBindFlags.DEFAULT);

@@ -1,6 +1,6 @@
 import Clutter from 'gi://Clutter';
 import St from 'gi://St';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { registerClass } from '../common/gjs.js';
 import {
 	get_first_visible_child,
@@ -20,7 +20,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 	private _lastQuery: SearchQuery | null = null;
 	private readonly _itemHandlers = new Map<ClipboardItem, number[]>();
 
-	constructor(ext: CopyousExtension) {
+	constructor(ext: KleptoExtension) {
 		super({
 			style_class: 'clipboard-item-list',
 			x_align: Clutter.ActorAlign.START,

@@ -114,7 +114,7 @@ class ShortcutDialog extends Adw.Dialog {
 				margin_start: 30,
 				margin_end: 30,
 				file: Gio.File.new_for_uri(
-					'resource:///org/gnome/Shell/Extensions/copyous/images/enter-keyboard-shortcut.svg',
+					'resource:///org/gnome/Shell/Extensions/klepto/images/enter-keyboard-shortcut.svg',
 				),
 			}),
 		);

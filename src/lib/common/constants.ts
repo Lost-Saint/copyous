@@ -71,7 +71,7 @@ export const DefaultColors = {
 	'custom-search-bg-color': ['rgb(71,71,76)', 'rgb(255,255,255)'],
 } as const;
 
-export const UserAgent = 'Mozilla/5.0 (compatible; CopyousBot/1.0; +https://github.com/boerdereinar/copyous)';
+export const UserAgent = 'Mozilla/5.0 (compatible; KleptoBot/1.0; +https://github.com/lost-saint/klepto)';
 
 export const HljsCdns = [
 	'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es',

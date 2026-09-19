@@ -5,7 +5,7 @@ import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum, type CopyousSettings } from '../../common/settings.js';
+import { bind_enum, type KleptoSettings } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass()
@@ -35,7 +35,7 @@ export class HeaderCustomization extends Adw.PreferencesGroup {
 		this.add(headerControlsVisibility);
 
 		// Bind properties
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('show-header', showHeader, 'active', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'header-controls-visibility', headerControlsVisibility, 'selected');
 		settings.bind('show-item-title', showItemTitle, 'active', Gio.SettingsBindFlags.DEFAULT);

@@ -1,7 +1,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import type GObject from 'gi://GObject';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import type { ItemType, Tag } from '../common/constants.js';
 import type { ClipboardHistory } from '../common/settings.js';
 import { ClipboardEntry, type Metadata } from './database.js';
@@ -34,7 +34,7 @@ export class JsonDatabase extends MemoryDatabase {
 	private _saveTimeoutId: number = -1;
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		private file: Gio.File,
 	) {
 		super();

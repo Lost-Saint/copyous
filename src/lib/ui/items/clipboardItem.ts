@@ -4,7 +4,7 @@ import GObject from 'gi://GObject';
 import Graphene from 'gi://Graphene';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { flagsParamSpec, registerClass } from '../../common/gjs.js';
 import type { Icon } from '../../common/icons.js';
@@ -38,7 +38,7 @@ export class ClipboardItem extends St.Button {
 	protected _content: St.BoxLayout;
 
 	constructor(
-		protected ext: CopyousExtension,
+		protected ext: KleptoExtension,
 		readonly entry: ClipboardEntry,
 		icon: Icon,
 		title: string,

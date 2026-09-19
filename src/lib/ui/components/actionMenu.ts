@@ -5,7 +5,7 @@ import GObject from 'gi://GObject';
 import type St from 'gi://St';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import {
 	type Action,
 	type ActionConfig,
@@ -125,7 +125,7 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 	private _monitorChangedId: number = -1;
 	private _tokens: Gio.Cancellable[] = [];
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super();
 
 		this._config = { actions: [] };

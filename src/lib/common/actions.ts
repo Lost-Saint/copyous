@@ -261,7 +261,7 @@ export function defaultConfig(ext: Extension | ExtensionPreferences): ActionConf
  */
 export async function loadConfig(ext: Extension | ExtensionPreferences, save: boolean = false): Promise<ActionConfig> {
 	const environment = GLib.get_environ();
-	const actions = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_ACTIONS');
+	const actions = GLib.environ_getenv(environment, 'DEBUG_KLEPTO_ACTIONS');
 	if (actions === 'default') return defaultConfig(ext);
 
 	const path = actions ? Gio.File.new_for_path(actions) : getActionsConfigPath(ext);

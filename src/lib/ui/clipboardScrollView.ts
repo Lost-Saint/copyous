@@ -1,7 +1,7 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
 import { get_first_visible_child, get_last_visible_child } from '../misc/actor.js';
 import { ClipboardScrollContainer } from './clipboardScrollContainer.js';
@@ -25,7 +25,7 @@ export class ClipboardScrollView extends St.ScrollView {
 
 	private readonly _scrollContainer: ClipboardScrollContainer;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super({
 			style_class: 'clipboard-scroll-view',
 			hscrollbar_policy: St.PolicyType.AUTOMATIC,

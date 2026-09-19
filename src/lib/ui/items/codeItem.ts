@@ -1,7 +1,7 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import type { CodeItemSettings } from '../../common/settings.js';
@@ -17,7 +17,7 @@ export class CodeItem extends ClipboardItem {
 	private readonly _code: CodeLabel;
 	private _codeInfo?: CodeInfo;
 
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Code, _('Code'));
 
 		this.codeItemSettings = this.ext.settings.get_child('code-item');

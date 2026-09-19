@@ -8,7 +8,7 @@ import Gtk from 'gi://Gtk';
 import { gettext as _, ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import { loadConfig } from './lib/common/actions.js';
 import { Icon } from './lib/common/icons.js';
-import { type CopyousSettings, migrateSettings } from './lib/common/settings.js';
+import { type KleptoSettings, migrateSettings } from './lib/common/settings.js';
 import { ActionsPage } from './lib/preferences/actions/actionsPage.js';
 import { DialogCustomization } from './lib/preferences/customization/dialogCustomization.js';
 import { HeaderCustomization } from './lib/preferences/customization/headerCustomization.js';
@@ -140,7 +140,7 @@ export default class Preferences extends ExtensionPreferences {
 
 		// Register css
 		const provider = new Gtk.CssProvider();
-		provider.load_from_resource('/org/gnome/Shell/Extensions/copyous/style.css');
+		provider.load_from_resource('/org/gnome/Shell/Extensions/klepto/style.css');
 		Gtk.StyleContext.add_provider_for_display(display, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
 		// Unregister resources
@@ -153,16 +153,16 @@ export default class Preferences extends ExtensionPreferences {
 	}
 
 	/* DEBUG-ONLY */
-	override getSettings(schema?: string): Gio.Settings & CopyousSettings {
+	override getSettings(schema?: string): Gio.Settings & KleptoSettings {
 		try {
 			const environment = GLib.get_environ();
-			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
+			const settings = GLib.environ_getenv(environment, 'DEBUG_KLEPTO_SCHEMA');
 			if (settings) schema ??= this.metadata['settings-schema'] + '.debug';
 
-			return super.getSettings(schema) as Gio.Settings & CopyousSettings;
+			return super.getSettings(schema) as Gio.Settings & KleptoSettings;
 		} catch {
 			// Fallback for when debug schema does not exist
-			return super.getSettings() as Gio.Settings & CopyousSettings;
+			return super.getSettings() as Gio.Settings & KleptoSettings;
 		}
 	}
 }

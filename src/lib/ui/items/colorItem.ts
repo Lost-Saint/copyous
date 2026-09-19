@@ -2,7 +2,7 @@ import Clutter from 'gi://Clutter';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { Color } from '../../common/color.js';
 import { ActiveState } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
@@ -65,7 +65,7 @@ export class ColorPreview extends ContentPreview {
 
 @registerClass()
 export class ColorItem extends ClipboardItem {
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Color, _('Color'));
 
 		this.add_style_class_name('color-item');

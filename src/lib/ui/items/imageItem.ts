@@ -1,7 +1,7 @@
 import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import type { ImageItemSettings } from '../../common/settings.js';
@@ -32,7 +32,7 @@ export class ImageItem extends ClipboardItem {
 
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Image, _('Image'));
 
 		this.imageItemSettings = this.ext.settings.get_child('image-item');

@@ -30,7 +30,7 @@ body:
       description: |
         You can find the extension version by running:
         ```shell
-        gnome-extensions info copyous@boerdereinar.dev
+        gnome-extensions info klepto@lost-saint
         ```
       placeholder: i.e. 1.0.0
     validations:
@@ -61,7 +61,7 @@ body:
       description: |
         Run the following command and paste the output below:
         ```shell
-        dconf dump /org/gnome/shell/extensions/copyous/
+        dconf dump /org/gnome/shell/extensions/klepto/
         ```
     validations:
       required: true

@@ -12,7 +12,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as ModalDialog from 'resource:///org/gnome/shell/ui/modalDialog.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { Color } from '../common/color.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
@@ -81,12 +81,12 @@ export class ClipboardIndicator extends PanelMenu.Button {
 	private readonly _incognitoSwitch: PopupMenu.PopupSwitchMenuItem;
 	private _previewWidget?: St.Widget;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super(0.5, ext.metadata.name, false);
 		this.configurePanelMenuClickGesture();
 
 		this._box = new St.BoxLayout({
-			style_class: 'copyous-indicator-box',
+			style_class: 'klepto-indicator-box',
 			orientation: Clutter.Orientation.HORIZONTAL,
 		});
 		this.add_child(this._box);

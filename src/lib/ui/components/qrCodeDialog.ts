@@ -4,7 +4,7 @@ import St from 'gi://St';
 import * as Dialog from 'resource:///org/gnome/shell/ui/dialog.js';
 import * as ModalDialog from 'resource:///org/gnome/shell/ui/modalDialog.js';
 import Cairo from 'cairo';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import QrCodeGen from '../../../thirdparty/qrcodegen.js';
 import { registerClass } from '../../common/gjs.js';
 
@@ -38,7 +38,7 @@ class QrCode extends St.DrawingArea {
 	private _qrCode: QrCodeGen.QrCode | ErrorQrCode;
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		text: string,
 	) {
 		super();
@@ -122,7 +122,7 @@ class QrCode extends St.DrawingArea {
 
 @registerClass()
 export class QrCodeDialog extends ModalDialog.ModalDialog {
-	constructor(ext: CopyousExtension, text: string) {
+	constructor(ext: KleptoExtension, text: string) {
 		super();
 
 		const content = new Dialog.MessageDialogContent({});

@@ -4,7 +4,7 @@ import type Gda6 from 'gi://Gda?version=6.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import type GObject from 'gi://GObject';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { getDataPath, type ItemType } from '../common/constants.js';
 import { ClipboardHistory } from '../common/settings.js';
 import { ClipboardEntry, type Database, type Metadata } from './database.js';
@@ -238,7 +238,7 @@ export class GdaDatabase implements Database {
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		gda: typeof Gda,
 		file: Gio.File | null,
 	) {

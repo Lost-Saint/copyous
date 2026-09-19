@@ -2,7 +2,7 @@ import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { DefaultColors, getDataPath } from '../common/constants.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
 import { ColorScheme, CustomColorScheme, Theme, type ThemeSettings } from '../common/settings.js';
@@ -34,7 +34,7 @@ export class ThemeManager extends GObject.Object {
 	// stale completion never rewrites the global stage theme afterwards.
 	private _generation: number = 0;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super();
 
 		this._resource = Gio.resource_load(`${this.ext.path}/theme.gresource`);
@@ -104,7 +104,7 @@ export class ThemeManager extends GObject.Object {
 		if (theme === Theme.Custom) {
 			try {
 				// Load template
-				const uri = `resource:///org/gnome/shell/extensions/copyous/css/template-${colorScheme}.css`;
+				const uri = `resource:///org/gnome/shell/extensions/klepto/css/template-${colorScheme}.css`;
 				const template = Gio.File.new_for_uri(uri);
 				const [contents] = await template.load_contents_async(null);
 				if (generation !== this._generation) return;
@@ -148,7 +148,7 @@ export class ThemeManager extends GObject.Object {
 
 		// GNOME Theme
 		const themeName = (['default', 'yaru'] as const)[theme];
-		const uri = `resource:///org/gnome/shell/extensions/copyous/css/stylesheet-${themeName}-${colorScheme}.css`;
+		const uri = `resource:///org/gnome/shell/extensions/klepto/css/stylesheet-${themeName}-${colorScheme}.css`;
 		const stylesheet = Gio.File.new_for_uri(uri);
 
 		if (this._stylesheet?.equal(stylesheet)) return;

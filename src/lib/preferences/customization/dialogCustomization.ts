@@ -4,7 +4,7 @@ import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum, type CopyousSettings } from '../../common/settings.js';
+import { bind_enum, type KleptoSettings } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass()
@@ -122,7 +122,7 @@ export class DialogCustomization extends Adw.PreferencesGroup {
 		this.add(showScrollbar);
 
 		// Bind properties
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('show-at-pointer', this._showAtPointer, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('show-at-cursor', this._showAtCursor, 'active', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'clipboard-orientation', this._orientation, 'selected');

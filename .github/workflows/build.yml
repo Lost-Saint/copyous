@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  UUID: copyous@boerdereinar.dev
+  UUID: klepto@lost-saint
 
 jobs:
   lint:

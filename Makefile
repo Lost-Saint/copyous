@@ -1,6 +1,6 @@
 # Constants
-NAME := copyous
-UUID := copyous@boerdereinar.dev
+NAME := klepto
+UUID := klepto@lost-saint
 
 # Directories
 SRC_DIR := src
@@ -73,8 +73,8 @@ resources/po/main.pot: $(SRC)
 	find src -name '*.ts' \
 	| xargs xgettext \
 		--from-code=UTF-8 \
-		--copyright-holder="Copyous" \
-		--package-name="Copyous" \
+		--copyright-holder="Klepto" \
+		--package-name="Klepto" \
 		--language="javascript" \
 		--sort-by-file \
 		--output="$@"
@@ -92,8 +92,8 @@ check-pot:
 	find src -name '*.ts' \
 	| xargs xgettext \
 		--from-code=UTF-8 \
-		--copyright-holder="Copyous" \
-		--package-name="Copyous" \
+		--copyright-holder="Klepto" \
+		--package-name="Klepto" \
 		--language="javascript" \
 		--sort-by-file \
 		--output=- \
@@ -211,10 +211,10 @@ MUTTER_DEVKIT := $(wildcard $(or $(shell command -V mutter-devkit 2>/dev/null), 
 
 export MUTTER_DEBUG_DUMMY_MODE_SPECS=$(RESOLUTION)
 export CLUTTER_TEXT_DIRECTION=$(TEXT_DIRECTION)
-export DEBUG_COPYOUS_SCHEMA=$(DEBUG_SCHEMA)
-export DEBUG_COPYOUS_DBPATH=$(DBPATH)
-export DEBUG_COPYOUS_GDA_VERSION=$(GDA_VERSION)
-export DEBUG_COPYOUS_ACTIONS=$(ACTIONS)
+export DEBUG_KLEPTO_SCHEMA=$(DEBUG_SCHEMA)
+export DEBUG_KLEPTO_DBPATH=$(DBPATH)
+export DEBUG_KLEPTO_GDA_VERSION=$(GDA_VERSION)
+export DEBUG_KLEPTO_ACTIONS=$(ACTIONS)
 
 launch: install database
 # Check for mutter-devkit

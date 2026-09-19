@@ -4,7 +4,7 @@ import { type ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensi
 import type { HLJSApi, LanguageFn } from 'highlight.js';
 import { getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
 import { DbusService } from './lib/common/dbus.js';
-import { type ClipboardHistory, type CopyousSettings, migrateSettings } from './lib/common/settings.js';
+import { type ClipboardHistory, type KleptoSettings, migrateSettings } from './lib/common/settings.js';
 import { type SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
 import type { ClipboardEntry } from './lib/database/database.js';
 import { ClipboardEntryTracker } from './lib/database/entryTracker.js';
@@ -15,8 +15,8 @@ import { ThemeManager } from './lib/misc/theme.js';
 import { ClipboardDialog } from './lib/ui/clipboardDialog.js';
 import { ClipboardIndicator } from './lib/ui/indicator.js';
 
-export default class CopyousExtension extends Extension {
-	public settings!: CopyousSettings;
+export default class KleptoExtension extends Extension {
+	public settings!: KleptoSettings;
 	public logger!: ConsoleLike;
 
 	public hljs: HLJSApi | null | undefined;
@@ -362,19 +362,19 @@ export default class CopyousExtension extends Extension {
 	}
 
 	/* DEBUG-ONLY */
-	override getSettings(schema?: string): Gio.Settings & CopyousSettings {
+	override getSettings(schema?: string): Gio.Settings & KleptoSettings {
 		try {
 			const environment = GLib.get_environ();
-			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
+			const settings = GLib.environ_getenv(environment, 'DEBUG_KLEPTO_SCHEMA');
 			if (settings) {
 				this.getLogger().log('Using debug schema');
 				schema ??= this.metadata['settings-schema'] + '.debug';
 			}
 
-			return super.getSettings(schema) as Gio.Settings & CopyousSettings;
+			return super.getSettings(schema) as Gio.Settings & KleptoSettings;
 		} catch {
 			// Fallback for when debug schema does not exist
-			return super.getSettings() as Gio.Settings & CopyousSettings;
+			return super.getSettings() as Gio.Settings & KleptoSettings;
 		}
 	}
 }

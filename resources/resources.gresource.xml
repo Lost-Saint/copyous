@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/main/gio/gresource.dtd?ref_type=heads"?>
 <gresources>
-	<gresource prefix="/org/gnome/Shell/Extensions/copyous">
+	<gresource prefix="/org/gnome/Shell/Extensions/klepto">
 		<file alias="style.css">css/prefs.css</file>
 		<file preprocess="xml-stripblanks">images/enter-keyboard-shortcut.svg</file>
 	</gresource>

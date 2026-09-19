@@ -494,7 +494,7 @@ export type CharacterItemSettings = TypedSettings<
 
 export type ThemeSettings = TypedSettings<(typeof SettingsTypes)['theme'], SettingsEnumTypes['theme']>;
 
-export interface CopyousSettings extends TypedSettings<typeof SettingsTypes, SettingsEnumTypes> {
+export interface KleptoSettings extends TypedSettings<typeof SettingsTypes, SettingsEnumTypes> {
 	get_child(name: typeof ChildKeys.TextItem): TextItemSettings;
 	get_child(name: typeof ChildKeys.CodeItem): CodeItemSettings;
 	get_child(name: typeof ChildKeys.ImageItem): ImageItemSettings;
@@ -541,7 +541,7 @@ function getIndicatorDisplay(showIcon: boolean, showContent: boolean): Indicator
 	return IndicatorDisplay.Hidden;
 }
 
-export function migrateSettings(settings: CopyousSettings): void {
+export function migrateSettings(settings: KleptoSettings): void {
 	// inverted paste-on-copy -> swap-copy-shortcut
 	const pasteOnCopy = settings.get_user_value<'b'>('paste-on-copy');
 	if (pasteOnCopy !== null) settings.set_boolean('swap-copy-shortcut', !pasteOnCopy.get_boolean());

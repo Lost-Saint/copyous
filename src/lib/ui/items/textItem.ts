@@ -2,7 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import type { TextItemSettings } from '../../common/settings.js';
@@ -18,7 +18,7 @@ export class TextItem extends ClipboardItem {
 	private readonly _text: Label;
 	private _textInfo?: TextInfo;
 
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Text, _('Text'));
 
 		this.textItemSettings = this.ext.settings.get_child('text-item');

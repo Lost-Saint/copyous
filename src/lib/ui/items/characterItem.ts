@@ -2,7 +2,7 @@ import Clutter from 'gi://Clutter';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import type { CharacterItemSettings } from '../../common/settings.js';
@@ -16,7 +16,7 @@ export class CharacterItem extends ClipboardItem {
 	private readonly _character: St.Label;
 	private readonly _chars: St.Label;
 
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Character, _('Char'));
 
 		this.characterItemSettings = this.ext.settings.get_child('character-item');

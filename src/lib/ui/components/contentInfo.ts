@@ -5,7 +5,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 import { gettext as _, type Extension, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { enumParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 import { TextCountMode } from '../../common/settings.js';
@@ -282,7 +282,7 @@ export function tryCreateImageInfo(file: Gio.File, size: number): ImageInfo | nu
 // Gst.init + uridecodebin in the compositor freezes/crashes the session
 // (see #158/#160/#152). Audio/video rows show size only.
 export async function createFileInfo(
-	ext: CopyousExtension,
+	ext: KleptoExtension,
 	file: Gio.File,
 	fileType: FileType,
 	_cancellable: Gio.Cancellable,

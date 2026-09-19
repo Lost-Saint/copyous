@@ -7,7 +7,7 @@ import St from 'gi://St';
 import { gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
@@ -27,7 +27,7 @@ function truncateBody(text: string): string {
 export class NotificationManager extends GObject.Object {
 	private _source: MessageTray.Source | null = null;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super();
 	}
 

@@ -5,7 +5,7 @@ import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import Shell from 'gi://Shell';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-import type CopyousExtension from '../../extension.js';
+import type KleptoExtension from '../../extension.js';
 import { instanceofAction, instanceofActionSubmenu, loadConfig } from '../common/actions.js';
 import { getActionsConfigPath } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
@@ -71,7 +71,7 @@ export class ShortcutManager extends GObject.Object {
 	private _monitor: Gio.FileMonitor;
 
 	constructor(
-		private ext: CopyousExtension,
+		private ext: KleptoExtension,
 		actor: Clutter.Actor,
 	) {
 		super();

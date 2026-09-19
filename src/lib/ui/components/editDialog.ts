@@ -8,7 +8,7 @@ import * as Dialog from 'resource:///org/gnome/shell/ui/dialog.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as ModalDialog from 'resource:///org/gnome/shell/ui/modalDialog.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { ItemType } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
@@ -153,7 +153,7 @@ export type LanguagePopupMenuSignals = {
 };
 
 export class LanguagePopupMenu extends PopupMenu.PopupMenu<LanguagePopupMenuSignals> {
-	constructor(ext: CopyousExtension, sourceActor: St.Widget, arrowAlignment: number, arrowSide: St.Side) {
+	constructor(ext: KleptoExtension, sourceActor: St.Widget, arrowAlignment: number, arrowSide: St.Side) {
 		super(sourceActor, arrowAlignment, arrowSide);
 
 		this.actor.add_style_class_name('language-popupmenu');
@@ -193,7 +193,7 @@ export class LanguageButton extends St.Button {
 	private readonly _label: St.Label;
 	private readonly _popupMenu: LanguagePopupMenu;
 
-	constructor(ext: CopyousExtension, language: Language | null) {
+	constructor(ext: KleptoExtension, language: Language | null) {
 		super({
 			style_class: 'language-button modal-dialog-button',
 			reactive: true,
@@ -254,7 +254,7 @@ export class EditDialog extends ModalDialog.ModalDialog {
 	private readonly _entry: MultilineEntry;
 	private readonly _languageButton?: LanguageButton;
 
-	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
+	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super({
 			styleClass: 'clipboard-item-edit-dialog',
 			destroyOnClose: true,

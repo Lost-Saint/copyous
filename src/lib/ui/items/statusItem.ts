@@ -3,7 +3,7 @@ import type Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import type CopyousExtension from '../../../extension.js';
+import type KleptoExtension from '../../../extension.js';
 import { enumParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 
@@ -27,7 +27,7 @@ export class StatusItem extends St.BoxLayout {
 	private readonly _icon: St.Icon;
 	private readonly _text: St.Label;
 
-	constructor(private ext: CopyousExtension) {
+	constructor(private ext: KleptoExtension) {
 		super({
 			style_class: 'clipboard-item status-item',
 			orientation: Clutter.Orientation.VERTICAL,

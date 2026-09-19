@@ -9,7 +9,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import type { CopyousSettings } from '../../common/settings.js';
+import type { KleptoSettings } from '../../common/settings.js';
 
 Gio._promisify(Adw.AlertDialog.prototype, 'choose');
 
@@ -303,7 +303,7 @@ export class AppExclusionsPage extends Adw.NavigationPage {
 		page.add(wmClassExclusionsGroup);
 
 		// Bind properties
-		const settings: CopyousSettings = prefs.getSettings();
+		const settings: KleptoSettings = prefs.getSettings();
 		settings.bind('wmclass-exclusions', wmClassExclusionsGroup, 'exclusions', Gio.SettingsBindFlags.DEFAULT);
 	}
 }

@@ -6,7 +6,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 import type Preferences from '../../../prefs.js';
 import { DefaultColors } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum, type CopyousSettings, type ThemeSettings } from '../../common/settings.js';
+import { bind_enum, type KleptoSettings, type ThemeSettings } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass({
@@ -127,7 +127,7 @@ export class ThemeCustomization extends Adw.PreferencesGroup {
 		this.add(searchBgColor);
 
 		// Bind properties
-		const settings = (prefs.getSettings() as CopyousSettings).get_child('theme');
+		const settings = (prefs.getSettings() as KleptoSettings).get_child('theme');
 
 		bind_enum(settings, 'theme', theme, 'selected');
 		bind_enum(settings, 'color-scheme', colorScheme, 'selected');
