@@ -15,6 +15,14 @@ import type { ClipboardEntry } from '../database/database.js';
 import { normalizeIndentation, trim } from '../ui/components/label.js';
 import { commonDirectory } from '../ui/items/filesItem.js';
 
+// Upper bound for clipboard-derived notification text. Full content stays in
+// the dialog; the notification shows just enough to recognize the capture.
+const MAX_NOTIFICATION_BODY = 200;
+
+function truncateBody(text: string): string {
+	return text.length > MAX_NOTIFICATION_BODY ? `${text.slice(0, MAX_NOTIFICATION_BODY)}…` : text;
+}
+
 @registerClass()
 export class NotificationManager extends GObject.Object {
 	private _source: MessageTray.Source | null = null;
@@ -64,7 +72,7 @@ export class NotificationManager extends GObject.Object {
 		const notification = new MessageTray.Notification({
 			source,
 			title: _('Copied Text'),
-			body: text,
+			body: truncateBody(text),
 			gicon: loadIcon(this.ext, Icon.Text),
 			isTransient: true,
 		});
@@ -110,7 +118,7 @@ export class NotificationManager extends GObject.Object {
 		if (!this.ext.settings.get_boolean('send-notification')) return;
 
 		let title: string;
-		let body: string | null = normalizeIndentation(trim(entry.content), 4);
+		let body: string | null = truncateBody(normalizeIndentation(trim(entry.content), 4));
 		let gicon: Gio.Icon | St.ImageContent;
 		switch (entry.type) {
 			case ItemType.Text:

@@ -216,7 +216,7 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 			const process = Gio.Subprocess.new(['sh', '-c', action.command, '_', ...match.slice(1)], flags);
 
 			// Wait for the command to complete and handle the output
-			const [stdout, stderr] = await process.communicate_utf8_async(entry.content, token);
+			const [stdout] = await process.communicate_utf8_async(entry.content, token);
 
 			if (process.get_successful()) {
 				const output = trim(stdout);
@@ -231,7 +231,9 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 						break;
 				}
 			} else {
-				this.ext.logger.error(stderr);
+				// Never log stderr: the command ran with clipboard content on
+				// stdin, so its output may contain sensitive data.
+				this.ext.logger.error('Action command failed');
 			}
 		} catch (e) {
 			this.ext.logger.error(e);

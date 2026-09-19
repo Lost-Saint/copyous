@@ -567,7 +567,8 @@ export class ClipboardDialog extends St.Widget {
 			})();
 
 			if (!item) {
-				this.ext.logger.error('Unknown item type', entry);
+				// Log the type and id only: entry content is sensitive and must never reach the journal.
+				this.ext.logger.error(`Unknown item type ${entry.type} for entry ${entry.id}`);
 				return;
 			}
 		} catch (e) {

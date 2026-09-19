@@ -302,7 +302,7 @@ export class ClipboardEntryTracker {
 					file.delete(null);
 				}
 			} catch {
-				this.ext.logger.error('Failed to delete image', entry.content);
+				this.ext.logger.error(`Failed to delete image for entry ${entry.id}`);
 			}
 		} else if (entry.type === ItemType.Link && entry.metadata) {
 			// Delete thumbnail image
@@ -314,7 +314,7 @@ export class ClipboardEntryTracker {
 						file.delete(null);
 					}
 				} catch {
-					this.ext.logger.error('Failed to delete thumbnail image', metadata.image);
+					this.ext.logger.error(`Failed to delete thumbnail image for entry ${entry.id}`);
 				}
 			}
 		}

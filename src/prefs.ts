@@ -126,10 +126,13 @@ export default class Preferences extends ExtensionPreferences {
 		const actions = new ActionsPage(this, window, config);
 		window.add(actions);
 
-		// Register icons
+		// Register icons (Gtk offers no removal, so only add once per display)
 		const display = Gdk.Display.get_default()!;
 		const iconTheme = Gtk.IconTheme.get_for_display(display);
-		iconTheme.add_search_path(`${this.dir.get_path()}/icons`);
+		const iconPath = `${this.dir.get_path()}/icons`;
+		if (!iconTheme.get_search_path()?.includes(iconPath)) {
+			iconTheme.add_search_path(iconPath);
+		}
 
 		// Register resources
 		const resource = Gio.resource_load(`${this.path}/resources.gresource`);
