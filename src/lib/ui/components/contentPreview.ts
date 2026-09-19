@@ -44,7 +44,6 @@ const PREVIEW_TARGET_EDGE = 1024;
 Gio._promisify(Gio.File.prototype, 'read_async');
 Gio._promisify(Gio.File.prototype, 'replace_async');
 Gio._promisify(GdkPixbuf.Pixbuf, 'new_from_stream_at_scale_async', 'new_from_stream_finish');
-Gio._promisify(GdkPixbuf.Pixbuf.prototype, 'save_to_streamv_async', 'save_to_stream_finish');
 Gio._promisify(Gio.OutputStream.prototype, 'close_async');
 
 // Promise-typed aliases for promisified functions whose gir types only
@@ -62,16 +61,15 @@ const saveToStreamPng = (
 	stream: Gio.OutputStream,
 	cancellable: Gio.Cancellable | null,
 ): Promise<boolean> =>
-	(
-		GdkPixbuf.Pixbuf.prototype.save_to_streamv_async as unknown as (
-			this: GdkPixbuf.Pixbuf,
-			stream: Gio.OutputStream,
-			type: string,
-			optionKeys: string[],
-			optionValues: string[],
-			cancellable: Gio.Cancellable | null,
-		) => Promise<boolean>
-	).call(pixbuf, stream, 'png', [], [], cancellable);
+	new Promise((resolve, reject) => {
+		pixbuf.save_to_streamv_async(stream, 'png', [], [], cancellable, (_source, result) => {
+			try {
+				resolve(GdkPixbuf.Pixbuf.save_to_stream_finish(result));
+			} catch (error) {
+				reject(error);
+			}
+		});
+	});
 
 // Generates a downscaled preview without ever blocking the compositor: the
 // read, the scaled decode, and the cache write are all asynchronous. Returns
