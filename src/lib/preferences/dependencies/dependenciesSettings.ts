@@ -343,7 +343,10 @@ class HighlightJsPage extends Adw.NavigationPage {
 			const isDefault = defaultLanguages.includes(name) || system;
 			listModel.append(new Language(name, language, hash, file, isDefault));
 		}
-		listModel.sort((a: Language, b: Language) => a.language.localeCompare(b.language));
+		// GLib.CompareDataFunc is typed (null, null); the store only holds Languages.
+		listModel.sort((a, b) =>
+			(a as unknown as Language).language.localeCompare((b as unknown as Language).language),
+		);
 
 		const filterListModel = new Gtk.FilterListModel<Language>({ model: listModel, filter: this._filter });
 

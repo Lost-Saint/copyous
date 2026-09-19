@@ -84,6 +84,6 @@ export class ItemActivationShortcuts extends Adw.PreferencesGroup {
 		});
 
 		const settings: CopyousSettings = prefs.getSettings();
-		settings.bind('swap-copy-shortcut', swapCopyPasteRow, 'active', null);
+		settings.bind('swap-copy-shortcut', swapCopyPasteRow, 'active', Gio.SettingsBindFlags.DEFAULT);
 	}
 }

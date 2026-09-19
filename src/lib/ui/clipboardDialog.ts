@@ -431,11 +431,14 @@ export class ClipboardDialog extends St.Widget {
 		this._nextCursor = this._cursor;
 
 		const grab = Main.pushModal(this, { actionMode: Shell.ActionMode.SYSTEM_MODAL }) as Clutter.Grab;
-		// GNOME 50 (Mutter 18) removed get_seat_state()/GrabState in favor of is_revoked()
+		// GNOME 50 (Mutter 18) removed get_seat_state()/GrabState in favor of is_revoked().
+		// Clutter.GrabState is also gone from the types, so read it off the
+		// runtime object on pre-50 shells where the branch below still runs.
 		const grabFailed =
 			VERSION >= 50
 				? (grab as Clutter.Grab & { is_revoked(): boolean }).is_revoked()
-				: (grab as Clutter.Grab & { get_seat_state(): number }).get_seat_state() !== Clutter.GrabState.ALL;
+				: (grab as Clutter.Grab & { get_seat_state(): number }).get_seat_state() !==
+					(Clutter as unknown as { GrabState: { ALL: number } }).GrabState.ALL;
 		if (grabFailed) {
 			Main.popModal(grab);
 			return;

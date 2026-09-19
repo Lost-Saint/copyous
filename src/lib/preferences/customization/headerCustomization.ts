@@ -1,4 +1,5 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -35,9 +36,9 @@ export class HeaderCustomization extends Adw.PreferencesGroup {
 
 		// Bind properties
 		const settings: CopyousSettings = prefs.getSettings();
-		settings.bind('show-header', showHeader, 'active', null);
+		settings.bind('show-header', showHeader, 'active', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'header-controls-visibility', headerControlsVisibility, 'selected');
-		settings.bind('show-item-title', showItemTitle, 'active', null);
+		settings.bind('show-item-title', showItemTitle, 'active', Gio.SettingsBindFlags.DEFAULT);
 
 		makeResettable(headerControlsVisibility, settings, 'header-controls-visibility');
 

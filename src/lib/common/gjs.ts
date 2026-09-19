@@ -1,10 +1,17 @@
 import GObject from 'gi://GObject';
 
 /**
- * GObject.registerClass wrapper for use with decorators
+ * GObject.registerClass wrapper for use with decorators.
+ *
+ * The return value is cast back to the input class: GObject.registerClass
+ * returns the class itself at runtime, but its types describe a wrapper that
+ * drops static members.
  */
 export function registerClass<
-	T extends GObject.ObjectConstructor,
+	T extends new (
+		// biome-ignore lint/suspicious/noExplicitAny: matches upstream Ctor shape.
+		...args: any[]
+	) => GObject.Object,
 	Props extends { [key: string]: GObject.ParamSpec },
 	Interfaces extends { $gtype: GObject.GType }[],
 	Sigs extends {
@@ -15,9 +22,9 @@ export function registerClass<
 	},
 >(options?: GObject.MetaInfo<Props, Interfaces, Sigs>) {
 	if (options) {
-		return (cls: T) => GObject.registerClass(options, cls);
+		return (cls: T) => GObject.registerClass(options, cls) as unknown as T;
 	} else {
-		return (cls: T) => GObject.registerClass(cls);
+		return (cls: T) => GObject.registerClass(cls) as unknown as T;
 	}
 }
 

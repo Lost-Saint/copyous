@@ -76,8 +76,10 @@ class TagsBox extends St.BoxLayout {
 
 	override vfunc_navigate_focus(from: Clutter.Actor | null, direction: St.DirectionType): boolean {
 		let res: boolean;
-		if (this.first_child === from && direction === St.DirectionType.LEFT) {
-			this.last_child.grab_key_focus();
+		const first = this.first_child;
+		const last = this.last_child;
+		if (first !== null && first === from && direction === St.DirectionType.LEFT && last !== null) {
+			last.grab_key_focus();
 			res = Clutter.EVENT_STOP;
 		} else {
 			res = super.vfunc_navigate_focus(from, direction);
@@ -217,6 +219,7 @@ export class TagsItem extends PopupMenu.PopupBaseMenuItem {
 	override vfunc_key_focus_in(): void {
 		const index = this._tag ? Tags.indexOf(this._tag) : -1;
 		const button = this._tagsBox.get_child_at_index(index) ?? this._tagsBox.first_child;
+		if (!button) return;
 		button.grab_key_focus();
 		this._tagsBox.scrollToChild(button);
 	}
@@ -243,6 +246,7 @@ export class TagsItem extends PopupMenu.PopupBaseMenuItem {
 
 		const index = this._tag ? Tags.indexOf(this._tag) : -1;
 		const button = this._tagsBox.get_child_at_index(index) ?? this._tagsBox.first_child;
+		if (!button) return;
 		this._tagsBox.scrollToChild(button, false);
 	}
 }

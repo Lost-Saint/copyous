@@ -1,6 +1,5 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
-import Meta from 'gi://Meta';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
@@ -69,11 +68,9 @@ export class Entry extends St.Entry {
 
 	private updateHover() {
 		this.sync_hover();
-		if (this.hover) {
-			global.display.set_cursor(Meta.Cursor.TEXT);
-		} else {
-			global.display.set_cursor(Meta.Cursor.DEFAULT);
-		}
+		// Mutter 18 removed Meta.Cursor/display.set_cursor; set the cursor on
+		// the entry actor itself instead of globally.
+		this.set_cursor_type(this.hover ? Clutter.CursorType.TEXT : Clutter.CursorType.DEFAULT);
 	}
 }
 
@@ -134,7 +131,7 @@ export class MultilineEntry extends St.Entry {
 		super.vfunc_allocate(box);
 
 		const contentBox = this.get_theme_node().get_content_box(box);
-		this.first_child.allocate(contentBox);
+		this.first_child?.allocate(contentBox);
 	}
 }
 

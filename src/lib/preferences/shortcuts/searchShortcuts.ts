@@ -1,4 +1,5 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -86,6 +87,6 @@ export class SearchScrollShortcuts extends Adw.PreferencesGroup {
 		swapScrollRow.bind_property('active', cycleItemTagRow, 'show-ctrl', GObject.BindingFlags.INVERT_BOOLEAN);
 
 		const settings: CopyousSettings = prefs.getSettings();
-		settings.bind('swap-scroll-shortcut', swapScrollRow, 'active', null);
+		settings.bind('swap-scroll-shortcut', swapScrollRow, 'active', Gio.SettingsBindFlags.DEFAULT);
 	}
 }

@@ -1,4 +1,5 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -30,7 +31,7 @@ export class TextItemCustomization extends Adw.ExpanderRow {
 
 		// Bind properties
 		const settings = prefs.getSettings().get_child('text-item');
-		settings.bind('show-text-info', showTextInfo, 'active', null);
+		settings.bind('show-text-info', showTextInfo, 'active', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'text-count-mode', textCounter, 'selected');
 
 		makeResettable(textCounter, settings, 'text-count-mode');

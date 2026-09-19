@@ -1,4 +1,5 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -42,9 +43,9 @@ export class CodeItemCustomization extends Adw.ExpanderRow {
 
 		// Bind properties
 		const settings = prefs.getSettings().get_child('code-item');
-		settings.bind('syntax-highlighting', syntaxHighlighting, 'active', null);
-		settings.bind('show-line-numbers', showLineNumbers, 'active', null);
-		settings.bind('show-code-info', showCodeInfo, 'active', null);
+		settings.bind('syntax-highlighting', syntaxHighlighting, 'active', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind('show-line-numbers', showLineNumbers, 'active', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind('show-code-info', showCodeInfo, 'active', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'text-count-mode', textCounter, 'selected');
 
 		makeResettable(textCounter, settings, 'text-count-mode');

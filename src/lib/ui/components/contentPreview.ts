@@ -47,6 +47,32 @@ Gio._promisify(GdkPixbuf.Pixbuf, 'new_from_stream_at_scale_async');
 Gio._promisify(GdkPixbuf.Pixbuf.prototype, 'save_to_streamv_async');
 Gio._promisify(Gio.OutputStream.prototype, 'close_async');
 
+// Promise-typed aliases for promisified functions whose gir types only
+// describe the callback form.
+const newFromStreamAtScale = GdkPixbuf.Pixbuf.new_from_stream_at_scale_async as unknown as (
+	stream: Gio.InputStream,
+	width: number,
+	height: number,
+	preserveAspectRatio: boolean,
+	cancellable: Gio.Cancellable | null,
+) => Promise<GdkPixbuf.Pixbuf>;
+
+const saveToStreamPng = (
+	pixbuf: GdkPixbuf.Pixbuf,
+	stream: Gio.OutputStream,
+	cancellable: Gio.Cancellable | null,
+): Promise<boolean> =>
+	(
+		GdkPixbuf.Pixbuf.prototype.save_to_streamv_async as unknown as (
+			this: GdkPixbuf.Pixbuf,
+			stream: Gio.OutputStream,
+			type: string,
+			optionKeys: string[],
+			optionValues: string[],
+			cancellable: Gio.Cancellable | null,
+		) => Promise<boolean>
+	).call(pixbuf, stream, 'png', [], [], cancellable);
+
 // Generates a downscaled preview without ever blocking the compositor: the
 // read, the scaled decode, and the cache write are all asynchronous. Returns
 // the original file when it is small enough, the cached copy otherwise, or
@@ -64,13 +90,7 @@ async function ensurePreviewFile(
 		if (!dir.query_exists(null)) dir.make_directory_with_parents(null);
 
 		const stream = await image.read_async(GLib.PRIORITY_DEFAULT, cancellable);
-		const pixbuf = (await GdkPixbuf.Pixbuf.new_from_stream_at_scale_async(
-			stream,
-			PREVIEW_TARGET_EDGE,
-			PREVIEW_TARGET_EDGE,
-			true,
-			cancellable,
-		)) as unknown as GdkPixbuf.Pixbuf;
+		const pixbuf = await newFromStreamAtScale(stream, PREVIEW_TARGET_EDGE, PREVIEW_TARGET_EDGE, true, cancellable);
 		const out = await preview.replace_async(
 			null,
 			false,
@@ -79,7 +99,7 @@ async function ensurePreviewFile(
 			cancellable,
 		);
 		try {
-			await (pixbuf.save_to_streamv_async(out, 'png', [], [], cancellable) as unknown as Promise<boolean>);
+			await saveToStreamPng(pixbuf, out, cancellable);
 		} finally {
 			await out.close_async(GLib.PRIORITY_DEFAULT, cancellable);
 		}
@@ -261,9 +281,9 @@ export class TextPreview extends ContentPreview {
 		const label = new CodeLabel(ext, props);
 		this.add_child(label);
 
-		this.bind_property('syntax-highlighting', label, 'syntax-highlighting', null);
-		this.bind_property('show-line-numbers', label, 'show-line-numbers', null);
-		this.bind_property('tab-width', label, 'tab-width', null);
+		this.bind_property('syntax-highlighting', label, 'syntax-highlighting', GObject.BindingFlags.DEFAULT);
+		this.bind_property('show-line-numbers', label, 'show-line-numbers', GObject.BindingFlags.DEFAULT);
+		this.bind_property('tab-width', label, 'tab-width', GObject.BindingFlags.DEFAULT);
 	}
 }
 

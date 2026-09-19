@@ -1,4 +1,5 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type Preferences from '../../../../prefs.js';
@@ -29,7 +30,7 @@ export class ImageItemCustomization extends Adw.ExpanderRow {
 
 		// Bind properties
 		const settings = prefs.getSettings().get_child('image-item');
-		settings.bind('show-image-info', showImageInfo, 'active', null);
+		settings.bind('show-image-info', showImageInfo, 'active', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'background-size', backgroundSize, 'selected');
 
 		makeResettable(backgroundSize, settings, 'background-size');

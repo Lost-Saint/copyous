@@ -232,7 +232,8 @@ export class ClipboardManager extends GObject.Object {
 		const window = global.display.focus_window;
 		if (window) {
 			const exclusions = this.ext.settings.get_strv('wmclass-exclusions');
-			if (exclusions.includes(window.wm_class)) return false;
+			const wmClass = window.wm_class;
+			if (wmClass && exclusions.includes(wmClass)) return false;
 		}
 
 		return !this.ext.settings.get_boolean('incognito');
