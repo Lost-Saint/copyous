@@ -3,9 +3,10 @@ import GObject from 'gi://GObject';
 /**
  * GObject.registerClass wrapper for use with decorators.
  *
- * The return value is cast back to the input class: GObject.registerClass
- * returns the class itself at runtime, but its types describe a wrapper that
- * drops static members.
+ * The inner call intentionally returns nothing: a decorator that returns a
+ * value replaces the class type (and the new types describe a wrapper that
+ * drops static members), while a void-returning decorator keeps the declared
+ * class exactly as written. GObject.registerClass still runs for effect.
  */
 export function registerClass<
 	T extends new (
@@ -22,9 +23,13 @@ export function registerClass<
 	},
 >(options?: GObject.MetaInfo<Props, Interfaces, Sigs>) {
 	if (options) {
-		return (cls: T) => GObject.registerClass(options, cls) as unknown as T;
+		return (cls: T) => {
+			GObject.registerClass(options, cls);
+		};
 	} else {
-		return (cls: T) => GObject.registerClass(cls) as unknown as T;
+		return (cls: T) => {
+			GObject.registerClass(cls);
+		};
 	}
 }
 
