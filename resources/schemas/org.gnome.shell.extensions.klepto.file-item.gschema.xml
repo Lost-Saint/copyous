@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
+<schemalist>
+	<schema id="org.gnome.shell.extensions.klepto.file-item" path="/org/gnome/shell/extensions/klepto/file-item/">
+		<key name="file-preview-visibility" enum="org.gnome.shell.extensions.klepto.file-item.FilePreviewVisibility">
+			<default>'file-preview-or-file-info'</default>
+			<summary>File preview shows a preview of the contents of a file. File info shows some information about the file.</summary>
+		</key>
+		<key name="file-preview-types" flags="org.gnome.shell.extensions.klepto.file-item.FilePreviewType">
+			<default>['text','image','thumbnail']</default>
+		</key>
+		<key name="file-preview-exclusion-patterns" type="as">
+			<default>[]</default>
+			<summary>Files matching these glob patterns will not have a preview</summary>
+		</key>
+		<key name="background-size" enum="org.gnome.shell.extensions.klepto.BackgroundSize">
+			<default>'cover'</default>
+			<summary>Background size of the image preview</summary>
+		</key>
+		<key name="syntax-highlighting" type="b">
+			<default>true</default>
+			<summary>Enable syntax highlighting in the text preview</summary>
+		</key>
+		<key name="show-line-numbers" type="b">
+			<default>true</default>
+			<summary>Show line numbers in the text preview</summary>
+		</key>
+	</schema>
+</schemalist>

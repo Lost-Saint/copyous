@@ -293,8 +293,8 @@ export class LinkPreview extends St.Widget {
 export class LinkItem extends ClipboardItem {
 	private readonly linkItemSettings: LinkItemSettings;
 
-	private readonly _linkPreview: LinkPreview;
-	private readonly _url: St.Label;
+	private _linkPreview: LinkPreview;
+	private _url: St.Label;
 
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
@@ -371,6 +371,10 @@ export class LinkItem extends ClipboardItem {
 	override destroy() {
 		this.linkItemSettings.disconnectObject(this);
 		this._cancellable.cancel();
+		this._linkPreview.destroy();
+		this._linkPreview = null!;
+		this._url.destroy();
+		this._url = null!;
 
 		super.destroy();
 	}

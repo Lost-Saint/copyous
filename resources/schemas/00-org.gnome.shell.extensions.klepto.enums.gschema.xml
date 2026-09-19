@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
+<schemalist>
+	<enum id="org.gnome.shell.extensions.klepto.DatabaseBackend">
+		<value nick="default" value="0"/>
+		<value nick="memory" value="1"/>
+		<value nick="sqlite" value="2"/>
+		<value nick="json" value="3"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.ClipboardHistory">
+		<value nick="clear" value="0"/>
+		<value nick="keep-pinned-and-tagged" value="1"/>
+		<value nick="keep-all" value="2"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.Orientation">
+		<value nick="horizontal" value="0"/>
+		<value nick="vertical" value="1"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.Position">
+		<value nick="top" value="0"/>
+		<!-- <value nick="left" value="0" /> -->
+		<value nick="center" value="1" />
+		<value nick="bottom" value="2"/>
+		<!-- <value nick="right" value="2" /> -->
+		<value nick="fill" value="3" />
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.HeaderControlsVisibility">
+		<value nick="visible" value="0"/>
+		<value nick="visible-on-hover" value="1"/>
+		<value nick="hidden" value="2"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.Theme">
+		<value nick="default" value="0"/>
+		<value nick="yaru" value="1"/>
+		<value nick="custom" value="2"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.ColorScheme">
+		<value nick="system" value="0"/>
+		<value nick="dark" value="1"/>
+		<value nick="light" value="2"/>
+		<value nick="high-contrast" value="3"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.CustomColorScheme">
+		<value nick="dark" value="0"/>
+		<value nick="light" value="1"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.OpenClipboardDialogBehavior">
+		<value nick="toggle" value="0"/>
+		<value nick="open-or-select-next" value="1"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.MiddleClickAction">
+		<value nick="none" value="0"/>
+		<value nick="pin" value="1"/>
+		<value nick="delete" value="2"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.IndicatorDisplay">
+		<value nick="hidden" value="0"/>
+		<value nick="icon-only" value="1"/>
+		<value nick="clipboard-content-only" value="2"/>
+		<value nick="icon-and-clipboard-content" value="3"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.TextCountMode">
+		<value nick="characters" value="0"/>
+		<value nick="words" value="1"/>
+		<value nick="lines" value="2"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.klepto.BackgroundSize">
+		<value nick="cover" value="0" />
+		<value nick="contain" value="1" />
+	</enum>
+
+	<flags id="org.gnome.shell.extensions.klepto.file-item.FilePreviewType">
+		<value nick="text" value="1"/>
+		<value nick="image" value="2"/>
+		<value nick="thumbnail" value="4" />
+	</flags>
+
+	<enum id="org.gnome.shell.extensions.klepto.file-item.FilePreviewVisibility">
+		<value nick="file-preview" value="0"/>
+		<value nick="file-info" value="1"/>
+		<value nick="file-preview-or-file-info" value="2"/>
+		<value nick="file-preview-and-file-info" value="3"/>
+		<value nick="hidden" value="4"/>
+	</enum>
+</schemalist>

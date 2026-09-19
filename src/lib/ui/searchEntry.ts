@@ -169,42 +169,46 @@ class ItemPopupMenu extends PopupMenu.PopupMenu<ItemPopupMenuSignals> {
 		this.actor.hide();
 		Main.layoutManager.uiGroup.add_child(this.actor);
 
-		this.actor.connect('captured-event', (_actor, event: Clutter.Event) => {
-			if (event.type() === Clutter.EventType.KEY_PRESS) {
-				const key = event.get_key_symbol();
+		this.actor.connectObject(
+			'captured-event',
+			(_actor: Clutter.Actor, event: Clutter.Event) => {
+				if (event.type() === Clutter.EventType.KEY_PRESS) {
+					const key = event.get_key_symbol();
 
-				const unicode = Clutter.keysym_to_unicode(key);
-				if (unicode === 0) return;
+					const unicode = Clutter.keysym_to_unicode(key);
+					if (unicode === 0) return;
 
-				// Select tag with number
-				if (key === Clutter.KEY_0 || key === Clutter.KEY_KP_0) {
-					this._tagsItem.tag = null;
-					this.close(BoxPointer.PopupAnimation.FADE);
-					this.emit('tag-changed', null);
-					return;
-				}
-
-				const isNum = key >= Clutter.KEY_1 && key <= Clutter.KEY_9;
-				if (isNum || (key >= Clutter.KEY_KP_1 && key <= Clutter.KEY_KP_9)) {
-					const i = isNum ? key - Clutter.KEY_1 : key - Clutter.KEY_KP_1;
-					let tag = Tags[i] ?? null;
-					tag = this._tagsItem.tag === tag ? null : tag;
-					this._tagsItem.tag = tag;
-					this.close(BoxPointer.PopupAnimation.FADE);
-					this.emit('tag-changed', tag);
-					return;
-				}
-
-				// Activate the item with the mnemonic
-				const char = String.fromCharCode(unicode).toLocaleLowerCase();
-				for (const menuItem of [this._all, ...Object.values(this._options)]) {
-					if (char === menuItem.mnemonic) {
-						menuItem.activate(event);
+					// Select tag with number
+					if (key === Clutter.KEY_0 || key === Clutter.KEY_KP_0) {
+						this._tagsItem.tag = null;
+						this.close(BoxPointer.PopupAnimation.FADE);
+						this.emit('tag-changed', null);
 						return;
 					}
+
+					const isNum = key >= Clutter.KEY_1 && key <= Clutter.KEY_9;
+					if (isNum || (key >= Clutter.KEY_KP_1 && key <= Clutter.KEY_KP_9)) {
+						const i = isNum ? key - Clutter.KEY_1 : key - Clutter.KEY_KP_1;
+						let tag = Tags[i] ?? null;
+						tag = this._tagsItem.tag === tag ? null : tag;
+						this._tagsItem.tag = tag;
+						this.close(BoxPointer.PopupAnimation.FADE);
+						this.emit('tag-changed', tag);
+						return;
+					}
+
+					// Activate the item with the mnemonic
+					const char = String.fromCharCode(unicode).toLocaleLowerCase();
+					for (const menuItem of [this._all, ...Object.values(this._options)]) {
+						if (char === menuItem.mnemonic) {
+							menuItem.activate(event);
+							return;
+						}
+					}
 				}
-			}
-		});
+			},
+			this,
+		);
 	}
 
 	private addItem(text: string, type: ItemType | null): ItemPopupMenuItem {
@@ -304,14 +308,18 @@ export class SearchEntry extends St.Entry {
 		});
 		left.add_child(this._itemButton);
 
-		this._itemButton.connect('clicked', (_btn, button) => {
-			if (button === Clutter.BUTTON_PRIMARY) {
-				this._menu.toggle();
-			} else if (button === Clutter.BUTTON_MIDDLE) {
-				this.type = null;
-				this.tag = null;
-			}
-		});
+		this._itemButton.connectObject(
+			'clicked',
+			(_btn: St.Button, button: number) => {
+				if (button === Clutter.BUTTON_PRIMARY) {
+					this._menu.toggle();
+				} else if (button === Clutter.BUTTON_MIDDLE) {
+					this.type = null;
+					this.tag = null;
+				}
+			},
+			this,
+		);
 
 		const itemButtonContent = new St.BoxLayout();
 		this._itemButton.add_child(itemButtonContent);
@@ -334,20 +342,24 @@ export class SearchEntry extends St.Entry {
 		const menuManager = new PopupMenu.PopupMenuManager(this);
 		menuManager.addMenu(this._menu, 0);
 
-		this._menu.connect('tag-changed', (_menu: unknown, tag: Tag | null) => {
-			this.tag = tag;
-			return undefined;
-		});
-
-		this._menu.connect('selected-changed', (_menu: unknown, type: ItemType | null) => {
-			this.type = type;
-			if (type) {
-				searchIcon.gicon = this._icons[type];
-			} else {
-				searchIcon.gicon = this._icons.search;
-			}
-			return undefined;
-		});
+		this._menu.connectObject(
+			'tag-changed',
+			(_menu: unknown, tag: Tag | null) => {
+				this.tag = tag;
+				return undefined;
+			},
+			'selected-changed',
+			(_menu: unknown, type: ItemType | null) => {
+				this.type = type;
+				if (type) {
+					searchIcon.gicon = this._icons[type];
+				} else {
+					searchIcon.gicon = this._icons.search;
+				}
+				return undefined;
+			},
+			this,
+		);
 
 		// Right
 		const right = new St.BoxLayout();
@@ -381,7 +393,11 @@ export class SearchEntry extends St.Entry {
 
 		// Connect signals
 		this.connect('notify::text', this.search.bind(this));
-		this.clutter_text.connect('key-press-event', (_text, event: Clutter.Event) => this._keyPressEvent(event));
+		this.clutter_text.connectObject(
+			'key-press-event',
+			(_text: Clutter.Text, event: Clutter.Event) => this._keyPressEvent(event),
+			this,
+		);
 	}
 
 	get pinned() {

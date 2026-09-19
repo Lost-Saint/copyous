@@ -369,23 +369,31 @@ export class ClipboardItemHeader extends St.BoxLayout {
 		// Select all text
 		this._titleEntry.clutter_text.set_selection(0, -1);
 
-		this._titleEntry.clutter_text.connect('key-press-event', (_text, event: Clutter.Event) => {
-			const key = event.get_key_symbol();
-			if (key === Clutter.KEY_Return || key === Clutter.KEY_KP_Enter) {
-				this.finishEditing(true);
-				return Clutter.EVENT_STOP;
-			} else if (key === Clutter.KEY_Escape) {
-				this.finishEditing(false);
-				return Clutter.EVENT_STOP;
-			}
-			return Clutter.EVENT_PROPAGATE;
-		});
+		this._titleEntry.clutter_text.connectObject(
+			'key-press-event',
+			(_text: Clutter.Text, event: Clutter.Event) => {
+				const key = event.get_key_symbol();
+				if (key === Clutter.KEY_Return || key === Clutter.KEY_KP_Enter) {
+					this.finishEditing(true);
+					return Clutter.EVENT_STOP;
+				} else if (key === Clutter.KEY_Escape) {
+					this.finishEditing(false);
+					return Clutter.EVENT_STOP;
+				}
+				return Clutter.EVENT_PROPAGATE;
+			},
+			this,
+		);
 
-		this._titleEntry.clutter_text.connect('key-focus-out', () => {
-			if (this._isEditing) {
-				this.finishEditing(true);
-			}
-		});
+		this._titleEntry.clutter_text.connectObject(
+			'key-focus-out',
+			() => {
+				if (this._isEditing) {
+					this.finishEditing(true);
+				}
+			},
+			this,
+		);
 
 		// Insert entry before time label
 		this._headerContent.insert_child_below(this._titleEntry, this._timeLabel);

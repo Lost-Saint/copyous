@@ -317,7 +317,7 @@ class HoleEffect extends Shell.GLSLEffect {
 		this._sizeLocation = this.get_uniform_location('size');
 		this._holeBoxLocation = this.get_uniform_location('hole_box');
 
-		target.connect('notify::allocation', () => this.queue_repaint());
+		target.connectObject('notify::allocation', () => this.queue_repaint(), this);
 	}
 
 	override vfunc_paint_target(node: Clutter.PaintNode, paintContext: Clutter.PaintContext): void {

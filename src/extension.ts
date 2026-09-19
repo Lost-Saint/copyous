@@ -356,9 +356,9 @@ export default class KleptoExtension extends Extension {
 		this.clipboardManager = undefined;
 
 		// Globals
-		this.settings?.disconnectObject(this);
-		this.settings = undefined!;
-		this.logger = undefined!;
+		this.settings.disconnectObject(this);
+		this.settings = null!;
+		this.logger = null!;
 	}
 
 	/* DEBUG-ONLY */

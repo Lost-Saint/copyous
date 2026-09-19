@@ -13,8 +13,6 @@ import { ClipboardItem } from './clipboardItem.js';
 
 @registerClass()
 export class ColorPreview extends ContentPreview {
-	private readonly _effect: Clutter.BrightnessContrastEffect;
-
 	constructor(color: string) {
 		super();
 
@@ -43,23 +41,25 @@ export class ColorPreview extends ContentPreview {
 		colorLabel.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
 		colorBox.add_child(colorLabel);
 
-		this._effect = new Clutter.BrightnessContrastEffect({ enabled: false });
-		colorBox.add_effect(this._effect);
+		colorBox.add_effect_with_name('brightness', new Clutter.BrightnessContrastEffect({ enabled: false }));
 	}
 
 	set active(active: ActiveState) {
+		const effect = this.first_child?.get_effect('brightness');
+		if (!(effect instanceof Clutter.BrightnessContrastEffect)) return;
+
 		if ((active & ActiveState.Active) > 0) {
-			this._effect.set_brightness(0.2);
+			effect.set_brightness(0.2);
 		} else if ((active & ActiveState.FocusHover) === (ActiveState.FocusHover as number)) {
-			this._effect.set_brightness(0.1);
+			effect.set_brightness(0.1);
 		} else if (active & ActiveState.Focus || active & ActiveState.Hover) {
-			this._effect.set_brightness(0.05);
+			effect.set_brightness(0.05);
 		} else {
-			this._effect.enabled = false;
+			effect.enabled = false;
 			return;
 		}
 
-		this._effect.enabled = true;
+		effect.enabled = true;
 	}
 }
 

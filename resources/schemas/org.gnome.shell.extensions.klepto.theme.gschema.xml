@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
+<schemalist>
+	<schema id="org.gnome.shell.extensions.klepto.theme" path="/org/gnome/shell/extensions/klepto/theme/">
+		<key name="theme" enum="org.gnome.shell.extensions.klepto.Theme">
+			<default>'default'</default>
+			<summary>The preferred theme</summary>
+		</key>
+		<key name="color-scheme" enum="org.gnome.shell.extensions.klepto.ColorScheme">
+			<default>'system'</default>
+			<summary>The color scheme of the theme</summary>
+		</key>
+		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.klepto.CustomColorScheme">
+			<default>'dark'</default>
+			<summary>The color scheme of the custom theme</summary>
+		</key>
+		<key name="custom-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of the clipboard dialog</summary>
+		</key>
+		<key name="custom-fg-color" type="s">
+			<default>''</default>
+			<summary>The text color of the clipboard dialog</summary>
+		</key>
+		<key name="custom-card-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of clipboard items</summary>
+		</key>
+		<key name="custom-search-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of the search bar</summary>
+		</key>
+	</schema>
+</schemalist>

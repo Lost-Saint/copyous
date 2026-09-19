@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
+<schemalist>
+	<schema id="org.gnome.shell.extensions.klepto.code-item" path="/org/gnome/shell/extensions/klepto/code-item/">
+		<key name="syntax-highlighting" type="b">
+			<default>true</default>
+			<summary>Enable syntax highlighting</summary>
+		</key>
+		<key name="show-line-numbers" type="b">
+			<default>true</default>
+			<summary>Show line numbers</summary>
+		</key>
+		<key name="show-code-info" type="b">
+			<default>false</default>
+			<summary>Show extra information</summary>
+		</key>
+		<key name="text-count-mode" enum="org.gnome.shell.extensions.klepto.TextCountMode">
+			<default>'characters'</default>
+			<summary>Show the number of characters, words or lines</summary>
+		</key>
+	</schema>
+</schemalist>

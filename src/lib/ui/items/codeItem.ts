@@ -66,9 +66,13 @@ export class CodeItem extends ClipboardItem {
 		this.updateCodeInfo();
 
 		// Update metadata
-		this._code.connect('notify::language', () => {
-			this.entry.metadata = { language: this._code.language } as CodeMetadata;
-		});
+		this._code.connectObject(
+			'notify::language',
+			() => {
+				this.entry.metadata = { language: this._code.language } as CodeMetadata;
+			},
+			this,
+		);
 	}
 
 	private updateCode() {

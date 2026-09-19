@@ -38,7 +38,7 @@ export class FileItem extends ClipboardItem {
 	private _filePreviewExclusionPatterns: string[] = [];
 	private _filePreviewExclusionRegex: RegExp | null = null;
 
-	private readonly _file: St.Label;
+	private _file: St.Label;
 	private _fileType?: FileType;
 	private _thumbnail?: Gio.File | null;
 	private _filePreview?: ContentPreview | null;
@@ -209,6 +209,8 @@ export class FileItem extends ClipboardItem {
 	override destroy() {
 		this.fileItemSettings.disconnectObject(this);
 		this._cancellable.cancel();
+		this._file.destroy();
+		this._file = null!;
 
 		super.destroy();
 	}

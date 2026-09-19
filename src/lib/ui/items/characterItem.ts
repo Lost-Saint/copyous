@@ -13,8 +13,8 @@ import { ClipboardItem } from './clipboardItem.js';
 export class CharacterItem extends ClipboardItem {
 	private readonly characterItemSettings: CharacterItemSettings;
 
-	private readonly _character: St.Label;
-	private readonly _chars: St.Label;
+	private _character: St.Label;
+	private _chars: St.Label;
 
 	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Character, _('Char'));
@@ -83,6 +83,10 @@ export class CharacterItem extends ClipboardItem {
 
 	override destroy() {
 		this.characterItemSettings.disconnectObject(this);
+		this._character.destroy();
+		this._character = null!;
+		this._chars.destroy();
+		this._chars = null!;
 
 		super.destroy();
 	}

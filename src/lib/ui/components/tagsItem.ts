@@ -137,8 +137,13 @@ export class TagsItem extends PopupMenu.PopupBaseMenuItem {
 		Tags.forEach((tag) => this.addTag(tag));
 		scrollView.child = this._tagsBox;
 
-		this._tagsBox.hadjustment.connect('notify::value', this.updateButtons.bind(this));
-		this._tagsBox.hadjustment.connect('changed', this.updateButtons.bind(this));
+		this._tagsBox.hadjustment.connectObject(
+			'notify::value',
+			this.updateButtons.bind(this),
+			'changed',
+			this.updateButtons.bind(this),
+			this,
+		);
 
 		// Right arrow
 		this._rightArrow = new St.Button({
@@ -163,8 +168,8 @@ export class TagsItem extends PopupMenu.PopupBaseMenuItem {
 			}
 		});
 
-		this._leftArrow.connect('clicked', () => this._tagsBox.previousPage());
-		this._rightArrow.connect('clicked', () => this._tagsBox.nextPage());
+		this._leftArrow.connectObject('clicked', () => this._tagsBox.previousPage(), this);
+		this._rightArrow.connectObject('clicked', () => this._tagsBox.nextPage(), this);
 	}
 
 	get tag(): Tag | null {

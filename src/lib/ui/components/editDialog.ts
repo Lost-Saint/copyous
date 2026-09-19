@@ -111,20 +111,24 @@ export class MultilineEntry extends St.Entry {
 		text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
 
 		// Always keep the cursor visible
-		text.connect('cursor-changed', () => {
-			const [success, x, y, h] = text.position_to_coords(text.cursor_position);
-			if (success) {
-				if (x > box.allocation.get_width()) return;
+		text.connectObject(
+			'cursor-changed',
+			() => {
+				const [success, x, y, h] = text.position_to_coords(text.cursor_position);
+				if (success) {
+					if (x > box.allocation.get_width()) return;
 
-				const y1 = box.vadjustment.value;
-				const y2 = y1 + box.vadjustment.page_size;
-				if (y < y1) {
-					box.vadjustment.value = y;
-				} else if (y > y2 - h) {
-					box.vadjustment.value = y - box.vadjustment.page_size + h;
+					const y1 = box.vadjustment.value;
+					const y2 = y1 + box.vadjustment.page_size;
+					if (y < y1) {
+						box.vadjustment.value = y;
+					} else if (y > y2 - h) {
+						box.vadjustment.value = y - box.vadjustment.page_size + h;
+					}
 				}
-			}
-		});
+			},
+			this,
+		);
 	}
 
 	override vfunc_allocate(box: Clutter.ActorBox) {
@@ -251,8 +255,8 @@ export class LanguageButton extends St.Button {
 
 @registerClass()
 export class EditDialog extends ModalDialog.ModalDialog {
-	private readonly _entry: MultilineEntry;
-	private readonly _languageButton?: LanguageButton;
+	private _entry: MultilineEntry;
+	private _languageButton: LanguageButton | null | undefined;
 
 	constructor(ext: KleptoExtension, entry: ClipboardEntry) {
 		super({
@@ -316,5 +320,14 @@ export class EditDialog extends ModalDialog.ModalDialog {
 
 	on_opened() {
 		this._entry.clutterText.queue_relayout();
+	}
+
+	override destroy() {
+		this._languageButton?.destroy();
+		this._languageButton = null;
+		this._entry.destroy();
+		this._entry = null!;
+
+		super.destroy();
 	}
 }

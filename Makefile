@@ -163,9 +163,8 @@ $(SCHEMAS): $(DIST_DIR)/schemas/%.gschema.xml: resources/schemas/%.gschema.xml |
 	cp $< $@
 
 $(DEBUG_SCHEMAS): $(DIST_DIR)/schemas/%.debug.gschema.xml: resources/schemas/%.gschema.xml | $(DIST_DIR)
-	$(eval ESCAPED := $(subst .,\., $*))
-	$(eval SLASHED := $(subst .,\/, $*))
-	@sed -e 's/$(ESCAPED)/$(ESCAPED).debug/g' -e 's/$(SLASHED)/$(SLASHED)\/debug/g' $< > $@
+	@sed -e 's/org\.gnome\.shell\.extensions\.klepto/org.gnome.shell.extensions.klepto.debug/g' \
+		-e 's/org\/gnome\/shell\/extensions\/klepto/org\/gnome\/shell\/extensions\/klepto\/debug/g' $< > $@
 
 # Resources
 $(DIST_DIR)/resources.gresource: resources/resources.gresource.xml resources/css/prefs.css | $(DIST_DIR)

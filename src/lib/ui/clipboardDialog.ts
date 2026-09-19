@@ -110,7 +110,7 @@ class ClipboardDialogHeader extends St.Widget {
 			child: new St.Icon({ gicon: loadIcon(ext, Icon.Settings) }),
 			can_focus: true,
 		});
-		this._settingsButton.connect('clicked', () => this.emit('open-settings'));
+		this._settingsButton.connectObject('clicked', () => this.emit('open-settings'), this);
 		this._headerBox.addPrefix(this._settingsButton);
 
 		this._incognitoButton = new IncognitoButton(ext, { style_class: 'dialog-header-icon-button' });
@@ -118,7 +118,7 @@ class ClipboardDialogHeader extends St.Widget {
 
 		// Center
 		this.searchEntry = new SearchEntry(ext);
-		this.searchEntry.clutter_text.connect('key-focus-in', () => this.updateHeader(true));
+		this.searchEntry.clutter_text.connectObject('key-focus-in', () => this.updateHeader(true), this);
 		this._headerBox.centerWidget = this.searchEntry;
 
 		// End
@@ -127,7 +127,7 @@ class ClipboardDialogHeader extends St.Widget {
 			label: _('Clear'),
 			can_focus: true,
 		});
-		this._clearButton.connect('clicked', () => this.emit('clear-history'));
+		this._clearButton.connectObject('clicked', () => this.emit('clear-history'), this);
 		this._headerBox.addSuffix(this._clearButton);
 
 		// Bind properties

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
+<schemalist>
+	<schema id="org.gnome.shell.extensions.klepto.character-item" path="/org/gnome/shell/extensions/klepto/character-item/">
+		<key name="max-characters" type="i">
+			<default>1</default>
+			<range min="1" max="4"/>
+			<summary>Maximum number of characters that are recognized as a character</summary>
+		</key>
+		<key name="show-unicode" type="b">
+			<default>false</default>
+			<summary>Show the Unicode of the character</summary>
+		</key>
+	</schema>
+</schemalist>

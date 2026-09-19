@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
+<schemalist>
+	<schema id="org.gnome.shell.extensions.klepto.image-item" path="/org/gnome/shell/extensions/klepto/image-item/">
+		<key name="show-image-info" type="b">
+			<default>false</default>
+			<summary>Show extra information</summary>
+		</key>
+		<key name="background-size" enum="org.gnome.shell.extensions.klepto.BackgroundSize">
+			<default>'cover'</default>
+			<summary>Background size of the image</summary>
+		</key>
+	</schema>
+</schemalist>

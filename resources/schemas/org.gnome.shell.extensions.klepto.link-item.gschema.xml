@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
+<schemalist>
+	<schema id="org.gnome.shell.extensions.klepto.link-item" path="/org/gnome/shell/extensions/klepto/link-item/">
+		<key name="show-link-preview" type="b">
+			<default>true</default>
+			<summary>Show a preview of the link</summary>
+		</key>
+		<key name="show-link-preview-image" type="b">
+			<default>true</default>
+			<summary>Show a preview image of the link</summary>
+		</key>
+		<key name="link-preview-image-background-size" enum="org.gnome.shell.extensions.klepto.BackgroundSize">
+			<default>'contain'</default>
+			<summary>Background size of the preview image of the link</summary>
+		</key>
+		<key name="link-preview-orientation" enum="org.gnome.shell.extensions.klepto.Orientation">
+			<default>'vertical'</default>
+			<summary>Orientation of the link preview</summary>
+		</key>
+		<key name="link-preview-exclusion-patterns" type="as">
+			<default>[]</default>
+			<summary>Links matching these regex patterns will not have a preview</summary>
+		</key>
+	</schema>
+</schemalist>
