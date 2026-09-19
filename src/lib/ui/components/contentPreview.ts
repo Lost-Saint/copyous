@@ -35,6 +35,10 @@ export class ContentPreview extends St.BoxLayout {
 	}
 }
 
+// Maximum image dimension uploaded as a texture. Anything larger risks
+// exceeding GL_MAX_TEXTURE_SIZE and killing the whole session (see #161).
+const MAX_IMAGE_DIMENSION = 4096;
+
 @registerClass({
 	Properties: {
 		'background-size': enumParamSpec(
@@ -59,6 +63,9 @@ export class ImagePreview extends ContentPreview {
 		if (image.query_exists(null)) {
 			try {
 				const [, width, height] = GdkPixbuf.Pixbuf.get_file_info(image.get_path()!);
+				if (width <= 0 || height <= 0 || width > MAX_IMAGE_DIMENSION || height > MAX_IMAGE_DIMENSION) {
+					throw new Error(`Image dimensions ${width}x${height} exceed texture limit`);
+				}
 				this._ratio = height / width;
 
 				const imageBox = new St.Widget({
@@ -309,7 +316,7 @@ export async function tryCreateFilePreview(
 				return allowedTypes & FilePreviewType.Image ? new ImagePreview(ext, file) : null;
 		}
 
-		return thumbnail && allowedTypes & FilePreviewType.Thumbnail ? new ThumbnailPreview(ext, file) : null;
+		return thumbnail && allowedTypes & FilePreviewType.Thumbnail ? new ThumbnailPreview(ext, thumbnail) : null;
 	} catch (error) {
 		ext.logger.error(error);
 		return null;
