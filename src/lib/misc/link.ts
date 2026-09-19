@@ -6,12 +6,38 @@ import type CopyousExtension from '../../extension.js';
 import { getCachePath, UserAgent } from '../common/constants.js';
 import type { LinkMetadata } from '../database/database.js';
 
-import OutputStreamSpliceFlags = Gio.OutputStreamSpliceFlags;
-
 Gio._promisify(Soup.Session.prototype, 'send_async');
 Gio._promisify(Gio.File.prototype, 'replace_async');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async');
-Gio._promisify(Gio.OutputStream.prototype, 'splice_async');
+Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
+
+// Upper bound for a single link preview download. Clipboard URLs are
+// untrusted, and an unbounded read can OOM the compositor process.
+const MAX_LINK_BYTES = 1024 * 1024;
+
+async function readWithBudget(stream: Gio.InputStream, cancellable: Gio.Cancellable): Promise<Uint8Array | null> {
+	const chunks: Uint8Array[] = [];
+	let total = 0;
+
+	for (;;) {
+		// biome-ignore lint/performance/noAwaitInLoops: stream chunks must be read sequentially.
+		const bytes = await stream.read_bytes_async(65536, GLib.PRIORITY_DEFAULT, cancellable);
+		const data = bytes.get_data();
+		if (!data || data.length === 0) break;
+
+		total += data.length;
+		if (total > MAX_LINK_BYTES) return null;
+		chunks.push(data);
+	}
+
+	const merged = new Uint8Array(total);
+	let offset = 0;
+	for (const chunk of chunks) {
+		merged.set(chunk, offset);
+		offset += chunk.length;
+	}
+	return merged;
+}
 
 export async function tryGetMetadata(
 	ext: CopyousExtension,
@@ -38,23 +64,21 @@ export async function tryGetMetadata(
 		// Check if the response is an image
 		const [contentType] = message.response_headers.get_content_type();
 		if (contentType && Gio.content_type_is_a(contentType, 'image/*')) {
-			// Since the response has already been received, write image to cache
 			const imagePath = getLinkImagePath(ext, url);
 			if (imagePath == null) return empty;
 
 			// Write to cache
 			if (!imagePath.query_exists(cancellable)) {
-				const out = await imagePath.replace_async(
+				if (message.response_headers.get_content_length() > MAX_LINK_BYTES) return empty;
+
+				const data = await readWithBudget(response, cancellable);
+				if (data == null) return empty;
+
+				await imagePath.replace_contents_async(
+					data,
 					null,
 					false,
 					Gio.FileCreateFlags.REPLACE_DESTINATION,
-					GLib.PRIORITY_DEFAULT,
-					null,
-				);
-				await out.splice_async(
-					response,
-					Gio.OutputStreamSpliceFlags.CLOSE_SOURCE | Gio.OutputStreamSpliceFlags.CLOSE_TARGET,
-					GLib.PRIORITY_DEFAULT,
 					null,
 				);
 			}
@@ -64,17 +88,9 @@ export async function tryGetMetadata(
 
 		// Download page
 		if (!contentType || !Gio.content_type_is_a(contentType, 'text/html')) return empty;
+		if (message.response_headers.get_content_length() > MAX_LINK_BYTES) return empty;
 
-		const out = Gio.MemoryOutputStream.new_resizable();
-		await out.splice_async(
-			response,
-			OutputStreamSpliceFlags.CLOSE_SOURCE | Gio.OutputStreamSpliceFlags.CLOSE_TARGET,
-			GLib.PRIORITY_DEFAULT,
-			cancellable,
-		);
-
-		const bytes = out.steal_as_bytes();
-		const data = bytes.get_data();
+		const data = await readWithBudget(response, cancellable);
 		if (data == null) return empty;
 
 		// Extract metadata
@@ -190,15 +206,16 @@ export async function tryGetLinkImage(
 		);
 
 		// Send request
-		const response = await session.send_and_read_async(message, GLib.PRIORITY_DEFAULT, cancellable);
+		const response = await session.send_async(message, GLib.PRIORITY_DEFAULT, cancellable);
 		if (response == null) return null;
 
-		const data = response.get_data();
-		if (data == null) return null;
-
-		// Check if the response is an image
+		// Check if the response is an image before reading the body
 		const [contentType] = message.response_headers.get_content_type();
 		if (contentType == null || !contentType.startsWith('image/')) return null;
+		if (message.response_headers.get_content_length() > MAX_LINK_BYTES) return null;
+
+		const data = await readWithBudget(response, cancellable);
+		if (data == null) return null;
 
 		// Write to cache
 		await imagePath.replace_contents_async(data, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, cancellable);

@@ -9,6 +9,10 @@ import { CustomColorScheme } from '../../common/settings.js';
 import type { Language } from '../../database/database.js';
 import { normalizeIndentation, trim } from './label.js';
 
+// Upper bound for syntax-highlighted input. Longer pastes keep their full
+// text; only the head is highlighted to bound compositor CPU time.
+const MAX_HIGHLIGHT_CHARS = 10000;
+
 // https://gitlab.gnome.org/GNOME/gtksourceview/-/blob/master/data/styles/Adwaita-dark.xml
 // https://gitlab.gnome.org/GNOME/gtksourceview/-/blob/master/data/styles/Adwaita.xml
 const Colors = {
@@ -363,6 +367,12 @@ export class CodeLabel extends St.Label {
 
 		// Trim indentation before highlighting to prevent empty lines
 		let text = normalizeIndentation(trim(this._code), this.tabWidth);
+
+		// Highlighting cost grows with input size, so only the head is
+		// highlighted; the remainder is appended escaped and unhighlighted.
+		const rest = text.length > MAX_HIGHLIGHT_CHARS ? text.slice(MAX_HIGHLIGHT_CHARS) : null;
+		if (rest) text = text.slice(0, MAX_HIGHLIGHT_CHARS);
+
 		if (this.syntaxHighlighting && this.ext.hljs != null) {
 			const language =
 				this.language && this.ext.hljs.getLanguage(this.language.id) != null ? this.language.id : null;
@@ -381,6 +391,8 @@ export class CodeLabel extends St.Label {
 		} else {
 			text = GLib.markup_escape_text(text, text.length);
 		}
+
+		if (rest) text += GLib.markup_escape_text(rest, rest.length);
 
 		this._highlighted = text;
 		this.updateLabel();

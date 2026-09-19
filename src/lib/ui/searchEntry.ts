@@ -15,6 +15,10 @@ import { TagsItem } from './components/tagsItem.js';
 
 const SearchCollator = new Intl.Collator(undefined, { sensitivity: 'base' });
 
+// Upper bound for search haystacks. The matcher is O(n*m) per row per
+// keystroke, so huge entries are matched on their head only.
+const MAX_SEARCH_CHARS = 2000;
+
 function localeContains(text: string, query: string): boolean {
 	for (let offset = 0; offset <= text.length - query.length; offset++) {
 		const comparison = SearchCollator.compare(text.substring(offset, offset + query.length), query);
@@ -76,7 +80,9 @@ export class SearchQuery extends GObject.Object {
 		if (this.query.length === 0) return true;
 		if (text.length === 0) return false;
 
-		return text.some((s) => localeContains(s, this.query));
+		return text.some((s) =>
+			localeContains(s.length > MAX_SEARCH_CHARS ? s.slice(0, MAX_SEARCH_CHARS) : s, this.query),
+		);
 	}
 
 	public matchesEntry(state: boolean, entry: ClipboardEntry, ...text: string[]): boolean {
