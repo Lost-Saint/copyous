@@ -76,7 +76,7 @@ function hasMoreGraphemes(text: string, max: number): boolean {
 export class ClipboardManager extends GObject.Object {
 	private selection: Meta.Selection;
 	private clipboard: St.Clipboard;
-	private keyboard: Keyboard;
+	private keyboard: Keyboard | undefined;
 	private signalId: number = -1;
 	private pasteSignalId: number = -1;
 
@@ -90,13 +90,13 @@ export class ClipboardManager extends GObject.Object {
 
 		this.selection = global.display.get_selection();
 		this.clipboard = St.Clipboard.get_default();
-		this.keyboard = new Keyboard();
 
 		this.signalId = this.selection.connect('owner-changed', this.ownerChanged.bind(this));
 	}
 
 	public destroy() {
-		this.keyboard.destroy();
+		this.keyboard?.destroy();
+		this.keyboard = undefined;
 
 		if (this.signalId >= 0) this.selection.disconnect(this.signalId);
 		if (this.pasteSignalId >= 0) GLib.source_remove(this.pasteSignalId);
@@ -138,6 +138,9 @@ export class ClipboardManager extends GObject.Object {
 
 		if (this.pasteSignalId >= 0) GLib.source_remove(this.pasteSignalId);
 		this.pasteSignalId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+			// Creating a virtual keyboard during Shell startup can crash GNOME 50.
+			this.keyboard ??= new Keyboard();
+
 			// https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator/blob/89c57703641a9d5d15f899f6e780174641911d95/extension.js#L1094
 			if (this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL) {
 				this.keyboard.press(Clutter.KEY_Control_L);
