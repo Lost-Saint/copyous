@@ -30,7 +30,7 @@ body:
       description: |
         You can find the extension version by running:
         ```shell
-        gnome-extensions info klepto@lost-saint
+        gnome-extensions info klepto@lost-saint.gg
         ```
       placeholder: i.e. 1.0.0
     validations:

@@ -1,7 +1,7 @@
 name: Release CI
 
 env:
-  UUID: klepto@lost-saint
+  UUID: klepto@lost-saint.gg
 
 on:
   push:

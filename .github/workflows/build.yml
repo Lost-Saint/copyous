@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  UUID: klepto@lost-saint
+  UUID: klepto@lost-saint.gg
 
 jobs:
   lint:

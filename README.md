@@ -1,7 +1,7 @@
 # <img src="resources/images/icon.svg" height="32px" alt="Icon"/> Klepto - Clipboard Manager
 [![GitHub License](https://img.shields.io/github/license/lost-saint/klepto)](./LICENSE)
 [![GitHub Release](https://img.shields.io/github/v/release/lost-saint/klepto)](https://github.com/lost-saint/klepto/releases/latest)
-[![Extension Downloads](https://img.shields.io/gnome-extensions/dt/klepto%40lost-saint?logo=gnome&logoColor=white&cacheSeconds=86400)](https://extensions.gnome.org/extension/8834/klepto/)
+[![Extension Downloads](https://img.shields.io/gnome-extensions/dt/klepto%40lost-saint.gg?logo=gnome&logoColor=white&cacheSeconds=86400)](https://extensions.gnome.org/extension/8834/klepto/)
 
 ![Screenshot](resources/images/screenshot.png)
 
@@ -36,12 +36,12 @@ For the extension to work optimally you need to install the following dependenci
 1. Download the latest release from [Releases](https://github.com/lost-saint/klepto/releases).
 2. Install extension:
    ```shell
-   gnome-extensions install -f ~/Downloads/klepto@lost-saint.zip
+   gnome-extensions install -f ~/Downloads/klepto@lost-saint.gg.zip
    ```
 3. Restart the session by logging out.
 4. Enable the extension in [Extension Manager](https://flathub.org/en/apps/com.mattjakeman.ExtensionManager) or by running the following command:
    ```shell
-   gnome-extensions enable klepto@lost-saint
+   gnome-extensions enable klepto@lost-saint.gg
    ```
 
 ### From Source
@@ -62,13 +62,13 @@ For the extension to work optimally you need to install the following dependenci
 4. Restart the session by logging out.
 5. Enable the extension in [Extension Manager](https://flathub.org/en/apps/com.mattjakeman.ExtensionManager) or by running the following command:
    ```shell
-   gnome-extensions enable klepto@lost-saint
+   gnome-extensions enable klepto@lost-saint.gg
    ```
 
 ## Configuration
 You can open the extension settings either through the panel indicator, [Extension Manager](https://flathub.org/en/apps/com.mattjakeman.ExtensionManager) or by running the following command:
 ```shell
-gnome-extensions prefs klepto@lost-saint
+gnome-extensions prefs klepto@lost-saint.gg
 ```
 
 ## Shortcuts

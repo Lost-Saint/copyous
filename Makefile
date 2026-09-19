@@ -1,6 +1,6 @@
 # Constants
 NAME := klepto
-UUID := klepto@lost-saint
+UUID := klepto@lost-saint.gg
 
 # Directories
 SRC_DIR := src
