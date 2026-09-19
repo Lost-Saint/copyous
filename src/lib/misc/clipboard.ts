@@ -1,16 +1,15 @@
 import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Meta from 'gi://Meta';
 import St from 'gi://St';
-
 import type CopyousExtension from '../../extension.js';
 import { Color } from '../common/color.js';
-import { ItemType, getImagesPath } from '../common/constants.js';
+import { getImagesPath, ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
-import { ClipboardEntry, FileOperation, Metadata } from '../database/database.js';
-import { ClipboardEntryTracker } from '../database/entryTracker.js';
+import { ClipboardEntry, FileOperation, type Metadata } from '../database/database.js';
+import type { ClipboardEntryTracker } from '../database/entryTracker.js';
 import { Keyboard } from './keyboard.js';
 
 Gio._promisify(Gio.File.prototype, 'load_contents_async');

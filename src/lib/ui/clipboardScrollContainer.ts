@@ -1,6 +1,5 @@
 import Clutter from 'gi://Clutter';
 import St from 'gi://St';
-
 import type CopyousExtension from '../../extension.js';
 import { registerClass } from '../common/gjs.js';
 import {
@@ -12,7 +11,7 @@ import {
 } from '../misc/actor.js';
 import { ClipboardItem } from './items/clipboardItem.js';
 import { State, StatusItem } from './items/statusItem.js';
-import { SearchChange, SearchQuery } from './searchEntry.js';
+import { SearchChange, type SearchQuery } from './searchEntry.js';
 
 @registerClass()
 export class ClipboardScrollContainer extends St.BoxLayout {

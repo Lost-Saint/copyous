@@ -1,5 +1,4 @@
 import Clutter from 'gi://Clutter';
-
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 // https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator/blob/89c57703641a9d5d15f899f6e780174641911d95/keyboard.js

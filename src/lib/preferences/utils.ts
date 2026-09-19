@@ -1,10 +1,9 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { registerClass } from '../common/gjs.js';
 import { Icon } from '../common/icons.js';
-import { KeysWithValue, SettingsKeys, TypedSettings } from '../common/settings.js';
+import type { KeysWithValue, SettingsKeys, TypedSettings } from '../common/settings.js';
 
 @registerClass({
 	Properties: {

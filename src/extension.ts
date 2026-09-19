@@ -1,16 +1,12 @@
-import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
-
-import { ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-
-import type { HLJSApi } from 'highlight.js';
-import type { LanguageFn } from 'highlight.js';
-
+import GLib from 'gi://GLib';
+import { type ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
+import type { HLJSApi, LanguageFn } from 'highlight.js';
 import { getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
 import { DbusService } from './lib/common/dbus.js';
-import { ClipboardHistory, CopyousSettings, migrateSettings } from './lib/common/settings.js';
-import { SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
-import { ClipboardEntry } from './lib/database/database.js';
+import { type ClipboardHistory, type CopyousSettings, migrateSettings } from './lib/common/settings.js';
+import { type SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
+import type { ClipboardEntry } from './lib/database/database.js';
 import { ClipboardEntryTracker } from './lib/database/entryTracker.js';
 import { ClipboardManager } from './lib/misc/clipboard.js';
 import { NotificationManager } from './lib/misc/notifications.js';

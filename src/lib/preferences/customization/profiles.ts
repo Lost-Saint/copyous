@@ -1,9 +1,7 @@
 import Adw from 'gi://Adw';
-import Gio from 'gi://Gio';
-
+import type Gio from 'gi://Gio';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import {
 	ChildKeys,
@@ -11,9 +9,9 @@ import {
 	HeaderControlsVisibility,
 	Orientation,
 	Position,
-	Settings,
+	type Settings,
 	SettingsTypes,
-	ValueTypes,
+	type ValueTypes,
 } from '../../common/settings.js';
 
 type ValueOf<T> = T[keyof T];

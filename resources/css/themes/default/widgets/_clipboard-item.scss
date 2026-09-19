@@ -2,7 +2,6 @@
 	color: $color;
 
 	.clipboard-item-header-buttons {
-		// prettier-ignore
 		.clipboard-item-header-button {
 			&:checked {
 				@include button(normal, $c: $color, $tc: #ffffff, $style: default);
@@ -47,7 +46,6 @@
 		}
 
 		// Tag colors
-		// prettier-ignore
 		& {
 			&.blue { @include header_color($tag_color_blue); }
 			&.teal { @include header_color($tag_color_teal); }
@@ -108,7 +106,6 @@
 				border-radius: $forced_circular_radius; // make circular
 				color: $fg_color;
 
-				// prettier-ignore
 				&.menu-button {
 					background-color: transparent;
 					&:focus { @include button(focus, $style: notification); }
@@ -116,7 +113,6 @@
 					&:active { @include button(active, $style: notification); }
 				}
 
-				// prettier-ignore
 				&:checked {
 					// @extend %default_button; doesnt work
 					@include button(normal, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default);

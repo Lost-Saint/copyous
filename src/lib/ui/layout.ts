@@ -1,7 +1,6 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
-
 import { int32ParamSpec, registerClass } from '../common/gjs.js';
 
 @registerClass({

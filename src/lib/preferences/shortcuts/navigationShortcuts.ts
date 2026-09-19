@@ -1,7 +1,5 @@
 import Adw from 'gi://Adw';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
 import { registerClass } from '../../common/gjs.js';
 import { ShortcutRow } from './shortcutRow.js';
 

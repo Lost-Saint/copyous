@@ -1,13 +1,11 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { CodeItemSettings } from '../../common/settings.js';
-import { ClipboardEntry, CodeMetadata } from '../../database/database.js';
+import type { CodeItemSettings } from '../../common/settings.js';
+import type { ClipboardEntry, CodeMetadata } from '../../database/database.js';
 import { CodeLabel } from '../components/codeLabel.js';
 import { CodeInfo } from '../components/contentInfo.js';
 import { ClipboardItem } from './clipboardItem.js';

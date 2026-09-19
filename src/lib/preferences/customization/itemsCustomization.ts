@@ -1,9 +1,7 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { CharacterItemCustomization } from './items/characterItemCustomization.js';
 import { CodeItemCustomization } from './items/codeItemCustomization.js';

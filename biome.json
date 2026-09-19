@@ -1,0 +1,89 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": ["**", "!src/thirdparty", "!submodules"]
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"lineEnding": "lf",
+		"lineWidth": 120,
+		"useEditorconfig": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"performance": {
+				"noAwaitInLoops": "error"
+			},
+			"complexity": {
+				"noUselessConstructor": "off",
+				"useLiteralKeys": "off",
+				"useOptionalChain": "off"
+			},
+			"correctness": {
+				"noUnusedFunctionParameters": "off",
+				"noUnusedVariables": "off",
+				"useParseIntRadix": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "off",
+				"noRestrictedGlobals": {
+					"level": "error",
+					"options": {
+						"deniedGlobals": {
+							"Debugger": "Internal use only",
+							"GIRepositoryGType": "Internal use only",
+							"log": "Use console.log()",
+							"logError": "Use console.warn() or console.error()"
+						}
+					}
+				},
+				"noMultiAssign": "warn",
+				"useNodejsImportProtocol": "off",
+				"useTemplate": "off"
+			},
+			"suspicious": {
+				"noAssignInExpressions": "off",
+				"noFallthroughSwitchClause": "off",
+				"noGlobalIsNan": "off",
+				"noImplicitAnyLet": "off",
+				"noShadow": "off",
+				"noShadowRestrictedNames": "warn",
+				"noSelfCompare": "error",
+				"noTemplateCurlyInString": "error",
+				"noVar": "warn",
+				"useIterableCallbackReturn": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteProperties": "preserve",
+			"quoteStyle": "single",
+			"semicolons": "always",
+			"trailingCommas": "all"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [":URL:", ":PACKAGE:", ":PATH:"],
+						"identifierOrder": "natural"
+					}
+				}
+			}
+		}
+	}
+}

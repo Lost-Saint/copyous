@@ -1,11 +1,9 @@
-import Cairo from 'cairo';
 import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
 import St from 'gi://St';
-
 import * as Dialog from 'resource:///org/gnome/shell/ui/dialog.js';
 import * as ModalDialog from 'resource:///org/gnome/shell/ui/modalDialog.js';
-
+import Cairo from 'cairo';
 import type CopyousExtension from '../../../extension.js';
 import QrCodeGen from '../../../thirdparty/qrcodegen.js';
 import { registerClass } from '../../common/gjs.js';
@@ -13,7 +11,7 @@ import { registerClass } from '../../common/gjs.js';
 Gio._promisify(Gio.File.prototype, 'load_bytes_async');
 
 class ErrorQrCode {
-	// prettier-ignore
+	// biome-ignore format: Keep the QR code bitmap readable.
 	private _errorMessage = [
 		0b111101110011100111101110,
 		0b100001001010010100101001,

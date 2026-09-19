@@ -1,12 +1,10 @@
-import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
-
+import GLib from 'gi://GLib';
 import type { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type { ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-
-import { ClipboardEntry } from '../database/database.js';
+import type { ClipboardEntry } from '../database/database.js';
 import { ColorSpace } from './color.js';
-import { ItemType, getActionsConfigPath } from './constants.js';
+import { getActionsConfigPath, ItemType } from './constants.js';
 
 Gio._promisify(Gio.File.prototype, 'load_contents_async');
 

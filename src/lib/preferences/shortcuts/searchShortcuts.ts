@@ -1,12 +1,10 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { CopyousSettings } from '../../common/settings.js';
+import type { CopyousSettings } from '../../common/settings.js';
 import { ShortcutRow } from './shortcutRow.js';
 
 const ShortcutLabel = ('ShortcutLabel' in Gtk && !('ShortcutLabel' in Adw) ? (Gtk as typeof Adw) : Adw).ShortcutLabel;

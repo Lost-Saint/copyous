@@ -1,4 +1,4 @@
-import Clutter from 'gi://Clutter';
+import type Clutter from 'gi://Clutter';
 
 /**
  * Retrieves the number of visible children of `actor`.

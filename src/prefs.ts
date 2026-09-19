@@ -1,16 +1,14 @@
 import Adw from 'gi://Adw';
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
 // DEBUG-ONLY
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gdk from 'gi://Gdk';
-import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
-
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
+import { gettext as _, ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import { loadConfig } from './lib/common/actions.js';
 import { Icon } from './lib/common/icons.js';
-import { CopyousSettings, migrateSettings } from './lib/common/settings.js';
+import { type CopyousSettings, migrateSettings } from './lib/common/settings.js';
 import { ActionsPage } from './lib/preferences/actions/actionsPage.js';
 import { DialogCustomization } from './lib/preferences/customization/dialogCustomization.js';
 import { HeaderCustomization } from './lib/preferences/customization/headerCustomization.js';
@@ -38,7 +36,7 @@ import {
 function findHeaderBar(window: Adw.PreferencesWindow): Adw.HeaderBar | null {
 	// Depth first search for the header bar
 	const stack: Gtk.Widget[] = [window];
-	let widget = undefined;
+	let widget;
 	while ((widget = stack.pop())) {
 		if (widget instanceof Adw.HeaderBar) {
 			return widget;

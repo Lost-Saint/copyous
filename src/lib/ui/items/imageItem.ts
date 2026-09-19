@@ -1,16 +1,14 @@
-import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
-
+import GObject from 'gi://GObject';
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { ImageItemSettings } from '../../common/settings.js';
-import { ClipboardEntry } from '../../database/database.js';
-import { ContentInfo, createFileInfo } from '../components/contentInfo.js';
+import type { ImageItemSettings } from '../../common/settings.js';
+import type { ClipboardEntry } from '../../database/database.js';
+import { type ContentInfo, createFileInfo } from '../components/contentInfo.js';
 import { FileType, ImagePreview } from '../components/contentPreview.js';
-import { SearchQuery } from '../searchEntry.js';
+import type { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';
 
 @registerClass({

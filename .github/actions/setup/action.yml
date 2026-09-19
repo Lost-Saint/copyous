@@ -8,20 +8,14 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install Pnpm
-      uses: pnpm/action-setup@v5
+    - name: Install Bun
+      uses: oven-sh/setup-bun@v2
       with:
-        version: latest
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: latest
-        cache: pnpm
+        bun-version: 1.4.2
 
     - name: Install Dependencies
       shell: bash
-      run: pnpm install --ignore-scripts
+      run: bun install --frozen-lockfile --ignore-scripts
 
     - name: Install Gnome Extensions Tool Dependencies
       if: inputs.install-gnome-extensions-tool == 'true'

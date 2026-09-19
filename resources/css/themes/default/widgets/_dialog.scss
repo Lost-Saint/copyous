@@ -27,7 +27,6 @@
 					-st-icon-style: symbolic;
 				}
 
-				// prettier-ignore
 				&:checked:checked {
 					@include button(normal, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default);
 					&:focus { @include button(focus, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }
@@ -61,7 +60,6 @@
 				-st-icon-style: symbolic;
 			}
 
-			// prettier-ignore
 			&:checked:checked {
 				@include button(normal, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default);
 				&:focus { @include button(focus, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }

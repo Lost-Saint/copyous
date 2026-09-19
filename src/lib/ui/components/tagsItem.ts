@@ -1,10 +1,8 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
-
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-
-import { Tag, Tags } from '../../common/constants.js';
+import { type Tag, Tags } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 

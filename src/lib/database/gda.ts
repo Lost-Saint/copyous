@@ -1,14 +1,13 @@
-import GLib from 'gi://GLib';
-import GObject from 'gi://GObject';
 import type Gda from 'gi://Gda';
 import type Gda5 from 'gi://Gda?version=5.0';
 import type Gda6 from 'gi://Gda?version=6.0';
 import Gio from 'gi://Gio';
-
-import CopyousExtension from '../../extension.js';
-import { ItemType, getDataPath } from '../common/constants.js';
+import GLib from 'gi://GLib';
+import type GObject from 'gi://GObject';
+import type CopyousExtension from '../../extension.js';
+import { getDataPath, type ItemType } from '../common/constants.js';
 import { ClipboardHistory } from '../common/settings.js';
-import { ClipboardEntry, Database, Metadata } from './database.js';
+import { ClipboardEntry, type Database, type Metadata } from './database.js';
 
 const DATABASE_VERSION = 2;
 

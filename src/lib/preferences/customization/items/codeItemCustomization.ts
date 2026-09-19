@@ -1,10 +1,8 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../../prefs.js';
+import type Preferences from '../../../../prefs.js';
 import { registerClass } from '../../../common/gjs.js';
 import { bind_enum } from '../../../common/settings.js';
 import { makeResettable } from '../../utils.js';

@@ -48,7 +48,7 @@ For the extension to work optimally you need to install the following dependenci
 1. Install the following prerequisites:
 	- Make
     - Node.js
-    - [pnpm](https://pnpm.io/installation)
+    - [Bun](https://bun.sh/docs/installation)
     - [jq](https://jqlang.org/)
 2. Clone the repository:
    ```shell
@@ -57,7 +57,7 @@ For the extension to work optimally you need to install the following dependenci
    ```
 3. Build and install the extension:
    ```shell
-   pnpm install
+   bun install
    ```
 4. Restart the session by logging out.
 5. Enable the extension in [Extension Manager](https://flathub.org/en/apps/com.mattjakeman.ExtensionManager) or by running the following command:

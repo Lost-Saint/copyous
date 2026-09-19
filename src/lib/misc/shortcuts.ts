@@ -1,12 +1,10 @@
 import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Meta from 'gi://Meta';
 import Shell from 'gi://Shell';
-
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-
 import type CopyousExtension from '../../extension.js';
 import { instanceofAction, instanceofActionSubmenu, loadConfig } from '../common/actions.js';
 import { getActionsConfigPath } from '../common/constants.js';

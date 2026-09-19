@@ -714,7 +714,7 @@ export class Color {
 
 	private rgbToLinear(): Color {
 		function channel(c: number) {
-			return c > 0.04045 ? Math.pow((c + 0.055) / 1.055, 2.4) : c / 12.92;
+			return c > 0.04045 ? ((c + 0.055) / 1.055) ** 2.4 : c / 12.92;
 		}
 
 		const r = channel(this.c1 / 255);
@@ -727,7 +727,7 @@ export class Color {
 	private linearToRgb(): Color {
 		function channel(c: number) {
 			if (c < 0.0031308) return 12.92 * c;
-			return 1.055 * Math.pow(c, 1 / 2.4) - 0.055;
+			return 1.055 * c ** (1 / 2.4) - 0.055;
 		}
 
 		const r = channel(this.c1) * 255;

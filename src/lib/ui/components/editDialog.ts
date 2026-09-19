@@ -3,19 +3,17 @@ import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as BoxPointer from 'resource:///org/gnome/shell/ui/boxpointer.js';
 import * as Dialog from 'resource:///org/gnome/shell/ui/dialog.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as ModalDialog from 'resource:///org/gnome/shell/ui/modalDialog.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { ItemType } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
-import { ClipboardEntry, CodeMetadata, Language } from '../../database/database.js';
+import type { ClipboardEntry, CodeMetadata, Language } from '../../database/database.js';
 
 /** Entry with proper height for multiline text and event forwarding */
 @registerClass()

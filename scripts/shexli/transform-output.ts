@@ -1,6 +1,7 @@
 /// <reference types="node" />
+
+import { type RawSourceMap, SourceMapConsumer } from 'source-map';
 import * as fs from 'node:fs';
-import { RawSourceMap, SourceMapConsumer } from 'source-map';
 
 type Evidence = {
 	path: string;
@@ -94,7 +95,7 @@ for (const finding of result.findings) {
 		const path = `dist/sourcemaps/${evidence.path}.map`;
 		const map = JSON.parse(fs.readFileSync(path, 'utf8')) as RawSourceMap;
 
-		// eslint-disable-next-line no-await-in-loop
+		// biome-ignore lint/performance/noAwaitInLoops: Source maps must be processed sequentially.
 		const consumer = await new SourceMapConsumer(map);
 		const position = consumer.originalPositionFor({
 			line: evidence.line ?? 1,

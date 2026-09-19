@@ -1,11 +1,9 @@
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import type GSound from 'gi://GSound';
-import Gio from 'gi://Gio';
-
 import type { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-
-import { CopyousSettings } from './settings.js';
+import type { CopyousSettings } from './settings.js';
 
 export const Sound = {
 	None: 'none',

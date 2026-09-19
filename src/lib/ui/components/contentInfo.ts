@@ -1,13 +1,11 @@
 import Clutter from 'gi://Clutter';
-import GLib from 'gi://GLib';
-import GObject from 'gi://GObject';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 import Gst from 'gi://Gst';
 import St from 'gi://St';
-
-import { Extension, gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
-
+import { gettext as _, type Extension, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
 import type CopyousExtension from '../../../extension.js';
 import { enumParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
@@ -20,7 +18,7 @@ const WordSegmenter = new Intl.Segmenter(undefined, { granularity: 'word' });
 function formatBytes(bytes: number): [string, string] {
 	const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 	const exp = Math.floor(Math.log10(bytes) / 3);
-	const value = (bytes / Math.pow(1000, exp)) % 1000;
+	const value = (bytes / 1000 ** exp) % 1000;
 	const formatted = value.toLocaleString('en', { maximumSignificantDigits: 2 });
 
 	return [formatted, units[exp]!];

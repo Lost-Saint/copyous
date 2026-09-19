@@ -1,12 +1,10 @@
-import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 import Soup from 'gi://Soup';
-
-import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-
+import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 import type CopyousExtension from '../../extension.js';
-import { UserAgent, getCachePath } from '../common/constants.js';
-import { LinkMetadata } from '../database/database.js';
+import { getCachePath, UserAgent } from '../common/constants.js';
+import type { LinkMetadata } from '../database/database.js';
 
 import OutputStreamSpliceFlags = Gio.OutputStreamSpliceFlags;
 

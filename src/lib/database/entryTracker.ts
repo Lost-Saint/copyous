@@ -1,12 +1,11 @@
-import GLib from 'gi://GLib';
 import type Gda from 'gi://Gda';
 import Gio from 'gi://Gio';
-
+import GLib from 'gi://GLib';
 import type CopyousExtension from '../../extension.js';
-import { ItemType, getDefaultDatabaseFile } from '../common/constants.js';
-import { ClipboardHistory, DatabaseBackend } from '../common/settings.js';
+import { getDefaultDatabaseFile, ItemType } from '../common/constants.js';
+import { type ClipboardHistory, DatabaseBackend } from '../common/settings.js';
 import { getLinkImagePath } from '../misc/link.js';
-import { ClipboardEntry, Database, Metadata } from './database.js';
+import type { ClipboardEntry, Database, Metadata } from './database.js';
 import { GdaDatabase } from './gda.js';
 import { JsonDatabase } from './json.js';
 import { MemoryDatabase } from './memory.js';

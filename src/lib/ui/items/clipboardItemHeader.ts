@@ -3,11 +3,9 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
-
-import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
+import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 import { formatTimeSpan } from 'resource:///org/gnome/shell/misc/dateUtils.js';
-
-import { ActiveState, Tag } from '../../common/constants.js';
+import { ActiveState, type Tag } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 import { HeaderControlsVisibility } from '../../common/settings.js';

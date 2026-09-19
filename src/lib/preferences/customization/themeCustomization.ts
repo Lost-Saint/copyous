@@ -1,14 +1,12 @@
 import Adw from 'gi://Adw';
-import GObject from 'gi://GObject';
 import Gdk from 'gi://Gdk';
+import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import type Preferences from '../../../prefs.js';
 import { DefaultColors } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
-import { CopyousSettings, ThemeSettings, bind_enum } from '../../common/settings.js';
+import { bind_enum, type CopyousSettings, type ThemeSettings } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass({

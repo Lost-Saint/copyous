@@ -1,11 +1,9 @@
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
-import { ActionConfig, countDifference, defaultConfig, mergeConfig, saveConfig } from '../../common/actions.js';
+import type Preferences from '../../../prefs.js';
+import { type ActionConfig, countDifference, defaultConfig, mergeConfig, saveConfig } from '../../common/actions.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import { ActionDefaultsPage } from './actionDefaults.js';

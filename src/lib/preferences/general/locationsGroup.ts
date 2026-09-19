@@ -1,8 +1,6 @@
 import Adw from 'gi://Adw';
 import Gtk from 'gi://Gtk';
-
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
+import { gettext as _, type ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import { getCachePath, getConfigPath, getDataPath } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 

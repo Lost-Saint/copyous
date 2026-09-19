@@ -1,20 +1,18 @@
 import Clutter from 'gi://Clutter';
-import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { BackgroundSize, LinkItemSettings } from '../../common/settings.js';
-import { ClipboardEntry, LinkMetadata } from '../../database/database.js';
+import { BackgroundSize, type LinkItemSettings } from '../../common/settings.js';
+import type { ClipboardEntry, LinkMetadata } from '../../database/database.js';
 import { tryGetLinkImage, tryGetMetadata } from '../../misc/link.js';
 import { ImagePreview } from '../components/contentPreview.js';
-import { SearchQuery } from '../searchEntry.js';
+import type { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';
 
 const SPACING = 3;

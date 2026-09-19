@@ -1,9 +1,7 @@
-import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
-
+import GLib from 'gi://GLib';
 import type { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import { DatabaseBackend } from './settings.js';
 
 export const ItemType = {
@@ -87,7 +85,7 @@ export const HljsSha512 =
 	'f35f24636b981f53d194735964bd7b8606c79e0f4b04e800e24f13415b1761368ac20839a4cc416a1c5e1c351d00c4cf509f360972d098964e97739050a675f1';
 
 // https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/languages/${language}.min.js
-// prettier-ignore
+// biome-ignore format: Keep the checksum table aligned.
 export const HljsLanguages: [string, string, string][] = [
 	["1c",             "1C",                      "46b64c3cb1134c3ca2a060955039748296d7f0b1671e06986feab0a1ec374939a4ade2cf740fb14fa9d9916c4194860e3bb237a417483856625c742874a1a7bd"],
 	["abnf",           "ABNF",                    "0e1f0474d64abf39470ccc687bd3363df1587ed2773a6cd00f102409c8a59c3adcc81bf5fef8c1875a7e3de5764e0a9ca148a143cba52e878fdb549acc550562"],

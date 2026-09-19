@@ -5,7 +5,7 @@
 - All pull requests are squashed and merged, so ensure your pull request accurately summarizes the change.
 
 ## Code Style
-This project uses [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) for linting and formatting.
+This project uses [Biome](https://biomejs.dev/) for linting and formatting.
 
 You can lint and format your code by running:
 ```shell

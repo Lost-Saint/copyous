@@ -1,5 +1,4 @@
 import Gio from 'gi://Gio';
-
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 export const Icon = {

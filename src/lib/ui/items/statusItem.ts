@@ -1,10 +1,8 @@
 import Clutter from 'gi://Clutter';
+import type Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import St from 'gi://St';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { enumParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';

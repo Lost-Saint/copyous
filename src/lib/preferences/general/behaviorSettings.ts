@@ -1,11 +1,9 @@
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { CopyousSettings } from '../../common/settings.js';
+import type { CopyousSettings } from '../../common/settings.js';
 
 @registerClass()
 export class BehaviorSettings extends Adw.PreferencesGroup {

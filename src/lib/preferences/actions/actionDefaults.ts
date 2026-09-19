@@ -1,14 +1,12 @@
 import Adw from 'gi://Adw';
-import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
 import {
-	Action,
-	ActionConfig,
-	ActionSubmenu,
+	type Action,
+	type ActionConfig,
+	type ActionSubmenu,
 	instanceofAction,
 	instanceofActionSubmenu,
 } from '../../common/actions.js';

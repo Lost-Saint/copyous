@@ -1,10 +1,8 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import { ActionSubmenu } from '../../common/actions.js';
+import type { ActionSubmenu } from '../../common/actions.js';
 import { registerClass } from '../../common/gjs.js';
 
 @registerClass({

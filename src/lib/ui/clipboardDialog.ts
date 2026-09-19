@@ -1,24 +1,21 @@
 import Clutter from 'gi://Clutter';
+import type Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Graphene from 'gi://Graphene';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
-
 import * as IBusManager from 'resource:///org/gnome/shell/misc/ibusManager.js';
 import * as BoxPointer from 'resource:///org/gnome/shell/ui/boxpointer.js';
 import * as Layout from 'resource:///org/gnome/shell/ui/layout.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-
-import { EasingParamsWithProperties } from '@girs/gnome-shell/extensions/global';
-
+import type { EasingParamsWithProperties } from '@girs/gnome-shell/extensions/global';
 import type CopyousExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
 import { OpenClipboardDialogBehavior } from '../common/settings.js';
-import { ClipboardEntry } from '../database/database.js';
+import type { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
 import { ClipboardScrollView } from './clipboardScrollView.js';
 import { ClipboardItemMenu } from './components/clipboardItemMenu.js';
@@ -32,7 +29,7 @@ import { ImageItem } from './items/imageItem.js';
 import { LinkItem } from './items/linkItem.js';
 import { TextItem } from './items/textItem.js';
 import { CenterBox, CollapsibleHeaderLayout, FitConstraint } from './layout.js';
-import { SearchEntry, SearchQuery } from './searchEntry.js';
+import { SearchEntry, type SearchQuery } from './searchEntry.js';
 
 const ANIMATION_TIME = 150;
 
@@ -377,7 +374,7 @@ export class ClipboardDialog extends St.Widget {
 		);
 
 		// Bind properties
-		// prettier-ignore
+		// biome-ignore format: Keep signal and callback pairs aligned.
 		this.ext.settings.connectObject(
 			'changed::show-at-pointer', this.updatePosition.bind(this),
 			'changed::clipboard-orientation', this.updatePosition.bind(this),

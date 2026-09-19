@@ -1,13 +1,11 @@
-import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
 import St from 'gi://St';
-
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-
-import CopyousExtension from '../../extension.js';
+import type CopyousExtension from '../../extension.js';
 import { DefaultColors, getDataPath } from '../common/constants.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
-import { ColorScheme, CustomColorScheme, Theme, ThemeSettings } from '../common/settings.js';
+import { ColorScheme, CustomColorScheme, Theme, type ThemeSettings } from '../common/settings.js';
 
 Gio._promisify(Gio.File.prototype, 'load_contents_async');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async');

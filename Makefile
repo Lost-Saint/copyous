@@ -60,15 +60,13 @@ endif
 
 # Lint
 lint:
-	pnpm exec eslint src --ext .ts
-	pnpm exec prettier src resources/css --check
+	bun run biome check src scripts package.json biome.json .vscode
 
 lint-fix:
-	pnpm exec eslint src --ext .ts --fix
-	pnpm exec prettier src resources/css --write
+	bun run biome check --write src scripts package.json biome.json .vscode
 
 shexli: $(DIST_ZIP)
-	uv run python -m shexli $< --format json | pnpm tsx ./scripts/shexli/transform-output.ts
+	uv run python -m shexli $< --format json | bun run tsx ./scripts/shexli/transform-output.ts
 
 # Localization
 resources/po/main.pot: $(SRC)
@@ -113,15 +111,14 @@ $(DIST_DIR)/metadata.json: resources/metadata.json | $(DIST_DIR)
 # TypeScript
 $(DIST_DIR)/extension.js: $(SRC) tsconfig.json | $(DIST_DIR)
 ifeq ($(RELEASE),1)
-	pnpm exec tsc
+	bun run tsc
 	@touch $@
 # Remove code blocks commented with /* DEBUG-ONLY */ or lines ending with // DEBUG-ONLY
 	find $(@D) -name '*.js' -exec perl -0777 -i -pe 's/^(\s*)\/\* DEBUG-ONLY \*\/(?:.|\n)*?^\1\}|\/\/ DEBUG-ONLY.*\n.*$$//gm' {} \;
 # Format code to make it easier for EGO reviewers
-	-pnpm exec eslint $(DIST_DIR) --config ./format.eslint.config.js --fix --cache --cache-location=$(DIST_DIR)/.eslintcache
-	pnpm exec prettier $(DIST_DIR) --ignore-path= --log-level=warn --write --cache --cache-location=$(DIST_DIR)/.prettiercache
+	find $(DIST_DIR) -name '*.js' -exec bun run biome format --write --vcs-use-ignore-file=false {} +
 else
-	pnpm exec tsc --sourceMap --sourceRoot src
+	bun run tsc --sourceMap --sourceRoot src
 	@touch $@
 # Move source maps to subdirectory
 	rsync -rv --include '*/' --exclude 'sourcemaps/**' --include '*.js.map' --exclude '*' --prune-empty-dirs --remove-source-files dist/ dist/sourcemaps/
@@ -136,7 +133,7 @@ $$(DIST_DIR)/css/stylesheet-$(1)-$(2).css: \
 		resources/css/themes/$(1)/$(2).scss resources/css/themes/$(1)/gnome-shell-sass/_*.scss \
 		resources/css/themes/default/_*.scss resources/css/themes/default/widgets/_*.scss | $$(DIST_DIR)
 	@mkdir -p $$(DIST_DIR)/css
-	pnpm exec sass --no-source-map --load-path=resources/css/themes/default --load-path=resources/css/themes/$(1)/gnome-shell-sass --quiet-deps $$<:$$@
+	bun run sass --no-source-map --load-path=resources/css/themes/default --load-path=resources/css/themes/$(1)/gnome-shell-sass --quiet-deps $$<:$$@
 	sed -i -re ':a; s%(.*)/\*.*\*/%\1%; ta; /\/\*/ !b; N; ba' $$@ # Remove multiline comments
 	sed -i -e '/stage {/,/}/d' -e '/^$$$$/d' $$@
 endef
@@ -150,7 +147,7 @@ $(DIST_DIR)/css/template-%.css: \
 		resources/css/template.scss scripts/template/postcss.config.cjs \
 		resources/css/themes/default/_*.scss resources/css/themes/default/widgets | $(DIST_DIR)
 	@mkdir -p $(DIST_DIR)/css
-	VARIANT=$* pnpm exec postcss $< --config scripts/template | pnpm exec sass --no-source-map --stdin $@
+	VARIANT=$* bun run postcss $< --config scripts/template | bun run sass --no-source-map --stdin $@
 
 CSS := $(THEME_CSS) $(DIST_DIR)/css/template-dark.css $(DIST_DIR)/css/template-light.css
 

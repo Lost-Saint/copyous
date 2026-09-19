@@ -1,6 +1,5 @@
-import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
-
+import GObject from 'gi://GObject';
 import { registerClass } from './gjs.js';
 import { ClipboardHistory } from './settings.js';
 

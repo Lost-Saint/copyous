@@ -1,9 +1,8 @@
 import GLib from 'gi://GLib';
-import GObject from 'gi://GObject';
-
-import { ItemType } from '../common/constants.js';
+import type GObject from 'gi://GObject';
+import type { ItemType } from '../common/constants.js';
 import { ClipboardHistory } from '../common/settings.js';
-import { ClipboardEntry, Database, Metadata } from './database.js';
+import { ClipboardEntry, type Database, type Metadata } from './database.js';
 
 /**
  * In memory database

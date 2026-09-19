@@ -1,5 +1,5 @@
-import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
+import type Gio from 'gi://Gio';
+import type GObject from 'gi://GObject';
 
 export const Settings = {
 	Incognito: 'incognito',

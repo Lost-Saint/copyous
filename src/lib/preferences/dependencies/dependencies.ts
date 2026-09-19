@@ -1,24 +1,22 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 import Soup from 'gi://Soup?version=3.0';
-
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import { gettext as _, type ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import type Preferences from '../../../prefs.js';
 import {
-	HljsSha512,
-	HljsUrls,
-	UserAgent,
 	getDataPath,
 	getHljsLanguageUrls,
 	getHljsPath,
+	HljsSha512,
+	HljsUrls,
+	UserAgent,
 } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { CopyousSettings } from '../../common/settings.js';
+import type { CopyousSettings } from '../../common/settings.js';
 
 export async function checkGda(prefs: ExtensionPreferences): Promise<boolean> {
 	try {
@@ -288,7 +286,7 @@ async function downloadHljs(prefs: ExtensionPreferences, cancellable: Gio.Cancel
 		if (prefUrl) prefs.getLogger().warn(`Failed to download highlight.js from '${prefUrl}'. Trying next cdn`);
 		prefUrl = url;
 
-		// eslint-disable-next-line no-await-in-loop
+		// biome-ignore lint/performance/noAwaitInLoops: Try fallback URLs sequentially.
 		if (await downloadHljsModule(prefs, url, HljsSha512, path, cancellable)) {
 			return true;
 		}
@@ -313,7 +311,7 @@ export async function downloadHljsLanguage(
 				.warn(`Failed to download highlight.js language '${language}' from '${prefUrl}'. Trying next cdn`);
 		prefUrl = url;
 
-		// eslint-disable-next-line no-await-in-loop
+		// biome-ignore lint/performance/noAwaitInLoops: Try fallback URLs sequentially.
 		if (await downloadHljsModule(prefs, url, hash, path, cancellable)) {
 			return true;
 		}

@@ -1,7 +1,6 @@
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
-
 import { registerClass } from '../../common/gjs.js';
 
 @registerClass({

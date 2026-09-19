@@ -1,14 +1,12 @@
 import Adw from 'gi://Adw';
-import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { CopyousSettings, IndicatorDisplay, bind_enum } from '../../common/settings.js';
+import { bind_enum, type CopyousSettings, IndicatorDisplay } from '../../common/settings.js';
 import { Sound, SoundManager } from '../../common/sound.js';
 import { makeResettable } from '../utils.js';
 

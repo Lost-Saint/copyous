@@ -1,11 +1,9 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
 import { registerClass } from '../../../common/gjs.js';
 import { globToRegex } from '../../../common/glob.js';
 import { Icon } from '../../../common/icons.js';

@@ -1,17 +1,15 @@
 import Clutter from 'gi://Clutter';
 import St from 'gi://St';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as BoxPointer from 'resource:///org/gnome/shell/ui/boxpointer.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { ItemType, Tags } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
-import { ClipboardEntry } from '../../database/database.js';
+import type { ClipboardEntry } from '../../database/database.js';
 import { Shortcut } from '../../misc/shortcuts.js';
-import { ActionPopupMenuSection, ActionPopupMenuSectionSignals } from './actionMenu.js';
+import { ActionPopupMenuSection, type ActionPopupMenuSectionSignals } from './actionMenu.js';
 import { EditDialog } from './editDialog.js';
 import { ShortcutLabel } from './shortcutLabel.js';
 import { TagsItem } from './tagsItem.js';

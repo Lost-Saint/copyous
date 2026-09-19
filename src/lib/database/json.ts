@@ -1,11 +1,10 @@
-import GLib from 'gi://GLib';
-import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
-
-import CopyousExtension from '../../extension.js';
-import { ItemType, Tag } from '../common/constants.js';
-import { ClipboardHistory } from '../common/settings.js';
-import { ClipboardEntry, Metadata } from './database.js';
+import GLib from 'gi://GLib';
+import type GObject from 'gi://GObject';
+import type CopyousExtension from '../../extension.js';
+import type { ItemType, Tag } from '../common/constants.js';
+import type { ClipboardHistory } from '../common/settings.js';
+import { ClipboardEntry, type Metadata } from './database.js';
 import { MemoryDatabase } from './memory.js';
 
 Gio._promisify(Gio.File.prototype, 'load_contents_async');

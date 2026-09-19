@@ -1,18 +1,16 @@
 import Clutter from 'gi://Clutter';
+import type Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import St from 'gi://St';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as BoxPointer from 'resource:///org/gnome/shell/ui/boxpointer.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-
 import type CopyousExtension from '../../extension.js';
-import { ItemType, ItemTypes, Tag, Tags } from '../common/constants.js';
+import { ItemType, ItemTypes, type Tag, Tags } from '../common/constants.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
-import { ClipboardEntry } from '../database/database.js';
+import type { ClipboardEntry } from '../database/database.js';
 import { TagsItem } from './components/tagsItem.js';
 
 const SearchCollator = new Intl.Collator(undefined, { sensitivity: 'base' });

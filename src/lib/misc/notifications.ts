@@ -1,19 +1,17 @@
 import Cogl from 'gi://Cogl';
-import GLib from 'gi://GLib';
-import GObject from 'gi://GObject';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
+import type GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 import St from 'gi://St';
-
 import { gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
-
 import type CopyousExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
-import { ClipboardEntry } from '../database/database.js';
+import type { ClipboardEntry } from '../database/database.js';
 import { normalizeIndentation, trim } from '../ui/components/label.js';
 import { commonDirectory } from '../ui/items/filesItem.js';
 

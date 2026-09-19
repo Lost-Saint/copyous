@@ -1,14 +1,12 @@
 import Clutter from 'gi://Clutter';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { CharacterItemSettings } from '../../common/settings.js';
-import { ClipboardEntry } from '../../database/database.js';
+import type { CharacterItemSettings } from '../../common/settings.js';
+import type { ClipboardEntry } from '../../database/database.js';
 import { ClipboardItem } from './clipboardItem.js';
 
 @registerClass()

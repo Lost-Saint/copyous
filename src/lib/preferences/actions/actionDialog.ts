@@ -2,18 +2,16 @@ import Adw from 'gi://Adw';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
 import {
-	Action,
+	type Action,
 	ActionOutput,
-	ColorAction,
-	CommandAction,
-	QrCodeAction,
+	type ColorAction,
+	type CommandAction,
 	instanceofColorAction,
 	instanceofCommandAction,
 	instanceofQrCodeAction,
+	type QrCodeAction,
 } from '../../common/actions.js';
 import { ColorSpace, ColorSpaces } from '../../common/color.js';
 import { ItemType } from '../../common/constants.js';

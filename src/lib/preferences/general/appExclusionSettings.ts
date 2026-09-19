@@ -1,17 +1,15 @@
 import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
+import type GioUnix from 'gi://GioUnix';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
-import GioUnix from 'gi://GioUnix';
 import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
-
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-import Preferences from '../../../prefs.js';
+import type Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { CopyousSettings } from '../../common/settings.js';
+import type { CopyousSettings } from '../../common/settings.js';
 
 Gio._promisify(Adw.AlertDialog.prototype, 'choose');
 

@@ -1,10 +1,9 @@
 import Clutter from 'gi://Clutter';
-import GObject from 'gi://GObject';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
-
 import { gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as animationUtils from 'resource:///org/gnome/shell/misc/animationUtils.js';
 import * as CheckBox from 'resource:///org/gnome/shell/ui/checkBox.js';
@@ -13,14 +12,13 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as ModalDialog from 'resource:///org/gnome/shell/ui/modalDialog.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-
 import type CopyousExtension from '../../extension.js';
 import { Color } from '../common/color.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
 import { ClipboardHistory, IndicatorDisplay } from '../common/settings.js';
-import { ClipboardEntry } from '../database/database.js';
+import type { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
 
 @registerClass({

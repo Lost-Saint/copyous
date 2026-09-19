@@ -1,9 +1,10 @@
 {
 	"css.customData": [".vscode/gnome-css.json"],
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": "biomejs.biome",
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "always",
+		"source.fixAll.biome": "always",
+		"source.organizeImports.biome": "always"
 	},
 	"search.exclude": {
 		"node_modules": true,

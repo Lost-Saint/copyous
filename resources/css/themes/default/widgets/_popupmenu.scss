@@ -5,7 +5,6 @@ $menuitem_border_radius: $base_border_radius * 1.5;
 
 $submenu_bg_color: if($variant == 'light', darken($menu_bg_color, 17%), lighten($menu_bg_color, 13%));
 
-// prettier-ignore
 @mixin tag_button($color) {
 	.tag {
 		background-color: $color;
@@ -103,7 +102,6 @@ $submenu_bg_color: if($variant == 'light', darken($menu_bg_color, 17%), lighten(
 				}
 			}
 
-			// prettier-ignore
 			& {
 				&.blue { @include tag_button($tag_color_blue); }
 				&.teal { @include tag_button($tag_color_teal); }
@@ -117,7 +115,6 @@ $submenu_bg_color: if($variant == 'light', darken($menu_bg_color, 17%), lighten(
 			}
 		}
 
-		// prettier-ignore
 		.arrow-button {
 			@extend %menuitem;
 

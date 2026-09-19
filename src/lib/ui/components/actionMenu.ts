@@ -1,20 +1,17 @@
 import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
-import St from 'gi://St';
-
+import type St from 'gi://St';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
-
 import type CopyousExtension from '../../../extension.js';
 import {
-	Action,
-	ActionConfig,
+	type Action,
+	type ActionConfig,
 	ActionOutput,
-	ActionSubmenu,
-	ColorAction,
-	CommandAction,
-	QrCodeAction,
+	type ActionSubmenu,
+	type ColorAction,
+	type CommandAction,
 	findActionById,
 	findDefaultAction,
 	instanceofAction,
@@ -25,12 +22,13 @@ import {
 	isDefaultAction,
 	loadConfig,
 	matchAction,
+	type QrCodeAction,
 	testAction,
 } from '../../common/actions.js';
 import { Color } from '../../common/color.js';
 import { getActionsConfigPath } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
-import { ClipboardEntry } from '../../database/database.js';
+import type { ClipboardEntry } from '../../database/database.js';
 import { trim } from './label.js';
 import { QrCodeDialog } from './qrCodeDialog.js';
 import { ShortcutLabel } from './shortcutLabel.js';

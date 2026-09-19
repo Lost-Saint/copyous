@@ -4,15 +4,14 @@ import GObject from 'gi://GObject';
 import Graphene from 'gi://Graphene';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
-
 import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { flagsParamSpec, registerClass } from '../../common/gjs.js';
-import { Icon } from '../../common/icons.js';
+import type { Icon } from '../../common/icons.js';
 import { MiddleClickAction } from '../../common/settings.js';
 import { ClipboardEntry } from '../../database/database.js';
 import { Shortcut } from '../../misc/shortcuts.js';
-import { SearchQuery } from '../searchEntry.js';
+import type { SearchQuery } from '../searchEntry.js';
 import { ClipboardItemHeader } from './clipboardItemHeader.js';
 
 @registerClass({
@@ -92,7 +91,7 @@ export class ClipboardItem extends St.Button {
 			GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
 		);
 
-		// prettier-ignore
+		// biome-ignore format: Keep signal and callback pairs aligned.
 		this.ext.settings.connectObject(
 			'changed::item-width', this.updateSize.bind(this),
 			'changed::item-height', this.updateSize.bind(this),

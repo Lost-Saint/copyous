@@ -1,29 +1,27 @@
 import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
-
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { globToRegex } from '../../common/glob.js';
 import { Icon } from '../../common/icons.js';
-import { FileItemSettings, FilePreviewType, FilePreviewVisibility } from '../../common/settings.js';
-import { ClipboardEntry } from '../../database/database.js';
-import { ContentInfo, createFileInfo } from '../components/contentInfo.js';
+import { type FileItemSettings, FilePreviewType, FilePreviewVisibility } from '../../common/settings.js';
+import type { ClipboardEntry } from '../../database/database.js';
+import { type ContentInfo, createFileInfo } from '../components/contentInfo.js';
 import {
-	ContentPreview,
+	type ContentPreview,
 	FileType,
+	getFileType,
 	ImagePreview,
 	TextPreview,
 	ThumbnailPreview,
-	getFileType,
 	tryCreateFilePreview,
 } from '../components/contentPreview.js';
-import { SearchQuery } from '../searchEntry.js';
+import type { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';
 
 export function formatFile(file: Gio.File): string {

@@ -16,7 +16,6 @@ $search_bg_color: $card_bg_color;
 .clipboard-dialog {
 	// Search entry
 	.clipboard-search-entry {
-		// prettier-ignore
 		& {
 			@extend %entry_common;
 			@include button(normal, $c:$search_bg_color, $style: default);
@@ -62,7 +61,6 @@ $search_bg_color: $card_bg_color;
 			&.item-button {
 				padding: $base_padding * 0.5 + 1px;
 
-				// prettier-ignore
 				& {
 					&.blue { @include item_button_color($tag_color_blue); }
 					&.teal { @include item_button_color($tag_color_teal); }
@@ -99,7 +97,6 @@ $search_bg_color: $card_bg_color;
 					}
 				}
 
-				// prettier-ignore
 				&:checked:checked {
 					@include button(normal, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default);
 					&:focus { @include button(focus, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }

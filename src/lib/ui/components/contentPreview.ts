@@ -1,18 +1,16 @@
 import Clutter from 'gi://Clutter';
-import GLib from 'gi://GLib';
-import GObject from 'gi://GObject';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 import St from 'gi://St';
-
-import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-
+import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 import { BackgroundSize, FilePreviewType } from '../../common/settings.js';
-import { CodeLabel, CodeLabelConstructorProps } from './codeLabel.js';
+import { CodeLabel, type CodeLabelConstructorProps } from './codeLabel.js';
 
 export const FileType = {
 	Unknown: 'Unknown',
