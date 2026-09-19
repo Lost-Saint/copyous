@@ -131,6 +131,7 @@ export class FileItem extends ClipboardItem {
 			}
 
 			this._filePreview = await tryCreateFilePreview(this.ext, file, this._fileType, this._thumbnail);
+			if (this._cancellable.is_cancelled()) return;
 			if (this._filePreview) {
 				this._content.insert_child_above(this._filePreview, this._file);
 				this.configureVisibility();
@@ -165,6 +166,7 @@ export class FileItem extends ClipboardItem {
 			}
 
 			this._fileInfo = await createFileInfo(this.ext, file, this._fileType, this._cancellable);
+			if (this._cancellable.is_cancelled()) return;
 			this._content.add_child(this._fileInfo);
 			this.configureVisibility();
 		}

@@ -81,6 +81,9 @@ export class DbusService extends GObject.Object implements DBusInterface {
 	}
 
 	private busAcquired(connection: Gio.DBusConnection, _name: string) {
+		// The name acquisition can resolve after destroy() unowned the name.
+		if (this.ownerId < 0) return;
+
 		this.dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterfaceXml, this);
 		this.dbus.export(connection, '/org/gnome/Shell/Extensions/Copyous');
 	}

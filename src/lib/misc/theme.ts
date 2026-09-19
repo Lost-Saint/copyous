@@ -30,6 +30,10 @@ export class ThemeManager extends GObject.Object {
 	private _stylesheet: Gio.File | null = null;
 	private _colorScheme: CustomColorScheme = CustomColorScheme.Dark;
 
+	// Incremented on destroy. Async theme loads bail out when it changes so a
+	// stale completion never rewrites the global stage theme afterwards.
+	private _generation: number = 0;
+
 	constructor(private ext: CopyousExtension) {
 		super();
 
@@ -63,6 +67,8 @@ export class ThemeManager extends GObject.Object {
 	}
 
 	destroy() {
+		this._generation++;
+
 		if (this._stylesheet) this.theme.unload_stylesheet(this._stylesheet);
 		this._stylesheet = null;
 		Gio.resources_unregister(this._resource);
@@ -72,6 +78,7 @@ export class ThemeManager extends GObject.Object {
 	}
 
 	private async updateTheme() {
+		const generation = this._generation;
 		let theme = this._themeSettings.get_enum('theme');
 
 		this.colorScheme = (() => {
@@ -100,6 +107,7 @@ export class ThemeManager extends GObject.Object {
 				const uri = `resource:///org/gnome/shell/extensions/copyous/css/template-${colorScheme}.css`;
 				const template = Gio.File.new_for_uri(uri);
 				const [contents] = await template.load_contents_async(null);
+				if (generation !== this._generation) return;
 				const text = new TextDecoder().decode(contents);
 
 				// Fill template
@@ -125,6 +133,7 @@ export class ThemeManager extends GObject.Object {
 					Gio.FileCreateFlags.REPLACE_DESTINATION,
 					null,
 				);
+				if (generation !== this._generation) return;
 
 				// Load theme
 				if (this._stylesheet) this.theme.unload_stylesheet(this._stylesheet);

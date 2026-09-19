@@ -40,6 +40,11 @@ export default class CopyousExtension extends Extension {
 	private historyTimeoutId: number = -1;
 	private updateHistory: boolean = false;
 
+	// Incremented on every disable. Async work captures the value before
+	// awaiting and bails out after if it changed, so stale completions never
+	// touch the next enable's managers, widgets, or settings.
+	private _generation: number = 0;
+
 	public clipboardManager: ClipboardManager | undefined;
 
 	override enable() {
@@ -105,9 +110,10 @@ export default class CopyousExtension extends Extension {
 
 		// Feedback
 		this.notificationManager = new NotificationManager(this);
+		const generation = this._generation;
 		tryCreateSoundManager(this)
 			.then((soundManager) => {
-				if (soundManager) this.soundManager = soundManager;
+				if (soundManager && generation === this._generation) this.soundManager = soundManager;
 			})
 			.catch(error);
 
@@ -168,9 +174,11 @@ export default class CopyousExtension extends Extension {
 	private async initHljs() {
 		if (this.hljs) return;
 
+		const generation = this._generation;
 		const hljsPath = getHljsPath(this);
 		try {
 			const hljs = (await import(hljsPath.get_uri())) as { default: HLJSApi };
+			if (generation !== this._generation) return;
 			this.hljs = hljs.default;
 
 			// Disable file monitor
@@ -179,6 +187,7 @@ export default class CopyousExtension extends Extension {
 
 			// Initialize extra languages
 			await this.loadHljsLanguages();
+			if (generation !== this._generation) return;
 
 			// Notify dependents
 			this.hljsCallbacks?.forEach((fn) => fn());
@@ -203,6 +212,7 @@ export default class CopyousExtension extends Extension {
 	}
 
 	private async loadHljsLanguages() {
+		const generation = this._generation;
 		this.hljsLanguages ??= new Map<string, boolean>();
 
 		if (!this.hljsMonitor) {
@@ -239,6 +249,7 @@ export default class CopyousExtension extends Extension {
 
 				try {
 					const language = (await import(path.get_uri())) as { default: LanguageFn };
+					if (generation !== this._generation) return;
 					this.hljs?.registerLanguage(name, language.default);
 					this.hljsLanguages?.set(name, true);
 				} catch {
@@ -258,8 +269,11 @@ export default class CopyousExtension extends Extension {
 	private async initEntryTracker() {
 		if (!this.entryTracker || !this.entryTracker.shouldInit) return;
 
+		const generation = this._generation;
+		const tracker = this.entryTracker;
 		this.clipboardDialog?.clearEntries();
-		const entries = await this.entryTracker.init();
+		const entries = await tracker.init();
+		if (generation !== this._generation) return;
 		for (const entry of entries) {
 			this.clipboardDialog?.addEntry(entry);
 		}
@@ -271,14 +285,17 @@ export default class CopyousExtension extends Extension {
 		const historyTime = this.settings?.get_int('history-time');
 		if (historyTime === undefined || historyTime === 0) return;
 
+		const generation = this._generation;
+		const logger = this.logger;
 		await this.entryTracker?.deleteOldest();
+		if (generation !== this._generation) return;
 		this.historyTimeoutId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 60, () => {
 			// Do not update the history if the dialog is open
 			this.updateHistory = this.clipboardDialog?.opened ?? false;
 			if (this.updateHistory) return GLib.SOURCE_CONTINUE;
 
 			if (this.entryTracker?.checkOldest()) {
-				this.entryTracker?.deleteOldest().catch(this.logger.error.bind(this.logger));
+				this.entryTracker?.deleteOldest().catch(logger.error.bind(logger));
 			}
 
 			return GLib.SOURCE_CONTINUE;
@@ -286,6 +303,9 @@ export default class CopyousExtension extends Extension {
 	}
 
 	override disable() {
+		// Invalidate all in-flight async work before tearing anything down.
+		this._generation++;
+
 		// UI
 		this.clipboardDialog?.disconnectObject(this);
 		this.clipboardDialog?.destroy();

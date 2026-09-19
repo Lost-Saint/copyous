@@ -131,7 +131,6 @@ function async_statement_execute_select<T>(
 					}
 
 					i++;
-					cancellable.disconnect(cancellableId);
 					return GLib.SOURCE_CONTINUE;
 				} catch (error) {
 					reject(error as Error);
@@ -196,7 +195,6 @@ function async_statement_execute_non_select(
 					}
 
 					i++;
-					cancellable.disconnect(cancellableId);
 					return GLib.SOURCE_CONTINUE;
 				} catch (error) {
 					reject(error as Error);

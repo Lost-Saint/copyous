@@ -150,6 +150,7 @@ export class LinkPreview extends St.Widget {
 
 			tryGetLinkImage(this.ext, this._metadata.image, this._cancellable)
 				.then((image) => {
+					if (this._cancellable.is_cancelled()) return;
 					if (image) {
 						this._image = new ImagePreview(this.ext, image);
 						this._image.backgroundSize = this._backgroundSize;
@@ -361,6 +362,7 @@ export class LinkItem extends ClipboardItem {
 			this._linkPreview.metadata ??= metadata;
 		} else if (show) {
 			const metadata = await tryGetMetadata(this.ext, url, this._cancellable);
+			if (this._cancellable.is_cancelled()) return;
 			this.entry.metadata = metadata;
 			this._linkPreview.metadata = metadata;
 		}
