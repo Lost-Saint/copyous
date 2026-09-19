@@ -3,6 +3,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import type St from 'gi://St';
+import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import type CopyousExtension from '../../../extension.js';
 import {
@@ -112,6 +113,9 @@ export type ActionPopupMenuSectionSignals = {
 	'paste': [string];
 };
 
+// Upper bound for clipboard content piped to a shell command's stdin.
+const MAX_ACTION_INPUT_BYTES = 1024 * 1024;
+
 export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPopupMenuSectionSignals> {
 	private _config: ActionConfig;
 	private _entry: ClipboardEntry | null = null;
@@ -194,6 +198,15 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 	private async runCommandAction(entry: ClipboardEntry, action: CommandAction) {
 		const match = matchAction(entry, action)?.map((x) => x ?? '');
 		if (!match) return;
+
+		// Never pipe unbounded clipboard content into a shell command.
+		if (new TextEncoder().encode(entry.content).length > MAX_ACTION_INPUT_BYTES) {
+			this.ext.notificationManager?.warning(
+				_('Action skipped'),
+				_('Clipboard content exceeds the 1 MB command input limit'),
+			);
+			return;
+		}
 
 		// Timeout after 30 seconds
 		const token = new Gio.Cancellable();

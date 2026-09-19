@@ -1,6 +1,6 @@
 {
 	"name": "Copyous",
-	"description": "Modern Clipboard Manager for GNOME",
+	"description": "Modern Clipboard Manager for GNOME.\n\nMonitors clipboard selections to keep a searchable history with previews, pins, tags, and actions.",
 	"uuid": "copyous@boerdereinar.dev",
 	"shell-version": ["48", "49", "50"],
 	"settings-schema": "org.gnome.shell.extensions.copyous",
