@@ -2,7 +2,7 @@
 !.vscode/extensions.json
 !.vscode/gnome-css.json
 !.vscode/settings.json
-
+AGENTS.md
 .env
 .idea
 .venv
