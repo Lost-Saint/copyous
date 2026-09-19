@@ -43,8 +43,8 @@ const PREVIEW_TARGET_EDGE = 1024;
 
 Gio._promisify(Gio.File.prototype, 'read_async');
 Gio._promisify(Gio.File.prototype, 'replace_async');
-Gio._promisify(GdkPixbuf.Pixbuf, 'new_from_stream_at_scale_async');
-Gio._promisify(GdkPixbuf.Pixbuf.prototype, 'save_to_streamv_async');
+Gio._promisify(GdkPixbuf.Pixbuf, 'new_from_stream_at_scale_async', 'new_from_stream_finish');
+Gio._promisify(GdkPixbuf.Pixbuf.prototype, 'save_to_streamv_async', 'save_to_stream_finish');
 Gio._promisify(Gio.OutputStream.prototype, 'close_async');
 
 // Promise-typed aliases for promisified functions whose gir types only
