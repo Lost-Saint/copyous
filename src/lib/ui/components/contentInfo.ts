@@ -3,7 +3,6 @@ import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gst from 'gi://Gst';
 import St from 'gi://St';
 import { gettext as _, type Extension, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
 import type CopyousExtension from '../../../extension.js';
@@ -279,63 +278,14 @@ export function tryCreateImageInfo(file: Gio.File, size: number): ImageInfo | nu
 	}
 }
 
-export async function tryCreateMediaFileInfo(
-	ext: CopyousExtension,
-	file: Gio.File,
-	size: number,
-	cancellable: Gio.Cancellable,
-): Promise<MediaInfo | null> {
-	try {
-		if (!Gst.is_initialized()) {
-			Gst.init(null);
-		}
-
-		// https://gitlab.freedesktop.org/gstreamer/gst-plugins-base/-/blob/ce69d1068af058425b083aaa1b8c268b1b2e5ddd/gst-libs/gst/pbutils/gstdiscoverer.c#L340
-		const pipeline = Gst.parse_launch(`uridecodebin uri="${file.get_uri()}"`);
-		pipeline.set_state(Gst.State.PAUSED);
-
-		// https://gitlab.freedesktop.org/gstreamer/gst-plugins-base/-/blob/ce69d1068af058425b083aaa1b8c268b1b2e5ddd/gst-libs/gst/pbutils/gstdiscoverer.c#L1417
-		let [success, duration] = pipeline.query_duration(Gst.Format.TIME);
-		if (!success) {
-			pipeline.set_state(Gst.State.PLAYING);
-
-			await new Promise<void>((resolve) => {
-				let i = 0;
-				const timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => {
-					[success, duration] = pipeline.query_duration(Gst.Format.TIME);
-					if (success || i >= 5) {
-						resolve();
-						cancellable.disconnect(cancellableId);
-						return GLib.SOURCE_REMOVE;
-					}
-
-					i++;
-					cancellable.disconnect(cancellableId);
-					return GLib.SOURCE_CONTINUE;
-				});
-
-				const cancellableId = cancellable.connect(() => GLib.source_remove(timeoutId));
-			});
-		}
-
-		pipeline.set_state(Gst.State.NULL);
-
-		if (success && duration >= 0) {
-			return new MediaInfo(ext, size, duration / Gst.SECOND);
-		} else {
-			return null;
-		}
-	} catch (err) {
-		ext.logger.error(err);
-		return null;
-	}
-}
-
+// Media duration is intentionally not probed in the shell process:
+// Gst.init + uridecodebin in the compositor freezes/crashes the session
+// (see #158/#160/#152). Audio/video rows show size only.
 export async function createFileInfo(
 	ext: CopyousExtension,
 	file: Gio.File,
 	fileType: FileType,
-	cancellable: Gio.Cancellable,
+	_cancellable: Gio.Cancellable,
 ): Promise<FileInfo> {
 	try {
 		if (!file.query_exists(null)) {
@@ -357,10 +307,6 @@ export async function createFileInfo(
 				break;
 			case FileType.Image:
 				fileInfo = tryCreateImageInfo(file, size);
-				break;
-			case FileType.Audio:
-			case FileType.Video:
-				fileInfo = await tryCreateMediaFileInfo(ext, file, size, cancellable);
 				break;
 		}
 
