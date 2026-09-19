@@ -6,7 +6,7 @@ import GObject from 'gi://GObject';
 import St from 'gi://St';
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 import type CopyousExtension from '../../../extension.js';
-import { ActiveState } from '../../common/constants.js';
+import { ActiveState, getPreviewCacheFile } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 import { BackgroundSize, FilePreviewType } from '../../common/settings.js';
@@ -35,9 +35,59 @@ export class ContentPreview extends St.BoxLayout {
 	}
 }
 
-// Maximum image dimension uploaded as a texture. Anything larger risks
-// exceeding GL_MAX_TEXTURE_SIZE and killing the whole session (see #161).
-const MAX_IMAGE_DIMENSION = 4096;
+// Largest image edge passed to St directly. Anything larger gets a cached
+// downscaled copy, since St crashes the shell on textures past
+// GL_MAX_TEXTURE_SIZE (see #161).
+const MAX_PREVIEW_EDGE = 4096;
+const PREVIEW_TARGET_EDGE = 1024;
+
+Gio._promisify(Gio.File.prototype, 'read_async');
+Gio._promisify(Gio.File.prototype, 'replace_async');
+Gio._promisify(GdkPixbuf.Pixbuf, 'new_from_stream_at_scale_async');
+Gio._promisify(GdkPixbuf.Pixbuf.prototype, 'save_to_streamv_async');
+Gio._promisify(Gio.OutputStream.prototype, 'close_async');
+
+// Generates a downscaled preview without ever blocking the compositor: the
+// read, the scaled decode, and the cache write are all asynchronous. Returns
+// the original file when it is small enough, the cached copy otherwise, or
+// null when no preview can be produced.
+async function ensurePreviewFile(
+	ext: Extension,
+	image: Gio.File,
+	cancellable: Gio.Cancellable,
+): Promise<Gio.File | null> {
+	try {
+		const preview = getPreviewCacheFile(ext, image.get_uri());
+		if (preview.query_exists(null)) return preview;
+
+		const dir = preview.get_parent()!;
+		if (!dir.query_exists(null)) dir.make_directory_with_parents(null);
+
+		const stream = await image.read_async(GLib.PRIORITY_DEFAULT, cancellable);
+		const pixbuf = (await GdkPixbuf.Pixbuf.new_from_stream_at_scale_async(
+			stream,
+			PREVIEW_TARGET_EDGE,
+			PREVIEW_TARGET_EDGE,
+			true,
+			cancellable,
+		)) as unknown as GdkPixbuf.Pixbuf;
+		const out = await preview.replace_async(
+			null,
+			false,
+			Gio.FileCreateFlags.REPLACE_DESTINATION,
+			GLib.PRIORITY_DEFAULT,
+			cancellable,
+		);
+		try {
+			await (pixbuf.save_to_streamv_async(out, 'png', [], [], cancellable) as unknown as Promise<boolean>);
+		} finally {
+			await out.close_async(GLib.PRIORITY_DEFAULT, cancellable);
+		}
+		return preview;
+	} catch {
+		return null;
+	}
+}
 
 @registerClass({
 	Properties: {
@@ -52,8 +102,9 @@ const MAX_IMAGE_DIMENSION = 4096;
 })
 export class ImagePreview extends ContentPreview {
 	private _backgroundSize: BackgroundSize = BackgroundSize.Cover;
-	private readonly _ratio: number | null;
-	private readonly _effect?: Clutter.BrightnessContrastEffect;
+	private _ratio: number | null = null;
+	private _effect?: Clutter.BrightnessContrastEffect;
+	private _cancellable: Gio.Cancellable | null = null;
 
 	constructor(ext: Extension, image: Gio.File) {
 		super();
@@ -63,30 +114,56 @@ export class ImagePreview extends ContentPreview {
 		if (image.query_exists(null)) {
 			try {
 				const [, width, height] = GdkPixbuf.Pixbuf.get_file_info(image.get_path()!);
-				if (width <= 0 || height <= 0 || width > MAX_IMAGE_DIMENSION || height > MAX_IMAGE_DIMENSION) {
-					throw new Error(`Image dimensions ${width}x${height} exceed texture limit`);
+				if (width <= 0 || height <= 0) {
+					this.showMissingImage(ext);
+					return;
 				}
 				this._ratio = height / width;
 
-				const imageBox = new St.Widget({
-					style_class: 'image-box',
-					x_align: Clutter.ActorAlign.FILL,
-					y_align: Clutter.ActorAlign.FILL,
-					x_expand: true,
-					y_expand: true,
-					style: `background-image: url("${image.get_uri()}");`,
-				});
-				this.add_child(imageBox);
+				// Small images load synchronously; oversized ones show a
+				// placeholder first and swap in the cached preview when ready.
+				if (width <= MAX_PREVIEW_EDGE && height <= MAX_PREVIEW_EDGE) {
+					this.addImageBox(image);
+					return;
+				}
 
-				this._effect = new Clutter.BrightnessContrastEffect();
-				imageBox.add_effect(this._effect);
+				this._cancellable = new Gio.Cancellable();
+				const cancellable = this._cancellable;
+				this.showMissingImage(ext, false);
+				ensurePreviewFile(ext, image, cancellable)
+					.then((preview) => {
+						if (!preview || cancellable.is_cancelled()) return;
+						this.remove_all_children();
+						this.remove_style_class_name('missing-image');
+						this.addImageBox(preview);
+					})
+					.catch(() => {});
 				return;
 			} catch {
 				// Ignore
 			}
 		}
 
-		this._ratio = null;
+		this.showMissingImage(ext);
+	}
+
+	private addImageBox(image: Gio.File) {
+		const imageBox = new St.Widget({
+			style_class: 'image-box',
+			x_align: Clutter.ActorAlign.FILL,
+			y_align: Clutter.ActorAlign.FILL,
+			x_expand: true,
+			y_expand: true,
+			style: `background-image: url("${image.get_uri()}");`,
+		});
+		this.add_child(imageBox);
+
+		this._effect = new Clutter.BrightnessContrastEffect();
+		imageBox.add_effect(this._effect);
+	}
+
+	private showMissingImage(ext: Extension, setRatio: boolean = true) {
+		if (setRatio) this._ratio = null;
 		this.add_style_class_name('missing-image');
 		this.add_child(
 			new St.Icon({
@@ -98,6 +175,13 @@ export class ImagePreview extends ContentPreview {
 				min_height: 0,
 			}),
 		);
+	}
+
+	override destroy() {
+		this._cancellable?.cancel();
+		this._cancellable = null;
+
+		super.destroy();
 	}
 
 	get backgroundSize() {

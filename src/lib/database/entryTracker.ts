@@ -2,7 +2,7 @@ import type Gda from 'gi://Gda';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import type CopyousExtension from '../../extension.js';
-import { getDefaultDatabaseFile, ItemType } from '../common/constants.js';
+import { getDefaultDatabaseFile, getPreviewCacheFile, ItemType } from '../common/constants.js';
 import { type ClipboardHistory, DatabaseBackend } from '../common/settings.js';
 import { getLinkImagePath } from '../misc/link.js';
 import type { ClipboardEntry, Database, Metadata } from './database.js';
@@ -293,6 +293,19 @@ export class ClipboardEntryTracker {
 		this._entries.delete(id);
 	}
 
+	private deletePreview(uri: string, id: number): void {
+		if (!uri) return;
+
+		try {
+			const preview = getPreviewCacheFile(this.ext, uri);
+			if (preview.query_exists(null)) {
+				preview.delete(null);
+			}
+		} catch {
+			this.ext.logger.error(`Failed to delete image preview for entry ${id}`);
+		}
+	}
+
 	private async delete(entry: ClipboardEntry) {
 		if (entry.type === ItemType.Image) {
 			// Delete image
@@ -303,6 +316,14 @@ export class ClipboardEntryTracker {
 				}
 			} catch {
 				this.ext.logger.error(`Failed to delete image for entry ${entry.id}`);
+			}
+
+			// Delete cached downscaled preview, if one was generated
+			this.deletePreview(entry.content, entry.id);
+		} else if (entry.type === ItemType.File || entry.type === ItemType.Files) {
+			// Delete cached downscaled previews, if any were generated
+			for (const uri of entry.content.split('\n')) {
+				this.deletePreview(uri.trim(), entry.id);
 			}
 		} else if (entry.type === ItemType.Link && entry.metadata) {
 			// Delete thumbnail image
@@ -316,6 +337,8 @@ export class ClipboardEntryTracker {
 				} catch {
 					this.ext.logger.error(`Failed to delete thumbnail image for entry ${entry.id}`);
 				}
+
+				this.deletePreview(metadata.image, entry.id);
 			}
 		}
 

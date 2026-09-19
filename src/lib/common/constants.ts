@@ -293,6 +293,11 @@ export function getImagesPath(ext: Extension | ExtensionPreferences): Gio.File {
 	return getDataPath(ext).get_child('images');
 }
 
+export function getPreviewCacheFile(ext: Extension | ExtensionPreferences, uri: string): Gio.File {
+	const key = GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, uri, uri.length)!;
+	return getCachePath(ext).get_child('previews').get_child(`${key}.png`);
+}
+
 export function getConfigPath(ext: Extension | ExtensionPreferences): Gio.File {
 	return Gio.file_new_build_filenamev([GLib.get_user_config_dir(), ext.uuid]);
 }
