@@ -398,6 +398,14 @@ export class ClipboardDialog extends St.Widget {
 		(Main.inputMethod as Clutter.InputMethod).disconnectObject(this);
 		this._ibusManager.disconnectObject(this);
 		this.ext.settings.disconnectObject(this);
+		this._clipboardItemMenu.disconnectObject(this);
+		this._clipboardItemMenu.destroy();
+		global.focus_manager.remove_group(this._dialog);
+
+		if (this._grab) {
+			Main.popModal(this._grab);
+			this._grab = null;
+		}
 
 		super.destroy();
 	}
@@ -646,6 +654,7 @@ export class ClipboardDialog extends St.Widget {
 	private confirmClearHistory() {
 		const dialog = new ConfirmClearHistoryDialog();
 		dialog.connect('clear-history', (_dialog, history) => this.emit('clear-history', history));
+		dialog.connect('closed', () => dialog.destroy());
 		dialog.open();
 	}
 

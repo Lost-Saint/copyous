@@ -240,6 +240,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 	private confirmClearHistory() {
 		const dialog = new ConfirmClearHistoryDialog();
 		dialog.connect('clear-history', (_dialog, history) => this.emit('clear-history', history));
+		dialog.connect('closed', () => dialog.destroy());
 		dialog.open();
 	}
 

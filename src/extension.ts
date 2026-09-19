@@ -312,6 +312,7 @@ export default class CopyousExtension extends Extension {
 		this.dbus = undefined;
 
 		// Feedback
+		this.notificationManager?.destroy();
 		this.notificationManager = undefined;
 		this.soundManager?.destroy();
 		this.soundManager = undefined;

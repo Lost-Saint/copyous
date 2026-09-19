@@ -13,6 +13,7 @@ import { MemoryDatabase } from './memory.js';
 export class ClipboardEntryTracker {
 	private _database: Database | undefined;
 	private _entries: Map<number, ClipboardEntry> = new Map();
+	private _entryHandlers: Map<number, number[]> = new Map();
 	private _fromDefault: boolean = false;
 
 	constructor(private ext: CopyousExtension) {}
@@ -185,6 +186,15 @@ export class ClipboardEntryTracker {
 	public async destroy() {
 		await this._database?.close();
 		this._database = undefined;
+
+		for (const [id, ids] of this._entryHandlers) {
+			const entry = this._entries.get(id);
+			if (entry) {
+				for (const handlerId of ids) entry.disconnect(handlerId);
+			}
+		}
+		this._entryHandlers.clear();
+		this._entries.clear();
 	}
 
 	/**
@@ -245,27 +255,42 @@ export class ClipboardEntryTracker {
 
 	private track(...entries: ClipboardEntry[]) {
 		for (const entry of entries) {
-			entry.connect('notify::content', async () => {
-				const id = await this._database?.updateProperty(entry, 'content');
-				// If entry conflicts with another entry, delete it
-				if (id !== undefined && id >= 0) {
-					entry.emit('delete');
+			if (this._entries.has(entry.id)) continue;
 
-					// Update the date of the other entry
-					const conflicted = this._entries.get(id);
-					if (conflicted) {
-						conflicted.datetime = entry.datetime;
+			const ids = [
+				entry.connect('notify::content', async () => {
+					const id = await this._database?.updateProperty(entry, 'content');
+					// If entry conflicts with another entry, delete it
+					if (id !== undefined && id >= 0) {
+						entry.emit('delete');
+
+						// Update the date of the other entry
+						const conflicted = this._entries.get(id);
+						if (conflicted) {
+							conflicted.datetime = entry.datetime;
+						}
 					}
-				}
-			});
-			entry.connect('notify::pinned', () => this._database?.updateProperty(entry, 'pinned'));
-			entry.connect('notify::tag', () => this._database?.updateProperty(entry, 'tag'));
-			entry.connect('notify::datetime', () => this._database?.updateProperty(entry, 'datetime'));
-			entry.connect('notify::metadata', () => this._database?.updateProperty(entry, 'metadata'));
-			entry.connect('notify::title', () => this._database?.updateProperty(entry, 'title'));
-			entry.connect('delete', () => this.delete(entry));
+				}),
+				entry.connect('notify::pinned', () => this._database?.updateProperty(entry, 'pinned')),
+				entry.connect('notify::tag', () => this._database?.updateProperty(entry, 'tag')),
+				entry.connect('notify::datetime', () => this._database?.updateProperty(entry, 'datetime')),
+				entry.connect('notify::metadata', () => this._database?.updateProperty(entry, 'metadata')),
+				entry.connect('notify::title', () => this._database?.updateProperty(entry, 'title')),
+				entry.connect('delete', () => this.delete(entry)),
+			];
+			this._entryHandlers.set(entry.id, ids);
 			this._entries?.set(entry.id, entry);
 		}
+	}
+
+	private untrack(id: number): void {
+		const entry = this._entries.get(id);
+		const ids = this._entryHandlers.get(id);
+		if (entry && ids) {
+			for (const handlerId of ids) entry.disconnect(handlerId);
+		}
+		this._entryHandlers.delete(id);
+		this._entries.delete(id);
 	}
 
 	private async delete(entry: ClipboardEntry) {
@@ -297,15 +322,18 @@ export class ClipboardEntryTracker {
 		// Delete from database if not deleted already
 		if (this._entries.has(entry.id)) {
 			await this._database?.delete(entry);
-			this._entries.delete(entry.id);
+			this.untrack(entry.id);
 		}
 	}
 
 	private deleteFromDatabase(id: number) {
 		const entry = this._entries.get(id);
 		if (entry) {
+			// Remove from the map first so the tracker's own delete handler
+			// skips the database delete, then emit so rows and files are cleaned up.
 			this._entries.delete(id);
 			entry.emit('delete');
+			this.untrack(id);
 		}
 	}
 }

@@ -37,6 +37,10 @@ class ShortcutBinding extends GObject.Object {
 		settings.bind(key, this, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 	}
 
+	public destroy(): void {
+		Gio.Settings.unbind(this, 'shortcuts');
+	}
+
 	public get shortcuts(): string[] {
 		return this._shortcuts;
 	}
@@ -193,6 +197,7 @@ export class ShortcutManager extends GObject.Object {
 		this.unregisterGlobalShortcut(Shortcut.Open);
 		this.unregisterGlobalShortcut(Shortcut.Incognito);
 
+		for (const binding of Object.values(this._shortcuts)) binding?.destroy();
 		this._shortcuts = {};
 		this._actor?.disconnectObject(this);
 		this._monitor?.disconnectObject(this);

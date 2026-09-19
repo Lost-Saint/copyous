@@ -36,6 +36,11 @@ export class NotificationManager extends GObject.Object {
 		return this._source;
 	}
 
+	public destroy() {
+		this._source?.destroy(MessageTray.NotificationDestroyedReason.SOURCE_CLOSED);
+		this._source = null;
+	}
+
 	public warning(title: string, body: string, ...actions: [label: string, callback: () => void][]) {
 		const source = this.source;
 		const notification = new MessageTray.Notification({
