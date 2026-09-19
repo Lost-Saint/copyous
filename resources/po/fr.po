@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klepto\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-19 13:35-0400\n"
+"POT-Creation-Date: 2026-09-19 18:35+0000\n"
 "PO-Revision-Date: 2025-12-06 04:59+0100\n"
 "Last-Translator: Axel Haustant <noirbizarre@gmail.com>\n"
 "Language-Team: \n"
@@ -126,8 +126,8 @@ msgstr "Couleur copiée"
 #: src/lib/preferences/general/feedbackSettings.ts:257
 #: src/lib/preferences/general/feedbackSettings.ts:306
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:37
-#: src/lib/ui/components/editDialog.ts:212
-#: src/lib/ui/components/editDialog.ts:239
+#: src/lib/ui/components/editDialog.ts:216
+#: src/lib/ui/components/editDialog.ts:243
 msgid "None"
 msgstr "Aucun"
 
@@ -217,7 +217,7 @@ msgstr "Sélectionnez les types autorisés"
 #: src/lib/preferences/dependencies/dependencies.ts:222
 #: src/lib/preferences/general/appExclusionSettings.ts:169
 #: src/lib/preferences/shortcuts/shortcutRow.ts:129
-#: src/lib/ui/components/editDialog.ts:301 src/lib/ui/indicator.ts:45
+#: src/lib/ui/components/editDialog.ts:305 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -348,7 +348,7 @@ msgid "Edit Action"
 msgstr "Modifier l'action"
 
 #: src/lib/preferences/actions/actionDialog.ts:660
-#: src/lib/ui/components/editDialog.ts:308
+#: src/lib/ui/components/editDialog.ts:312
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -1175,8 +1175,8 @@ msgid ""
 "You can manually install highlight.js by downloading highlight.min.js from "
 "\"Url\" to \"Install Location\"."
 msgstr ""
-"Vous pouvez installer manuellement highlight.js en téléchargeant "
-"highlight.min.js de \"Url\" vers \"Emplacement d'installation\"."
+"Vous pouvez installer manuellement highlight.js en téléchargeant highlight."
+"min.js de \"Url\" vers \"Emplacement d'installation\"."
 
 #: src/lib/preferences/dependencies/dependencies.ts:206
 msgid "Url"
@@ -1789,7 +1789,7 @@ msgstr "Fichier manquant"
 msgid "Error"
 msgstr "Erreur"
 
-#: src/lib/ui/components/editDialog.ts:264
+#: src/lib/ui/components/editDialog.ts:268
 msgid "Edit Clipboard Item"
 msgstr "Modifier l'élément du presse-papiers"
 
@@ -1898,7 +1898,7 @@ msgstr "C__aractère"
 msgid "Colo__r"
 msgstr "Couleu__r"
 
-#: src/lib/ui/searchEntry.ts:278
+#: src/lib/ui/searchEntry.ts:282
 msgid "Type to search"
 msgstr "Tapez pour rechercher"
 

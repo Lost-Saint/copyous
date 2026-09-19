@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klepto\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-19 13:35-0400\n"
+"POT-Creation-Date: 2026-09-19 18:35+0000\n"
 "PO-Revision-Date: 2026-04-30 18:05+0200\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
@@ -128,8 +128,8 @@ msgstr "Skopiowany kolor"
 #: src/lib/preferences/general/feedbackSettings.ts:257
 #: src/lib/preferences/general/feedbackSettings.ts:306
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:37
-#: src/lib/ui/components/editDialog.ts:212
-#: src/lib/ui/components/editDialog.ts:239
+#: src/lib/ui/components/editDialog.ts:216
+#: src/lib/ui/components/editDialog.ts:243
 msgid "None"
 msgstr "Brak"
 
@@ -219,7 +219,7 @@ msgstr "Wybierz dozwolone typy"
 #: src/lib/preferences/dependencies/dependencies.ts:222
 #: src/lib/preferences/general/appExclusionSettings.ts:169
 #: src/lib/preferences/shortcuts/shortcutRow.ts:129
-#: src/lib/ui/components/editDialog.ts:301 src/lib/ui/indicator.ts:45
+#: src/lib/ui/components/editDialog.ts:305 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -350,7 +350,7 @@ msgid "Edit Action"
 msgstr "Edytuj akcję"
 
 #: src/lib/preferences/actions/actionDialog.ts:660
-#: src/lib/ui/components/editDialog.ts:308
+#: src/lib/ui/components/editDialog.ts:312
 msgid "Save"
 msgstr "Zapisz"
 
@@ -1773,7 +1773,7 @@ msgstr "Brakujący plik"
 msgid "Error"
 msgstr "Błąd"
 
-#: src/lib/ui/components/editDialog.ts:264
+#: src/lib/ui/components/editDialog.ts:268
 msgid "Edit Clipboard Item"
 msgstr "Edytuj element schowka"
 
@@ -1885,7 +1885,7 @@ msgstr "Z_nak"
 msgid "Colo__r"
 msgstr "Kolo_r"
 
-#: src/lib/ui/searchEntry.ts:278
+#: src/lib/ui/searchEntry.ts:282
 msgid "Type to search"
 msgstr "Wpisz, aby wyszukać"
 
